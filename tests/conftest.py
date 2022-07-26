@@ -6,8 +6,8 @@ import pytest_asyncio
 from python_on_whales import docker
 
 from db.currency_db import CurrencyDB
+from db.database import create_all, get_db, get_engine
 from db.models import Base
-from db.utils import get_async_db, get_engine
 from utils import logger
 
 tests_logger = logger.get_logger("Tests")
@@ -36,7 +36,8 @@ async def db_engine(request):
     env = {k.split("_")[1].lower(): v for k, v in env.items()}
     env["port"] = port
 
-    engine = await get_engine(env, Base)
+    engine = get_engine(env)
+    await create_all(engine, Base)
 
     yield engine
 
@@ -51,7 +52,8 @@ async def db_engine(request):
 async def db(db_engine):
 
     tests_logger.info("Opening DB connection and starting tests")
-    currency_db = await get_async_db(db_engine, CurrencyDB)
+
+    currency_db = await get_db(CurrencyDB, db_engine)
 
     yield currency_db
 

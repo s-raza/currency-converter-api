@@ -7,10 +7,10 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from pydantic import BaseModel
 
+from db.currency_db import CurrencyDB
+from db.database import get_db
 from db.models import User
 from settings import settings as cfg
-
-from .dependencies.db import get_currency_db
 
 auth_settings = cfg.api.auth
 SECRET_KEY = auth_settings.secret_key
@@ -54,7 +54,7 @@ def get_password_hash(password: str) -> str:
 
 
 async def get_user(username: str) -> Union[User, None]:
-    db = await get_currency_db()
+    db = await get_db(CurrencyDB)
     result: Union[User, None] = await db.get_user(username)
     await db.session.close()
     return result
