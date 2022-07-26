@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  test_mysqldb:
+    env_file:
+    - .test_env
+    container_name: test_mysqldb
+    restart: always
+    image: mysql:8.0.29
+    volumes:
+      - vol:/var/lib/mysql
+    ports:
+      - "3307:3306"
+volumes:
+  vol:

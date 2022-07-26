@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  currency_api:
+    environment:
+      - MYSQL__HOST=mysqldb
+      - API__STARTUP__UVICORN_RELOAD=False
+    container_name: currency_api
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    entrypoint: python api_main.py
+    depends_on:
+      - currency_updater
+      - mysqldb
+    ports:
+      - "${API__STARTUP__PORT}:${API__STARTUP__PORT}"
+  currency_updater:
+    environment:
+      - MYSQL__HOST=mysqldb
+    container_name: currency_updater
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    entrypoint: python start_updates.py
+    depends_on:
+      - mysqldb
+  mysqldb:
+    container_name: mysqldb
+    restart: always
+    image: mysql:8.0.29
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL__ROOT_PASSWORD}'
+      MYSQL_USER: '${MYSQL__USER}'
+      MYSQL_PASSWORD: '${MYSQL__PASSWORD}'
+      MYSQL_DATABASE: '${MYSQL__DATABASE}'
+    volumes:
+      - vol:/var/lib/mysql
+    ports:
+      - "3306:3306"
+volumes:
+  vol:

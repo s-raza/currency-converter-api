@@ -1,0 +1,44 @@
+
+FROM python:3.9.5-slim
+
+LABEL maintainer="Salman Raza <raza.salman@gmail.com>"
+
+RUN apt-get update; apt-get install curl -y
+
+# Install poetry
+RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | POETRY_HOME=/opt/poetry python && \
+    cd /usr/local/bin && \
+    ln -s /opt/poetry/bin/poetry && \
+    poetry config virtualenvs.create false
+
+ARG APP_DIR=/app
+
+# Create app user and group
+ARG APP_USR=appusr
+ARG APP_GRP=appgrp
+
+RUN groupadd -r $APP_GRP
+RUN useradd -r -m $APP_USR
+RUN usermod -a -G $APP_GRP $APP_USR
+
+# Create app directory
+WORKDIR $APP_DIR
+RUN chown $APP_USR:$APP_GRP $APP_DIR
+
+# Install dependencies
+COPY --chown=$APP_USR:$APP_GRP ./pyproject.toml ./poetry.lock* ./
+RUN poetry install --no-root --no-dev
+
+# Install db application into the container
+COPY --chown=$APP_USR:$APP_GRP ./db ./db
+COPY --chown=$APP_USR:$APP_GRP ./ext_api ./ext_api
+COPY --chown=$APP_USR:$APP_GRP ./utils ./utils
+COPY --chown=$APP_USR:$APP_GRP ./settings.py ./
+COPY --chown=$APP_USR:$APP_GRP ./start_updates.py ./
+COPY --chown=$APP_USR:$APP_GRP ./.env ./
+
+# Become appusr
+USER $APP_USR
+
+# Set env variable for DB hostname pointing to MySQL container
+ENV MYSQL__HOST="mysqldb"
