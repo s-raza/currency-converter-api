@@ -1,5 +1,5 @@
 from asyncio import current_task
-from typing import Any, Dict, TypeVar
+from typing import Any, Dict, Type, TypeVar
 
 from sqlalchemy.ext.asyncio import (
     AsyncEngine,
@@ -47,7 +47,9 @@ def get_async_session(engine: AsyncEngine) -> T:
     return async_session
 
 
-async def get_db(currency_db: CurrencyDB, engine: AsyncEngine = None) -> CurrencyDB:
+async def get_db(
+    currency_db: Type[CurrencyDB], engine: AsyncEngine = None
+) -> CurrencyDB:
 
     if engine is None:
         engine = get_engine(cfg.db_conn_settings)
@@ -56,4 +58,4 @@ async def get_db(currency_db: CurrencyDB, engine: AsyncEngine = None) -> Currenc
 
     async with async_session() as session:
         async with session.begin():
-            return currency_db(session)  # type: ignore
+            return currency_db(session)

@@ -5,8 +5,8 @@ import datetime
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from db.currency_db import CurrencyDB
+from db.database import create_all, get_db, get_engine
 from db.models import Base
-from db.utils import get_async_db, get_engine
 from ext_api import CurrencyRatesDownloader, ExchangeRateAPI
 from settings import settings as cfg
 from utils import logger
@@ -25,15 +25,10 @@ async def execute(freq_mins: int) -> None:
     """
     rates_api = ExchangeRateAPI()
     downloader = CurrencyRatesDownloader(rates_api)
-
     rates = downloader.get_rates()
 
-    engine = await get_engine(cfg.db_conn_settings, Base)
-    currency_db = await get_async_db(engine, CurrencyDB)  # type: ignore
-
+    currency_db = await get_db(CurrencyDB)
     await currency_db.add_update(rates["base_currency"], rates["rates"])
-    await currency_db.session.close()
-    await engine.dispose()
 
     updates_logger.info(f"Database Updated, next update in {freq_mins} minutes")
 
@@ -53,6 +48,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     freq_mins = int(args.minutes) if args.minutes else cfg.updater.frequency
+
+    # Create all database tables on startup
+    loop = asyncio.get_event_loop()
+    engine = get_engine(cfg.db_conn_settings)
+    loop.run_until_complete(create_all(engine, Base))
 
     scheduler = AsyncIOScheduler()
     scheduler.add_job(

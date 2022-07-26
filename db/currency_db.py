@@ -3,7 +3,6 @@ from typing import Any, Dict, List, Union
 
 from passlib.context import CryptContext
 from sqlalchemy import func, select
-from sqlalchemy.ext.asyncio import AsyncEngine
 from sqlalchemy.orm import Session, selectinload
 
 from .models import Currencies, CurrencyUpdateDates, CurrencyUpdates, User
@@ -16,14 +15,11 @@ class CurrencyDB:
     :param session: SQLAlchemy :obj:`Session` object.
     :type session: required
 
-    :param engine: SQLAlchemy :obj:`AsyncEngine` object.
-    :type engine: required
     """
 
-    def __init__(self, session: Session, engine: AsyncEngine) -> None:
+    def __init__(self, session: Session) -> None:
 
         self.session = session
-        self.engine = engine
 
     def get_pwd_hash(self, plain: str) -> str:
         """
