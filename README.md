@@ -59,7 +59,7 @@ The API documentation will be available at `http://localhost:8080/docs` once all
 
 ### Code documentation
 
-Code documentation can be accessed from the  [docs](./docs/build/html/index.html) folder of this repository. The code documentation is pre-built using [Sphinx](https://www.sphinx-doc.org/en/master/)
+Code documentation can be accessed from the  [docs](https://htmlpreview.github.io/?https://github.com/s-raza/currency-converter-api/blob/master/docs/build/html/index.html) folder of this repository. The code documentation is pre-built using [Sphinx](https://www.sphinx-doc.org/en/master/)
 
 Alternatively the code documentation can be read directly from the docstrings in the source code.
 
