@@ -2,8 +2,9 @@ import uvicorn
 from fastapi import FastAPI
 
 from currency_api.currencies_router import currencies_router
-from currency_api.dependencies.db import get_currency_db
 from currency_api.user_auth_router import user_router
+from db.currency_db import CurrencyDB
+from db.database import get_db
 from db.utils import wait_for_db
 from settings import settings as cfg
 
@@ -14,11 +15,12 @@ app.include_router(user_router)
 
 @app.on_event("startup")
 async def add_default_user() -> None:
+
+    db = await get_db(CurrencyDB)
     apiuser = cfg.api.user.dict()
-    db = await get_currency_db()
+
     if not await db.get_user(apiuser["username"]):
         await db.add_user(**apiuser)
-    await db.session.close()
 
 
 if __name__ == "__main__":
