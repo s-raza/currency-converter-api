@@ -6,6 +6,7 @@ from db.currency_db import CurrencyDB
 from db.models import CurrencyUpdates
 
 from .dependencies.db import get_currency_db
+from .models import errors as err
 from .models import response as resp
 from .user_auth_router import UserModel, get_current_active_user
 
@@ -13,7 +14,9 @@ currencies_router = APIRouter()
 
 
 @currencies_router.get(
-    "/currencies/rate/{curr_code}", response_model=resp.CurrencyRateResponse
+    "/currencies/rate/{curr_code}",
+    response_model=resp.CurrencyRateResponse,
+    responses=err.get_responses(err.all_errors),
 )
 async def get_currency_code_rate(
     curr_code: str,
@@ -40,7 +43,9 @@ async def get_currency_code_rate(
 
 
 @currencies_router.get(
-    "/currencies/convert/{from_code}/{to_code}", response_model=resp.ConvertedResponse
+    "/currencies/convert/{from_code}/{to_code}",
+    response_model=resp.ConvertedResponse,
+    responses=err.get_responses(err.all_errors),
 )
 async def convert_currency_rate(
     from_code: str,
