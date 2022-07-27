@@ -18,7 +18,7 @@ async def execute(freq_mins: int) -> None:
     """
     Execute the DB update.
 
-    :param freq_mins: Interval in seconds for the update schedule.
+    :param freq_mins: Interval in minutes for the update schedule.
     :type freq_mins: required
 
     :return: `None`
