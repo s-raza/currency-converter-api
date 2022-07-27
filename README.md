@@ -2,7 +2,7 @@
 
 A simple FastAPI based currency converter API using micro services architecture.
 
-## Components services of the API
+## Component services of the API
 
 The API is implemented using three separate services running in docker containers and orechestrated using docker compose.
 
