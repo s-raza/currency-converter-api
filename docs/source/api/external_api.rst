@@ -1,6 +1,8 @@
 External API
 ============
 
+External source API that is used to get the latest currency rates.
+
 ExternalAPIBase
 ---------------
 
