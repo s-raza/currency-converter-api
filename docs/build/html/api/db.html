@@ -19,7 +19,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="External API" href="external_api.html" />
+    <link rel="next" title="DB Updates" href="db_updates.html" />
     <link rel="prev" title="API Reference" href="api.html" />
 </head>
 
@@ -61,9 +61,23 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#currency-database-interface-using-sqlalchemy-orm">Currency Database Interface using <strong>SQLAlchemy</strong> ORM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#database-engine-and-sessions">Database Engine and Sessions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-engine">get_engine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-all">create_all</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-async-session">get_async_session</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-db">get_db</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#utils">Utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#wait-for-db">wait_for_db</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="db_updates.html">DB Updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fastapi.html">FastAPI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external_api.html">External API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
 </ul>
 </li>
 </ul>
@@ -180,15 +194,12 @@
 <h2>Currency Database Interface using <strong>SQLAlchemy</strong> ORM<a class="headerlink" href="#currency-database-interface-using-sqlalchemy-orm" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="db.currency_db.CurrencyDB">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">db.currency_db.</span></span><span class="sig-name descname"><span class="pre">CurrencyDB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncEngine</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#db.currency_db.CurrencyDB" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">db.currency_db.</span></span><span class="sig-name descname"><span class="pre">CurrencyDB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Session</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#db.currency_db.CurrencyDB" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Interface to the Currency Database.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>session</strong> (<em>required</em>) – SQLAlchemy <code class="xref py py-obj docutils literal notranslate"><span class="pre">Session</span></code> object.</p></li>
-<li><p><strong>engine</strong> (<em>required</em>) – SQLAlchemy <code class="xref py py-obj docutils literal notranslate"><span class="pre">AsyncEngine</span></code> object.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>session</strong> (<em>required</em>) – SQLAlchemy <code class="xref py py-obj docutils literal notranslate"><span class="pre">Session</span></code> object.</p>
 </dd>
 </dl>
 <dl class="py method">
@@ -371,6 +382,97 @@ and last updated date of the currency from the external API</p>
 </dd></dl>
 
 </section>
+<section id="database-engine-and-sessions">
+<h2>Database Engine and Sessions<a class="headerlink" href="#database-engine-and-sessions" title="Permalink to this heading"></a></h2>
+<section id="get-engine">
+<h3>get_engine<a class="headerlink" href="#get-engine" title="Permalink to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="db.database.get_engine">
+<span class="sig-prename descclassname"><span class="pre">db.database.</span></span><span class="sig-name descname"><span class="pre">get_engine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conn_settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncEngine</span></span></span><a class="headerlink" href="#db.database.get_engine" title="Permalink to this definition"></a></dt>
+<dd><p>Get SQLAlchemy <code class="xref py py-obj docutils literal notranslate"><span class="pre">sqlalchemy.engine.base.Engine</span></code>,
+to be provided to SQLAlchemy sessions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sqlalchemy.engine.base.Engine</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="create-all">
+<h3>create_all<a class="headerlink" href="#create-all" title="Permalink to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="db.database.create_all">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">db.database.</span></span><span class="sig-name descname"><span class="pre">create_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncEngine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#db.database.create_all" title="Permalink to this definition"></a></dt>
+<dd><p>Create all models in the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>engine</strong> (<em>required</em>) – <code class="xref py py-obj docutils literal notranslate"><span class="pre">AsyncEngine</span></code>: object initialized with the database settings.</p></li>
+<li><p><strong>base</strong> (<em>required</em>) – <code class="xref py py-obj docutils literal notranslate"><span class="pre">Base</span></code> object from SQLAlchemy’s <code class="xref py py-obj docutils literal notranslate"><span class="pre">declarative_base()</span></code> method
+initialized with the models.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="get-async-session">
+<h3>get_async_session<a class="headerlink" href="#get-async-session" title="Permalink to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="db.database.get_async_session">
+<span class="sig-prename descclassname"><span class="pre">db.database.</span></span><span class="sig-name descname"><span class="pre">get_async_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AsyncEngine</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span><a class="headerlink" href="#db.database.get_async_session" title="Permalink to this definition"></a></dt>
+<dd><p>Get an <code class="docutils literal notranslate"><span class="pre">async</span></code> session object initialized with <code class="docutils literal notranslate"><span class="pre">AsyncEngine</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>engine</strong> (<em>required</em>) – <code class="xref py py-obj docutils literal notranslate"><span class="pre">AsyncEngine</span></code>: object initialized with the database settings.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="get-db">
+<h3>get_db<a class="headerlink" href="#get-db" title="Permalink to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="db.database.get_db">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">db.database.</span></span><span class="sig-name descname"><span class="pre">get_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">currency_db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#db.currency_db.CurrencyDB" title="db.currency_db.CurrencyDB"><span class="pre">CurrencyDB</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">AsyncEngine</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#db.currency_db.CurrencyDB" title="db.currency_db.CurrencyDB"><span class="pre">CurrencyDB</span></a></span></span><a class="headerlink" href="#db.database.get_db" title="Permalink to this definition"></a></dt>
+<dd><p>Get a <a class="reference internal" href="#db.currency_db.CurrencyDB" title="db.currency_db.CurrencyDB"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CurrencyDB</span></code></a> instance to interact with it in <code class="docutils literal notranslate"><span class="pre">async</span></code>
+fashion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>currency_db</strong> (<em>required</em>) – <a class="reference internal" href="#db.currency_db.CurrencyDB" title="db.currency_db.CurrencyDB"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CurrencyDB</span></code></a> Class</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><a class="reference internal" href="#db.currency_db.CurrencyDB" title="db.currency_db.CurrencyDB"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CurrencyDB</span></code></a> instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="utils">
+<h2>Utils<a class="headerlink" href="#utils" title="Permalink to this heading"></a></h2>
+<section id="wait-for-db">
+<h3>wait_for_db<a class="headerlink" href="#wait-for-db" title="Permalink to this heading"></a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="db.utils.wait_for_db">
+<span class="sig-prename descclassname"><span class="pre">db.utils.</span></span><span class="sig-name descname"><span class="pre">wait_for_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conn_settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sleep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_sleep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#db.utils.wait_for_db" title="Permalink to this definition"></a></dt>
+<dd><p>Attempts to connect to the database indefinitely,
+in case the database is not yet up.</p>
+<p>While attempting to connect, displays reason for delay in  connecting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conn_settings</strong> (<em>required</em>) – Dictionary containing the setting:value pairs</p></li>
+<li><p><strong>sleep</strong> (<em>optional</em><em>, </em><em>default=5</em>) – Number of seconds between reconnection attempts.</p></li>
+<li><p><strong>extra_sleep</strong> (<em>optional</em>) – Extra seconds to sleep after a successful connection.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
 </section>
 
 
@@ -378,7 +480,7 @@ and last updated date of the currency from the external API</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="api.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="external_api.html" class="btn btn-neutral float-right" title="External API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="db_updates.html" class="btn btn-neutral float-right" title="DB Updates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

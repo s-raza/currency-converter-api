@@ -43,3 +43,34 @@ Currency Database Interface using **SQLAlchemy** ORM
     :show-inheritance:
     :members:
     :inherited-members:
+
+Database Engine and Sessions
+----------------------------------------------------
+
+get_engine
+++++++++++
+
+.. autofunction:: db.database.get_engine
+
+create_all
+++++++++++
+
+.. autofunction:: db.database.create_all
+
+get_async_session
++++++++++++++++++
+
+.. autofunction:: db.database.get_async_session
+
+get_db
+++++++
+
+.. autofunction:: db.database.get_db
+
+Utils
+-----
+
+wait_for_db
++++++++++++
+
+.. autofunction:: db.utils.wait_for_db

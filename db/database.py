@@ -33,12 +33,29 @@ def get_engine(conn_settings: Dict[str, Any]) -> AsyncEngine:
 
 
 async def create_all(engine: AsyncEngine, base):  # type: ignore
+    """
+    Create all models in the database.
+
+    :param engine: :obj:`AsyncEngine`: object initialized with the database settings.
+    :type engine: required
+
+    :param base: :obj:`Base` object from SQLAlchemy's :obj:`declarative_base()` method
+        initialized with the models.
+    :type base: required
+
+    """
     async with engine.begin() as conn:
         await conn.run_sync(base.metadata.create_all)
 
 
 def get_async_session(engine: AsyncEngine) -> T:
+    """
+    Get an ``async`` session object initialized with ``AsyncEngine``
 
+    :param engine: :obj:`AsyncEngine`: object initialized with the database settings.
+    :type engine: required
+
+    """
     async_session = async_scoped_session(
         sessionmaker(engine, expire_on_commit=False, class_=AsyncSession),
         scopefunc=current_task,
@@ -50,9 +67,19 @@ def get_async_session(engine: AsyncEngine) -> T:
 async def get_db(
     currency_db: Type[CurrencyDB], engine: AsyncEngine = None
 ) -> CurrencyDB:
+    """
+    Get a :py:obj:`~db.currency_db.CurrencyDB` instance to interact with it in ``async``
+    fashion.
+
+    :param currency_db: :py:obj:`~db.currency_db.CurrencyDB` Class
+    :type currency_db: required
+
+    :return: :py:obj:`~db.currency_db.CurrencyDB` instance
+
+    """
 
     if engine is None:
-        engine = get_engine(cfg.db_conn_settings)
+        engine = get_engine(cfg().db_conn_settings)
 
     async_session = get_async_session(engine)  # type: ignore
 

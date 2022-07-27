@@ -33,9 +33,9 @@ async def execute(freq_mins: int) -> None:
     updates_logger.info(f"Database Updated, next update in {freq_mins} minutes")
 
 
-if __name__ == "__main__":
+def main() -> None:
     """
-    Entry point for the currency rates DB updater.
+    Main entry point for the currency rates DB updater.
 
     The interval in seconds for the update schedule can be provided on the command line
     using the `-m` switch. If it is not provided, the value of `UPDATER__FREQUENCY`
@@ -47,11 +47,11 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    freq_mins = int(args.minutes) if args.minutes else cfg.updater.frequency
+    freq_mins = int(args.minutes) if args.minutes else cfg().updater.frequency
 
     # Create all database tables on startup
     loop = asyncio.get_event_loop()
-    engine = get_engine(cfg.db_conn_settings)
+    engine = get_engine(cfg().db_conn_settings)
     loop.run_until_complete(create_all(engine, Base))
 
     scheduler = AsyncIOScheduler()
@@ -65,3 +65,7 @@ if __name__ == "__main__":
 
     scheduler.start()
     asyncio.get_event_loop().run_forever()
+
+
+if __name__ == "__main__":
+    main()
