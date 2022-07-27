@@ -15,21 +15,33 @@ app.include_router(user_router)
 
 @app.on_event("startup")
 async def add_default_user() -> None:
+    """
+    Ceates the default user on FastAPI startup.
+    """
 
     db = await get_db(CurrencyDB)
-    apiuser = cfg.api.user.dict()
+    apiuser = cfg().api.user.dict()
 
     if not await db.get_user(apiuser["username"]):
         await db.add_user(**apiuser)
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """
+    Main entry point for the FastAPI server.
 
-    wait_for_db(cfg.db_conn_settings, extra_sleep=5)
-    config = cfg.api.startup
+    Waits for the database to startup before starting up itself.
+    """
+
+    wait_for_db(cfg().db_conn_settings, extra_sleep=5)
+    config = cfg().api.startup
     uvicorn.run(
         config.uvicorn_entry,
         host="0.0.0.0",
         port=config.port,
         reload=config.uvicorn_reload,
     )
+
+
+if __name__ == "__main__":
+    main()
