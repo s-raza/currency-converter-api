@@ -20,7 +20,7 @@ def get_conn_string(db_settings: Dict[str, Any]) -> str:
 
 class MYSQL(BaseModel):
     """
-    DB connection settings sourced from `.env` file.
+    DB connection settings
     """
 
     user: str
@@ -33,7 +33,7 @@ class MYSQL(BaseModel):
 
 class Updater(BaseModel):
     """
-    DB updater setttings sourced from `.env` file.
+    DB updater setttings
     """
 
     frequency: int
@@ -41,7 +41,7 @@ class Updater(BaseModel):
 
 class CurrencyAPIStartup(BaseModel):
     """
-    Currency API setttings sourced from `.env` file.
+    Currency API Startup setttings
     """
 
     port: int
@@ -51,7 +51,7 @@ class CurrencyAPIStartup(BaseModel):
 
 class CurrencyAPIAuth(BaseModel):
     """
-    Currency API setttings sourced from `.env` file.
+    Currency API Auth setttings
     """
 
     secret_key: str
@@ -61,7 +61,7 @@ class CurrencyAPIAuth(BaseModel):
 
 class CurrencyAPIUser(BaseModel):
     """
-    Currency API setttings sourced from `.env` file.
+    Currency API User setttings
     """
 
     username = "user"
@@ -73,7 +73,7 @@ class CurrencyAPIUser(BaseModel):
 
 class CurrencyAPI(BaseModel):
     """
-    Currency API setttings sourced from `.env` file.
+    Currency API setttings
     """
 
     startup: CurrencyAPIStartup
@@ -113,5 +113,16 @@ class Settings(BaseSettings):
         """
         return self.dict()["mysql"]
 
+    @property
+    def auth_settings(self) -> CurrencyAPIAuth:
+        """
+        Get Auth settings
+        """
+        return self.api.auth
 
-settings = Settings()
+
+def settings() -> Settings:
+    """
+    Get settings object to import in other modules.
+    """
+    return Settings()

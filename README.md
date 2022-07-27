@@ -2,7 +2,7 @@
 
 A simple FastAPI based currency converter API using micro services architecture.
 
-## Components services of the API
+## Component services of the API
 
 The API is implemented using three separate services running in docker containers and orechestrated using docker compose.
 
@@ -90,9 +90,9 @@ The API requires authentication. A default user with credentials `user:pass123` 
 
    Convert the amount given in the `amount` query parameter from `from_code` currency code to `to_code` currency code.
 
-   If a parameter `on_date` is provided the last rate recorded for the `from_code` currency code and `to_code` on that particular date is used in the conversion calculation.
+   If a parameter `on_date` is provided the last rates recorded for the `from_code` currency code and `to_code` on that particular date are used in the conversion calculation.
 
-   If `on_date` parameter is not provided, the absolute last rates recorded for the `from_code`currency code and `to_code` is used in the conversion calculation.
+   If `on_date` parameter is not provided, the absolute last rates recorded for the `from_code` currency code and `to_code` are used in the conversion calculation.
 
    The accepted date format is "%d-%m-%Y", any other format will result in a `Bad Request` response.
 
