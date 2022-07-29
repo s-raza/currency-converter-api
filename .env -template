@@ -30,3 +30,9 @@ API__USER__EMAIL = "user@email.com"
 API__USER__FULL_NAME = "User Full Name"
 API__USER__DISABLED = False
 API__USER__PASSWORD = "pass123"
+
+# REDIS SETTINGS #
+
+REDIS__HOST = "localhost"
+REDIS__EXPIRE_SECONDS = 2400
+REDIS__PORT = 6379
