@@ -8,3 +8,4 @@ API Reference
    ./fastapi.rst
    ./external_api.rst
    ./settings.rst
+   ./utils.rst
