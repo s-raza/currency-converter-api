@@ -2,6 +2,14 @@ import logging
 
 
 def get_logger(name: str) -> logging.Logger:
+    """
+    Utility function to get a logging instance to write logs to stdout.
+
+    :param name: :obj:`str` Name of the logger to show in the output.
+    :type str: required.
+
+    :return: :obj:`logging.Logger`
+    """
 
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)

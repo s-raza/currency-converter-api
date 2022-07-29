@@ -5,8 +5,8 @@ import uvicorn
 from fastapi import FastAPI, Request, Response
 from starlette.concurrency import iterate_in_threadpool
 
+from currency_api import utils
 from currency_api.currencies_router import currencies_router
-from currency_api.middleware import utils
 from currency_api.user_auth_router import user_router
 from db.currency_db import CurrencyDB
 from db.database import get_db
@@ -16,15 +16,40 @@ from settings import settings as cfg
 app = FastAPI()
 currencies_prefix = "currencies"
 
-redis = aioredis.from_url(
-    f"redis://{cfg().redis.host}:{cfg().redis.port}", decode_responses=True
-)
-
 
 @app.middleware("http")
 async def redis_cache(request: Request, call_next: Any) -> Response:
+    """
+    Redis middleware implementation for caching responses.
+
+    The value ``REDIS__EXPIRE_SECONDS`` from the `.env` file is used to set the expiry
+    of a cached key, value pair that is cached using Redis.
+
+    Once the number of seconds that are set pass, the entry is deleted from Redis cache,
+    forcing a fresh query to the database upon the next request to the same endpoint
+    with the same request path and query parameters.
+
+    The caching is applied selectively only to the requests that have the value of
+    ``currencies_prefix`` variable present in them. This is to avoid caching any other
+    requests that are related to authentication and error responses.
+
+    `Key`     : Combination of API request path and query parameters
+
+    `Value`   : API response after querying the database.
+
+    :param request: :obj:`fastapi.Request` object.
+    :type request: required
+
+    :param call_next: :obj:`Callable` callback for getting response from API endpoint.
+    :type call_next: required
+
+    :return: :obj:`fastapi.Response` object
+    """
 
     url = utils.request_url(request)
+    redis = aioredis.from_url(
+        f"redis://{cfg().redis.host}:{cfg().redis.port}", decode_responses=True
+    )
 
     if currencies_prefix in url:
         from_redis = await redis.execute_command("GET", url)
