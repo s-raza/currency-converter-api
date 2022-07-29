@@ -30,14 +30,17 @@ async def redis_cache(request: Request, call_next: Any) -> Response:
         from_redis = await redis.execute_command("GET", url)
 
         if not from_redis:
-            response = await call_next(request)
+            response: Response = await call_next(request)
             response_body = [chunk async for chunk in response.body_iterator]
             response.body_iterator = iterate_in_threadpool(iter(response_body))
 
             resp_str = response_body[0].decode()
-            await redis.execute_command(
-                "SETEX", url, cfg().redis.expire_seconds, resp_str
-            )
+            if response.status_code == 200:
+                await redis.execute_command(
+                    "SETEX", url, cfg().redis.expire_seconds, resp_str
+                )
+            else:
+                await redis.execute_command("DEL", url)
             response_to_send = response
         else:
             response_to_send = Response(
