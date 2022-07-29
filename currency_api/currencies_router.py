@@ -15,7 +15,7 @@ currencies_router = APIRouter()
 
 
 @currencies_router.get(
-    "/currencies/rate/{curr_code}",
+    "/rate/{curr_code}",
     response_model=resp.CurrencyRateResponse,
     responses=err.get_responses(err.all_errors),
 )
@@ -42,7 +42,7 @@ async def get_currency_code_rate(
 
 
 @currencies_router.get(
-    "/currencies/convert/{from_code}/{to_code}",
+    "/convert/{from_code}/{to_code}",
     response_model=resp.ConvertedResponse,
     responses=err.get_responses(err.all_errors),
 )
@@ -72,7 +72,7 @@ async def convert_currency_rate(
     }
 
 
-@currencies_router.get("/currencies", response_model=resp.CurrenciesResponse)
+@currencies_router.get("/", response_model=resp.CurrenciesResponse)
 async def get_all_currencies(
     currency_db: CurrencyDB = Depends(get_currency_db),
     auth_user: UserModel = Depends(get_current_active_user),

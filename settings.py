@@ -81,6 +81,16 @@ class CurrencyAPI(BaseModel):
     user: CurrencyAPIUser
 
 
+class REDIS(BaseModel):
+    """
+    Redis connection setttings
+    """
+
+    host: str
+    expire_seconds: int
+    port: int
+
+
 class Settings(BaseSettings):
     """
     Retrieve settings from the `.env` file.
@@ -89,6 +99,7 @@ class Settings(BaseSettings):
     mysql: MYSQL
     updater: Updater
     api: CurrencyAPI
+    redis: REDIS
 
     class Config:
         env_file = ".env"
