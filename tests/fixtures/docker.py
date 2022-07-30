@@ -14,12 +14,12 @@ tests_logger = logger.get_logger("Docker")
 async def db_engine(request):
 
     os.chdir(request.fspath.dirname)
-    tests_logger.info("Starting MySQL container")
+    tests_logger.info("Starting Docker Containers")
 
     docker.compose.down(volumes=True)
     docker.compose.up(detach=True)
 
-    tests_logger.info("Container startup initiated")
+    tests_logger.info("Startup initiated in detached mode")
 
     docker_config = docker.compose.config().services["test_mysqldb"]
     env = docker_config.environment
@@ -33,7 +33,7 @@ async def db_engine(request):
 
     yield engine
 
-    tests_logger.info("Stopping MySQL container")
+    tests_logger.info("Stopping Containers")
     docker.compose.down(volumes=True)
 
     tests_logger.info("Stopped")
