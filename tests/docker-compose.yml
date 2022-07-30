@@ -1,14 +1,51 @@
 version: '3.8'
 services:
+  test_redis:
+      container_name: test_redis
+      restart: always
+      image: redis:7.0.4
+      volumes:
+        - redis-vol:/data
+      ports:
+        - "6380:${REDIS__PORT}"
+  test_currency_api:
+    container_name: test_currency_api
+    restart: always
+    build:
+      context: ..
+      args:
+        ENV_FILE: ./tests/.env
+      dockerfile: Dockerfile.api
+    entrypoint: python api_main.py
+    depends_on:
+      - currency_updater
+      - test_mysqldb
+    ports:
+      - "${API__STARTUP__PORT}:${API__STARTUP__PORT}"
+  test_currency_updater:
+    container_name: test_currency_updater
+    restart: always
+    build:
+      context: ..
+      args:
+        ENV_FILE: ./tests/.env
+      dockerfile: Dockerfile.db
+    entrypoint: python start_updates.py
+    depends_on:
+      - test_mysqldb
   test_mysqldb:
-    env_file:
-    - .test_env
     container_name: test_mysqldb
     restart: always
     image: mysql:8.0.29
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL__ROOT_PASSWORD}'
+      MYSQL_USER: '${MYSQL__USER}'
+      MYSQL_PASSWORD: '${MYSQL__PASSWORD}'
+      MYSQL_DATABASE: '${MYSQL__DATABASE}'
     volumes:
       - vol:/var/lib/mysql
     ports:
       - "3307:3306"
 volumes:
   vol:
+  redis-vol:

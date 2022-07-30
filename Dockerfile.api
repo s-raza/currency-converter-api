@@ -12,6 +12,7 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
     poetry config virtualenvs.create false
 
 ARG APP_DIR=/app
+ARG ENV_FILE=./.env
 
 # Create app user and group
 ARG APP_USR=appusr
@@ -36,10 +37,7 @@ COPY --chown=$APP_USR:$APP_GRP ./ext_api ./ext_api
 COPY --chown=$APP_USR:$APP_GRP ./utils ./utils
 COPY --chown=$APP_USR:$APP_GRP ./settings.py ./
 COPY --chown=$APP_USR:$APP_GRP ./api_main.py ./
-COPY --chown=$APP_USR:$APP_GRP ./.env ./
+COPY --chown=$APP_USR:$APP_GRP $ENV_FILE ./
 
 # Become appusr
 USER $APP_USR
-
-# Set env variable for DB hostname pointing to MySQL container
-ENV MYSQL__HOST="mysqldb"
