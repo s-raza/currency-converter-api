@@ -79,6 +79,7 @@ class CurrencyAPI(BaseModel):
     startup: CurrencyAPIStartup
     auth: CurrencyAPIAuth
     user: CurrencyAPIUser
+    prefix: str
 
 
 class REDIS(BaseModel):
