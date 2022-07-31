@@ -8,4 +8,4 @@ def event_loop():
     return asyncio.get_event_loop()
 
 
-pytest_plugins = ["tests.fixtures.docker", "tests.fixtures.db"]
+pytest_plugins = ["tests.fixtures.docker", "tests.fixtures.db", "tests.fixtures.api"]
