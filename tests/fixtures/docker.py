@@ -26,7 +26,6 @@ async def db_engine(request):
     env = docker_config.environment
     port = docker_config.ports[0].published
 
-    print(f"{env = }")
     env = {k.split("__")[1].lower(): v for k, v in env.items() if "MYSQL__" in k}
     env["port"] = port
 
