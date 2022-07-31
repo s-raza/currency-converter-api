@@ -43,7 +43,7 @@ def wait_for_db(
                 connected = True
         except Exception as e:
             if e.args[0] in [2003, 2013]:
-                engine_logger.info("Waiting for Database container to finish startup")
+                engine_logger.info(f"Waiting for Database: {e.args}")
             else:
                 engine_logger.info(f"Exception: {e.args}")
             time.sleep(sleep)
