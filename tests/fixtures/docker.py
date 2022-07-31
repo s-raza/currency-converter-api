@@ -11,10 +11,10 @@ from utils import logger
 tests_logger = logger.get_logger("Docker")
 
 
-@pytest_asyncio.fixture(scope="module")
-async def db_engine(request):
+@pytest_asyncio.fixture(scope="session")
+async def db_engine():
 
-    os.chdir(request.fspath.dirname)
+    os.chdir("./tests")
     tests_logger.info("Starting Docker Containers")
 
     docker.compose.down(volumes=True)
@@ -40,4 +40,4 @@ async def db_engine(request):
     docker.compose.down(volumes=True)
 
     tests_logger.info("Removed")
-    os.chdir(request.config.invocation_dir)
+    os.chdir("..")
