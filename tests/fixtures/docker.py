@@ -18,7 +18,7 @@ async def db_engine():
     tests_logger.info("Starting Docker Containers")
 
     docker.compose.down(volumes=True)
-    docker.compose.up(detach=True)
+    docker.compose.up(detach=True, build=True)
 
     tests_logger.info("Startup initiated in detached mode")
 
