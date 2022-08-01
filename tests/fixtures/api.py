@@ -14,7 +14,7 @@ class PasswordAuth(Auth):
 
 
 @pytest_asyncio.fixture(scope="module")
-async def api():
+async def api(db):
 
     port = cfg().api.startup.port
 
@@ -29,7 +29,9 @@ async def api():
     await auth_client.aclose()
 
     auth = PasswordAuth(token.json()["access_token"])
-
     client = AsyncClient(base_url=f"{base_url}/{cfg().api.prefix}", auth=auth)
-    yield client
-    await client.aclose()
+
+    api = {"db": db, "client": client}
+
+    yield api
+    await api["client"].aclose()
