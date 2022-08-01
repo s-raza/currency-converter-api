@@ -9,6 +9,9 @@ services:
       ports:
         - "6380:${REDIS__PORT}"
   test_currency_api:
+    environment:
+      - MYSQL__PORT=3306
+      - MYSQL__HOST=test_mysqldb
     container_name: test_currency_api
     restart: always
     build:
