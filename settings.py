@@ -27,8 +27,8 @@ class MYSQL(BaseModel):
     password: str
     database: str
     dialect: str
-    host: str = "localhost"
-    port: str = "3306"
+    host: str
+    port: str
 
 
 class Updater(BaseModel):
