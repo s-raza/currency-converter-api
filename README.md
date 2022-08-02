@@ -154,13 +154,12 @@ The caching is applied selectively only to the requests that have the api path p
 
 ## Planned Updates
 
-1. [X] Add a caching middleware layer using Redis running in a separate container.
-2. [] Increase tests coverage.
-3. [] Increase documentation coverage.
-4. Add more endpoints. E.g.
+1. Add a caching middleware layer using Redis running in a separate container. &check;
+2. Increase tests coverage.
+3. Add more endpoints. E.g.
 
-    1. [] Highest/Lowest rate for a currency on a given day
-    2. [] Highest/Lowest rate for a currency between two dates.
+    1. Highest/Lowest rate for a currency on a given day
+    2. Highest/Lowest rate for a currency between two dates.
 
-5. [] Interactive front end to visualize trends in currency rates using React.
-6. [] Closer integration of Pydantic and SQLAlchemy models in FastAPI.
+4. Interactive front end to visualize trends in currency rates using React.
+5. Closer integration of Pydantic and SQLAlchemy models in FastAPI.
