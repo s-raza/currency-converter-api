@@ -347,3 +347,9 @@ sample_rates2 = {
         "ZWL": 322.008488,
     },
 }
+
+base_currency = sample_rates["base_currency"]
+rates = sample_rates["rates"]
+
+base_currency2 = sample_rates2["base_currency"]
+rates2 = sample_rates2["rates"]

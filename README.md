@@ -137,15 +137,29 @@ Pytest waits for the docker container to startup before connecting to it, and ex
     ======= 7 passed in 14.57s =======
 ```
 
+## Redis Cache
+
+Redis middleware is implemented for the purpose of caching responses.
+
+The value ``REDIS__EXPIRE_SECONDS`` from the `.env` file is used to set the expiry of a cached key, value pair that is cached using Redis.
+
+Once the number of seconds that are set pass, the entry is deleted from Redis cache. This forces a fresh query to the database upon the next request to the same endpoint
+with the same request path and query parameters.
+
+The caching is applied selectively only to the requests that have the api path prefix present in them. This is to avoid caching any other requests that are related to authentication and error responses.
+
+`Key`     : Combination of API request path and query parameters
+
+`Value`   : API response after querying the database.
+
 ## Planned Updates
 
-1. Add a caching middleware layer using Redis running in a separate container.
+1. Add a caching middleware layer using Redis running in a separate container. &check;
 2. Increase tests coverage.
-3. Increase documentation coverage.
-4. Add more endpoints. E.g.
+3. Add more endpoints. E.g.
 
     1. Highest/Lowest rate for a currency on a given day
     2. Highest/Lowest rate for a currency between two dates.
 
-5. Interactive front end to visualize trends in currency rates using React.
-6. Closer integration of Pydantic and SQLAlchemy models in FastAPI.
+4. Interactive front end to visualize trends in currency rates using React.
+5. Closer integration of Pydantic and SQLAlchemy models in FastAPI.

@@ -1,9 +1,18 @@
 version: '3.8'
 services:
+  redis:
+      container_name: redis
+      restart: always
+      image: redis:7.0.4
+      volumes:
+        - redis-vol:/data
+      ports:
+        - "${REDIS__PORT}:${REDIS__PORT}"
   currency_api:
     environment:
       - MYSQL__HOST=mysqldb
       - API__STARTUP__UVICORN_RELOAD=False
+      - REDIS__HOST=redis
     container_name: currency_api
     restart: always
     build:
@@ -41,3 +50,4 @@ services:
       - "3306:3306"
 volumes:
   vol:
+  redis-vol:

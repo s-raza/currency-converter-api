@@ -87,6 +87,7 @@
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#U"><strong>U</strong></a>
  | <a href="#W"><strong>W</strong></a>
@@ -99,19 +100,12 @@
 </li>
       <li><a href="api/external_api.html#ext_api.rates_downloader.CurrencyRatesDownloader.add_headers">add_headers() (ext_api.rates_downloader.CurrencyRatesDownloader method)</a>
 </li>
-      <li><a href="api/db.html#db.currency_db.CurrencyDB.add_update">add_update() (db.currency_db.CurrencyDB method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/db.html#db.currency_db.CurrencyDB.add_update">add_update() (db.currency_db.CurrencyDB method)</a>
+</li>
       <li><a href="api/db.html#db.currency_db.CurrencyDB.add_user">add_user() (db.currency_db.CurrencyDB method)</a>
 </li>
-      <li>
-    api_main
-
-      <ul>
-        <li><a href="api/fastapi.html#module-api_main">module</a>
-</li>
-      </ul></li>
       <li><a href="api/settings.html#settings.Settings.auth_settings">auth_settings (settings.Settings property)</a>
 </li>
   </ul></td>
@@ -126,12 +120,26 @@
 </li>
       <li><a href="api/db.html#db.models.Currencies">Currencies (class in db.models)</a>
 </li>
+      <li>
+    currency_api.dependencies.db
+
+      <ul>
+        <li><a href="api/fastapi.html#module-currency_api.dependencies.db">module</a>
+</li>
+      </ul></li>
+      <li>
+    currency_api.utils
+
+      <ul>
+        <li><a href="api/fastapi.html#module-currency_api.utils">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/settings.html#settings.CurrencyAPI">CurrencyAPI (class in settings)</a>
 </li>
       <li><a href="api/settings.html#settings.CurrencyAPIAuth">CurrencyAPIAuth (class in settings)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/settings.html#settings.CurrencyAPIStartup">CurrencyAPIStartup (class in settings)</a>
 </li>
       <li><a href="api/settings.html#settings.CurrencyAPIUser">CurrencyAPIUser (class in settings)</a>
@@ -196,11 +204,15 @@
 </li>
       <li><a href="api/db.html#db.currency_db.CurrencyDB.get_currency_codes">get_currency_codes() (db.currency_db.CurrencyDB method)</a>
 </li>
+      <li><a href="api/fastapi.html#currency_api.dependencies.db.get_currency_db">get_currency_db() (in module currency_api.dependencies.db)</a>
+</li>
       <li><a href="api/db.html#db.database.get_db">get_db() (in module db.database)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/db.html#db.database.get_engine">get_engine() (in module db.database)</a>
+</li>
+      <li><a href="api/utils.html#utils.logger.get_logger">get_logger() (in module utils.logger)</a>
 </li>
       <li><a href="api/db.html#db.currency_db.CurrencyDB.get_or_create">get_or_create() (db.currency_db.CurrencyDB method)</a>
 </li>
@@ -236,11 +248,15 @@
     module
 
       <ul>
-        <li><a href="api/fastapi.html#module-api_main">api_main</a>
+        <li><a href="api/fastapi.html#module-currency_api.dependencies.db">currency_api.dependencies.db</a>
+</li>
+        <li><a href="api/fastapi.html#module-currency_api.utils">currency_api.utils</a>
 </li>
         <li><a href="api/settings.html#module-settings">settings</a>
 </li>
         <li><a href="api/db_updates.html#module-start_updates">start_updates</a>
+</li>
+        <li><a href="api/utils.html#module-utils.logger">utils.logger</a>
 </li>
       </ul></li>
   </ul></td>
@@ -259,6 +275,20 @@
         <li><a href="api/external_api.html#ext_api.ext_api_interface.ExternalAPIBase.params">(ext_api.ext_api_interface.ExternalAPIBase property)</a>
 </li>
       </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/settings.html#settings.REDIS">REDIS (class in settings)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/fastapi.html#api_main.redis_cache">redis_cache() (in module api_main)</a>
+</li>
+      <li><a href="api/fastapi.html#currency_api.utils.request_url">request_url() (in module currency_api.utils)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -303,6 +333,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/db.html#db.models.User">User (class in db.models)</a>
 </li>
+      <li>
+    utils.logger
+
+      <ul>
+        <li><a href="api/utils.html#module-utils.logger">module</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
