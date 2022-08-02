@@ -14,7 +14,7 @@ from db.utils import wait_for_db
 from settings import settings as cfg
 
 app = FastAPI()
-currencies_prefix = "currencies"
+currencies_prefix = cfg().api.prefix
 
 
 @app.middleware("http")

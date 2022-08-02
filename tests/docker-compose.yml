@@ -1,14 +1,44 @@
 version: '3.8'
 services:
+  test_redis:
+      container_name: test_redis
+      restart: always
+      image: redis:7.0.4
+      volumes:
+        - redis-vol:/data
+      ports:
+        - "6380:${REDIS__PORT}"
+  test_currency_api:
+    environment:
+      - MYSQL__PORT=3306
+      - MYSQL__HOST=test_mysqldb
+    container_name: test_currency_api
+    restart: always
+    build:
+      context: ..
+      args:
+        ENV_FILE: ./tests/.env
+      dockerfile: Dockerfile.api
+    entrypoint: python api_main.py
+    depends_on:
+      - test_mysqldb
+      - test_redis
+    ports:
+      - "${API__STARTUP__PORT}:${API__STARTUP__PORT}"
   test_mysqldb:
-    env_file:
-    - .test_env
     container_name: test_mysqldb
     restart: always
     image: mysql:8.0.29
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL__ROOT_PASSWORD}'
+      MYSQL_USER: '${MYSQL__USER}'
+      MYSQL_PASSWORD: '${MYSQL__PASSWORD}'
+      MYSQL_DATABASE: '${MYSQL__DATABASE}'
     volumes:
       - vol:/var/lib/mysql
     ports:
       - "3307:3306"
 volumes:
   vol:
+  redis-vol:

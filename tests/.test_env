@@ -1,8 +1,0 @@
-# Test database details
-MYSQL_ROOT_PASSWORD = "rootpass"
-MYSQL_USER = "currencyuser"
-MYSQL_PASSWORD = "currencypass"
-MYSQL_DATABASE = "currencydb_test"
-MYSQL_DIALECT = "mysql+aiomysql"
-MYSQL_HOST = 'localhost'
-# MYSQL__PORT=''
