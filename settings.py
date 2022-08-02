@@ -1,6 +1,6 @@
 from typing import Any, Dict
 
-from pydantic import BaseModel, BaseSettings
+from pydantic import BaseModel, BaseSettings, ValidationError
 
 
 def get_conn_string(db_settings: Dict[str, Any]) -> str:
@@ -137,4 +137,11 @@ def settings() -> Settings:
     """
     Get settings object to import in other modules.
     """
-    return Settings()
+    try:
+        return Settings()
+    except ValidationError:
+        # When generating docs with sphinx ``.env`` is not found by pydantic as sphinx
+        # is running from the ``docs`` directory. We then load the ``.env`` from one
+        # directory above.
+        # TODO: Find a better solution.
+        return Settings(_env_file="../.env")
