@@ -127,8 +127,8 @@ of a cached key, value pair that is cached using Redis.</p>
 forcing a fresh query to the database upon the next request to the same endpoint
 with the same request path and query parameters.</p>
 <p>The caching is applied selectively only to the requests that have the value of
-<code class="docutils literal notranslate"><span class="pre">currencies_prefix</span></code> variable present in them. This is to avoid caching any other
-requests that are related to authentication and error responses.</p>
+<code class="docutils literal notranslate"><span class="pre">API__PREFIX</span></code> from <code class="docutils literal notranslate"><span class="pre">.env</span></code> file present in them. This is to avoid caching any
+other requests that are related to authentication and error responses.</p>
 <p><cite>Key</cite>     : Combination of API request path and query parameters</p>
 <p><cite>Value</cite>   : API response after querying the database.</p>
 <dl class="field-list simple">
