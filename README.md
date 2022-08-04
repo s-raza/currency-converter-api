@@ -2,6 +2,22 @@
 
 A simple FastAPI based currency converter API using micro services architecture.
 
+FastAPI &check;
+
+Async &check;
+
+Micro Services &check;
+
+Tests Automation &check;
+
+CI/CD Ready &check;
+
+REST API &check;
+
+Redis Cache &check;
+
+SQLAlchemy/MySQL &check;
+
 ## Component services of the API
 
 The API is implemented using three separate services running in docker containers and orechestrated using docker compose.
