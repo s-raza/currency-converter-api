@@ -14,7 +14,6 @@ from db.utils import wait_for_db
 from settings import settings as cfg
 
 app = FastAPI()
-currencies_prefix = cfg().api.prefix
 
 
 @app.middleware("http")
@@ -30,8 +29,8 @@ async def redis_cache(request: Request, call_next: Any) -> Response:
     with the same request path and query parameters.
 
     The caching is applied selectively only to the requests that have the value of
-    ``currencies_prefix`` variable present in them. This is to avoid caching any other
-    requests that are related to authentication and error responses.
+    ``API__PREFIX`` from ``.env`` file present in them. This is to avoid caching any
+    other requests that are related to authentication and error responses.
 
     `Key`     : Combination of API request path and query parameters
 
@@ -51,7 +50,7 @@ async def redis_cache(request: Request, call_next: Any) -> Response:
         f"redis://{cfg().redis.host}:{cfg().redis.port}", decode_responses=True
     )
 
-    if currencies_prefix in url:
+    if cfg().api.prefix in url:
         from_redis = await redis.execute_command("GET", url)
 
         if not from_redis:
@@ -79,7 +78,7 @@ async def redis_cache(request: Request, call_next: Any) -> Response:
     return await call_next(request)
 
 
-app.include_router(currencies_router, prefix=f"/{currencies_prefix}")
+app.include_router(currencies_router, prefix=f"/{cfg().api.prefix}")
 app.include_router(user_router)
 
 
