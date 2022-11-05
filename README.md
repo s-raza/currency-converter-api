@@ -124,6 +124,8 @@ A docker container is started upon initiating tests using pytest.
 
 Pytest waits for the docker container to startup before connecting to it, and executing the tests using the MySQL server running inside it.
 
+Before running tests copy the `tests/.env-template` file to `tests/.env`, all the settings in it can be left as they are for local testing purposes.
+
 
 **Test Run**
 ```
