@@ -35,6 +35,21 @@ services:
     entrypoint: python start_updates.py
     depends_on:
       - mysqldb
+
+  react_frontend:
+    environment:
+      - PORT="${REACT__HOST_PORT}"
+    container_name: react_frontend
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    entrypoint: npm start --port=${REACT__HOST_PORT}
+    depends_on:
+      - currency_api
+      - mysqldb
+    ports:
+      - "${REACT__HOST_PORT}:${REACT__HOST_PORT}"
   mysqldb:
     container_name: mysqldb
     restart: always
@@ -47,7 +62,7 @@ services:
     volumes:
       - vol:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "${MYSQL__PORT}:3306"
 volumes:
   vol:
   redis-vol:
