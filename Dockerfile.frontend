@@ -1,0 +1,36 @@
+FROM node:18.12.1-slim as base
+
+ARG APP_DIR=/app
+ARG LOCAL_DIR=frontend
+ARG CONTAINER_PATH=$APP_DIR/$LOCAL_DIR
+
+# Create user and group
+ARG APP_USR=appusr
+ARG APP_GRP=appgrp
+FROM base as node-deps
+
+COPY $LOCAL_DIR/package.json .
+RUN npm install
+
+FROM base as runtime
+
+RUN groupadd -r $APP_GRP
+RUN useradd -r -m $APP_USR
+RUN usermod -a -G $APP_GRP $APP_USR
+
+RUN mkdir $APP_DIR
+
+# Change ownership of /app to appusr from root
+RUN chown appusr:appgrp $APP_DIR
+
+# Copy node dependencies from the node-deps stage
+COPY --chown=appusr:appgrp --from=node-deps /node_modules $CONTAINER_PATH/node_modules
+
+# Copy application into container
+COPY --chown=appusr:appgrp ./$LOCAL_DIR $CONTAINER_PATH
+
+# Change to app path
+WORKDIR $CONTAINER_PATH
+
+# Become appusr to run the app
+USER $APP_USR
