@@ -1,5 +1,5 @@
 import time
-from typing import Any, Dict
+from typing import Any, Dict, Union
 
 import requests  # type: ignore
 
@@ -68,33 +68,35 @@ class CurrencyRatesDownloader:
         for k, v in headers.items():
             self.headers[k] = v
 
-    def get_rates(self) -> R:
+    def get_rates(self) -> Union[R, None]:
         """
         Get rates from the external source API for currency rates.
 
         :return: `dict` containing the currency:rate pairs from the
             external source API for currency rates.
         """
-        try:
-            req_result = requests.get(
-                self.api.url, headers=self.headers, params=self.api.params
-            )
 
-        except Exception as e:
-            req_result = None
-            if self.max_retries > 0:
+        success = False
+
+        while not success and self.max_retries > 0:
+            try:
+                req_result = requests.get(
+                    self.api.url, headers=self.headers, params=self.api.params
+                )
+                success = True
+            except Exception as e:
                 download_logger.error(
-                    f"Error retrieving rates from {self.api.url,}"
-                    f", retrying in: {self.time_out}s"
+                    f"Error retrieving rates from: {self.api.url}\n\n"
+                    f"Error: {e.args}\n\n"
+                    f"Retrying in: {self.time_out}s"
                     f", attempts left: {self.max_retries}"
                 )
                 time.sleep(self.time_out)
                 self.max_retries -= 1
                 self.time_out += self.increment_timeout
-                self.get_rates()
-            else:
-                download_logger.error("Giving up, Failed to retrieve data from API")
-                download_logger.error(e.args)
-                return req_result
+                continue
 
-        return self.api.formatted_rates(req_result.json())
+        if success is True:
+            return self.api.formatted_rates(req_result.json())
+        else:
+            return None
