@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import CurrencyConverter from './components/currencyConverter';
+// import CircularProgress from '@mui/material/CircularProgress';
+// import Box from '@mui/material/Box';
 
 function App() {
   const [currencies, setCurrencies] = useState([]);
@@ -13,8 +15,6 @@ function App() {
   useEffect(() => {
     getCurrencies()
   }, [getCurrencies]);
-
-  console.log(currencies)
 
   return (
     <div className="App">
