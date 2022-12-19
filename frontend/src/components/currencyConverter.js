@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { useDebounce } from 'use-debounce';
 
 const CurrencyDropDown = ({currencies, onSelect, label}) => {
 
@@ -26,12 +27,13 @@ const CurrencyConverter = ({currencies}) => {
     const [fromCode, setFromCode] = useState(currencies[0])
     const [toCode, setToCode] = useState(currencies[0])
     const [amount, setAmount] = useState(0)
+    const [amountDebounced] = useDebounce(amount, 1000);
 
     const getConversion = useCallback(async () => {
-        await fetch(`/currencies/convert/${fromCode}/${toCode}?amount=${amount}`).then(res => res.json()).then(data => {
+        await fetch(`/currencies/convert/${fromCode}/${toCode}?amount=${amountDebounced}`).then(res => res.json()).then(data => {
             setConverted(data);
         });
-      }, [fromCode, toCode, amount])
+      }, [fromCode, toCode, amountDebounced])
 
     const handleChange = (event, setter) => {
         setter(event.target.value)
@@ -39,13 +41,13 @@ const CurrencyConverter = ({currencies}) => {
 
     useEffect(() => {
         getConversion()
-      }, [amount, fromCode, toCode]);
+      }, [amountDebounced, fromCode, toCode, getConversion]);
 
     return (
         <div>
-            <CurrencyDropDown currencies={currencies} onSelect={ (event) => handleChange(event, setFromCode)} label="From"/>
-            <CurrencyDropDown currencies={currencies} onSelect={ (event) => handleChange(event, setToCode)} label="To" />
-            <input type="text" placeholder='Amount' value={amount} onChange={ (event) => handleChange(event, setAmount)} />
+            <CurrencyDropDown currencies={currencies} onSelect={ event => handleChange(event, setFromCode)} label="From"/>
+            <CurrencyDropDown currencies={currencies} onSelect={ event => handleChange(event, setToCode)} label="To" />
+            <input type="text" placeholder='Amount' value={amount} onChange={ event => handleChange(event, setAmount)} />
             <div>
                 Converted: {converted.converted}
             </div>
