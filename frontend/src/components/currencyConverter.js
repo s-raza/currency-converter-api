@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 const CurrencyDropDown = ({currencies, onSelect, label}) => {
 
@@ -33,24 +33,19 @@ const CurrencyConverter = ({currencies}) => {
         });
       }, [fromCode, toCode, amount])
 
-    const handleFromCode = (event) => {
-        setFromCode(event.target.value)
+    const handleChange = (event, setter) => {
+        setter(event.target.value)
     }
 
-    const handleToCode = (event) => {
-        setToCode(event.target.value)
-    }
-
-    const handleAmount = (event) => {
-        setAmount(event.target.value)
-    }
+    useEffect(() => {
+        getConversion()
+      }, [amount, fromCode, toCode]);
 
     return (
         <div>
-            <CurrencyDropDown currencies={currencies} onSelect={handleFromCode} label="From"/>
-            <CurrencyDropDown currencies={currencies} onSelect={handleToCode} label="To" />
-            <input type="text" placeholder='Amount' value={amount} onChange={handleAmount} />
-            <button onClick={getConversion}>Convert</button>
+            <CurrencyDropDown currencies={currencies} onSelect={ (event) => handleChange(event, setFromCode)} label="From"/>
+            <CurrencyDropDown currencies={currencies} onSelect={ (event) => handleChange(event, setToCode)} label="To" />
+            <input type="text" placeholder='Amount' value={amount} onChange={ (event) => handleChange(event, setAmount)} />
             <div>
                 Converted: {converted.converted}
             </div>
