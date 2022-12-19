@@ -25,7 +25,7 @@ const CurrencyConverter = ({currencies}) => {
     const [converted, setConverted] = useState({})
     const [fromCode, setFromCode] = useState(currencies[0])
     const [toCode, setToCode] = useState(currencies[0])
-    const [amount, setAmount] = useState('')
+    const [amount, setAmount] = useState(0)
 
     const getConversion = useCallback(async () => {
         await fetch(`/currencies/convert/${fromCode}/${toCode}?amount=${amount}`).then(res => res.json()).then(data => {
