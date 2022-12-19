@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect, useCallback } from 'react';
 
 function App() {
+  const [currencies, setCurrencies] = useState([]);
+
+  let getCurrencies = useCallback(async () => {
+    await fetch('/currencies/').then(res => res.json()).then(data => {
+      setCurrencies(data);
+    });
+  }, [])
+
+  useEffect(() => {
+    getCurrencies()
+  }, [getCurrencies]);
+
+  console.log(currencies)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ul>
+      {
+          currencies && currencies.success && currencies.currencies.map(
+            (item) => {
+              return(
+                <li key={item}>{item}</li>
+              )
+            }
+          )
+        }
+      </ul>
     </div>
   );
 }
