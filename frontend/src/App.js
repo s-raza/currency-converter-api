@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import CurrencyConverter from './components/currencyConverter';
 
 function App() {
   const [currencies, setCurrencies] = useState([]);
@@ -17,17 +18,10 @@ function App() {
 
   return (
     <div className="App">
-      <ul>
       {
-          currencies && currencies.success && currencies.currencies.map(
-            (item) => {
-              return(
-                <li key={item}>{item}</li>
-              )
-            }
-          )
-        }
-      </ul>
+        currencies && currencies.success? <CurrencyConverter currencies={currencies.currencies}/> :
+        <>Loading...</>
+      }
     </div>
   );
 }
