@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import CurrencyConverter from './components/currencyConverter';
-// import CircularProgress from '@mui/material/CircularProgress';
-// import Box from '@mui/material/Box';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function App() {
   const [currencies, setCurrencies] = useState([]);
@@ -17,12 +17,15 @@ function App() {
   }, [getCurrencies]);
 
   return (
-    <div className="App">
+    <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"
+    >
       {
         currencies && currencies.success? <CurrencyConverter currencies={currencies.currencies}/> :
-        <>Loading...</>
+        <Box sx={{ display: 'flex' }}>
+          <CircularProgress />
+        </Box>
       }
-    </div>
+    </Box>
   );
 }
 

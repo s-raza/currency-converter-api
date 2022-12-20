@@ -1,24 +1,18 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useDebounce } from 'use-debounce';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
-const CurrencyDropDown = ({currencies, onSelect, label}) => {
-
+const currencyFormatter = (amount, currCode, format='en-US') => {
     return (
-    <div>
-    {label}: <select onChange={onSelect}>
-        {
-            currencies.map(
-                item => {
-                    return (
-                        <option key = {item} value={item}>
-                            {item}
-                        </option>
-                    )
-                }
-            )
+        new Intl.NumberFormat(format, {
+            style: 'currency',
+            currency: currCode,
         }
-    </select>
-    </div>
+        ).format(amount)
     )
 }
 
@@ -26,8 +20,8 @@ const CurrencyConverter = ({currencies}) => {
     const [converted, setConverted] = useState({})
     const [fromCode, setFromCode] = useState(currencies[0])
     const [toCode, setToCode] = useState(currencies[0])
-    const [amount, setAmount] = useState(0)
-    const [amountDebounced] = useDebounce(amount, 1000);
+    const [amount, setAmount] = useState(1)
+    const [amountDebounced] = useDebounce(amount, 800);
 
     const getConversion = useCallback(async () => {
         await fetch(`/currencies/convert/${fromCode}/${toCode}?amount=${amountDebounced}`).then(res => res.json()).then(data => {
@@ -35,23 +29,53 @@ const CurrencyConverter = ({currencies}) => {
         });
       }, [fromCode, toCode, amountDebounced])
 
-    const handleChange = (event, setter) => {
-        setter(event.target.value)
-    }
-
     useEffect(() => {
         getConversion()
       }, [amountDebounced, fromCode, toCode, getConversion]);
 
     return (
-        <div>
-            <CurrencyDropDown currencies={currencies} onSelect={ event => handleChange(event, setFromCode)} label="From"/>
-            <CurrencyDropDown currencies={currencies} onSelect={ event => handleChange(event, setToCode)} label="To" />
-            <input type="text" placeholder='Amount' value={amount} onChange={ event => handleChange(event, setAmount)} />
-            <div>
-                Converted: {converted.converted}
-            </div>
-        </div>
+        <Stack spacing={2}>
+            <Box display="flex" justifyContent="center" alignItems="center">
+                <Typography variant="h6" gutterBottom>
+                    {currencyFormatter(amountDebounced, fromCode)} = {currencyFormatter(converted.converted, toCode)}
+                </Typography>
+            </Box>
+            <Box component="form" noValidate autoComplete="off" display="flex" justifyContent="center" alignItems="center">
+                <TextField
+                required
+                id="outlined-number"
+                label="Amount"
+                type="number"
+                inputProps={{min: 0, style: { textAlign: 'center', fontSize: 25, padding: 1 }}}
+                value={amount}
+                onChange={event => setAmount(event.target.value)}
+                />
+            </Box>
+            <Stack direction="row" spacing={5} display="flex" justifyContent="center" alignItems="center">
+                <Autocomplete
+                    options={currencies}
+                    disableClearable
+                    id="currencies-from"
+                    value={fromCode}
+                    onChange={ (event, newValue) => setFromCode(newValue)}
+                    sx={{ width: 100 }}
+                    renderInput={(params) => (
+                    <TextField {...params} variant="standard" />
+                    )}
+                />
+                <Autocomplete
+                    options={currencies}
+                    disableClearable
+                    id="currencies-to"
+                    value={toCode}
+                    onChange={ (event, newValue) => setToCode(newValue)}
+                    sx={{ width: 100 }}
+                    renderInput={(params) => (
+                    <TextField {...params} variant="standard" />
+                    )}
+                />
+            </Stack>
+        </Stack>
     )
 }
 
