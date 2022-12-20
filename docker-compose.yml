@@ -7,13 +7,13 @@ services:
       volumes:
         - redis-vol:/data
       ports:
-        - "${REDIS__PORT}:${REDIS__PORT}"
-  currency_api:
+        - ${REDIS__PORT}:${REDIS__PORT}
+  currencyapi:
     environment:
       - MYSQL__HOST=mysqldb
       - API__STARTUP__UVICORN_RELOAD=False
       - REDIS__HOST=redis
-    container_name: currency_api
+    container_name: currencyapi
     restart: always
     build:
       context: .
@@ -23,7 +23,7 @@ services:
       - currency_updater
       - mysqldb
     ports:
-      - "${API__STARTUP__PORT}:${API__STARTUP__PORT}"
+      - ${API__STARTUP__PORT}:${API__STARTUP__PORT}
   currency_updater:
     environment:
       - MYSQL__HOST=mysqldb
@@ -35,19 +35,35 @@ services:
     entrypoint: python start_updates.py
     depends_on:
       - mysqldb
+
+  react_frontend:
+    environment:
+      - PORT=${REACT_APP__PORT}
+      - REACT_APP_PROXY_HOST=http://currencyapi:${API__STARTUP__PORT}
+    container_name: react_frontend
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    entrypoint: npm start
+    depends_on:
+      - currencyapi
+      - mysqldb
+    ports:
+      - ${REACT_APP__PORT}:${REACT_APP__PORT}
   mysqldb:
     container_name: mysqldb
     restart: always
     image: mysql:8.0.29
     environment:
-      MYSQL_ROOT_PASSWORD: '${MYSQL__ROOT_PASSWORD}'
-      MYSQL_USER: '${MYSQL__USER}'
-      MYSQL_PASSWORD: '${MYSQL__PASSWORD}'
-      MYSQL_DATABASE: '${MYSQL__DATABASE}'
+      MYSQL_ROOT_PASSWORD: ${MYSQL__ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL__USER}
+      MYSQL_PASSWORD: ${MYSQL__PASSWORD}
+      MYSQL_DATABASE: ${MYSQL__DATABASE}
     volumes:
       - vol:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - ${MYSQL__PORT}:3306
 volumes:
   vol:
   redis-vol:

@@ -9,7 +9,8 @@ from .dependencies.db import get_currency_db
 from .models import errors as err
 from .models import request as req
 from .models import response as resp
-from .user_auth_router import UserModel, get_current_active_user
+
+# from .user_auth_router import UserModel, get_current_active_user
 
 currencies_router = APIRouter()
 
@@ -22,7 +23,7 @@ currencies_router = APIRouter()
 async def get_currency_code_rate(
     currency_in: req.CurrencyIn = Depends(),
     currency_db: CurrencyDB = Depends(get_currency_db),
-    auth_user: UserModel = Depends(get_current_active_user),
+    # auth_user: UserModel = Depends(get_current_active_user),
 ) -> Dict[str, Any]:
 
     try:
@@ -49,7 +50,7 @@ async def get_currency_code_rate(
 async def convert_currency_rate(
     convert_in: req.ConvertIn = Depends(),
     currency_db: CurrencyDB = Depends(get_currency_db),
-    auth_user: UserModel = Depends(get_current_active_user),
+    # auth_user: UserModel = Depends(get_current_active_user),
 ) -> Dict[str, Any]:
 
     try:
@@ -75,7 +76,7 @@ async def convert_currency_rate(
 @currencies_router.get("/", response_model=resp.CurrenciesResponse)
 async def get_all_currencies(
     currency_db: CurrencyDB = Depends(get_currency_db),
-    auth_user: UserModel = Depends(get_current_active_user),
+    # auth_user: UserModel = Depends(get_current_active_user),
 ) -> Dict[str, Any]:
 
     currencies: List[str] = await currency_db.get_currency_codes()

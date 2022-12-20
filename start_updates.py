@@ -27,10 +27,15 @@ async def execute(freq_mins: int) -> None:
     downloader = CurrencyRatesDownloader(rates_api)
     rates = downloader.get_rates()
 
-    currency_db = await get_db(CurrencyDB)
-    await currency_db.add_update(rates["base_currency"], rates["rates"])
+    if rates is not None:
+        currency_db = await get_db(CurrencyDB)
+        await currency_db.add_update(rates["base_currency"], rates["rates"])
 
-    updates_logger.info(f"Database Updated, next update in {freq_mins} minutes")
+        updates_logger.info(f"Database updated, next update in {freq_mins} minutes")
+    else:
+        updates_logger.error(
+            f"Database update failed, next update attempt in {freq_mins} minutes"
+        )
 
 
 def main() -> None:
