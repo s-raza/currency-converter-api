@@ -32,8 +32,6 @@ const CurrencyConverter = ({currencies}) => {
       }, [fromCode, toCode, amountDebounced])
 
     const switchToFrom = () => {
-        // const to = toCode
-        // const from = fromCode
         setFromCode(toCode)
         setToCode(fromCode)
     }
@@ -60,7 +58,7 @@ const CurrencyConverter = ({currencies}) => {
                 onChange={event => setAmount(event.target.value)}
                 />
             </Box>
-            <Stack direction="row" spacing={5} display="flex" justifyContent="center" alignItems="center">
+            <Stack direction="row" spacing={2} display="flex" justifyContent="center" alignItems="center">
                 <Autocomplete
                     options={currencies}
                     disableClearable
