@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import CompareArrowsSharpIcon from '@mui/icons-material/CompareArrowsSharp';
+import IconButton from '@mui/material/IconButton';
 
 const currencyFormatter = (amount, currCode, format='en-US') => {
     return (
@@ -28,6 +30,13 @@ const CurrencyConverter = ({currencies}) => {
             setConverted(data);
         });
       }, [fromCode, toCode, amountDebounced])
+
+    const switchToFrom = () => {
+        // const to = toCode
+        // const from = fromCode
+        setFromCode(toCode)
+        setToCode(fromCode)
+    }
 
     useEffect(() => {
         getConversion()
@@ -63,6 +72,9 @@ const CurrencyConverter = ({currencies}) => {
                     <TextField {...params} variant="standard" />
                     )}
                 />
+                <IconButton onClick={switchToFrom}>
+                    <CompareArrowsSharpIcon/>
+                </IconButton>
                 <Autocomplete
                     options={currencies}
                     disableClearable
