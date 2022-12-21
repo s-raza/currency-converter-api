@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import Dict, List
 
 from pydantic import BaseModel
 
@@ -25,3 +25,9 @@ class ConvertedResponse(BaseModel):
 class CurrenciesResponse(BaseModel):
     success: bool
     currencies: List[str]
+
+
+class CurrenciesRatesResponse(BaseModel):
+    created: datetime
+    base_currency: str
+    rates: Dict[str, float]
