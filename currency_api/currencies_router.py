@@ -16,7 +16,7 @@ currencies_router = APIRouter()
 
 
 @currencies_router.get(
-    "/rate/{curr_code}",
+    "/rates/{curr_code}",
     response_model=resp.CurrencyRateResponse,
     responses=err.get_responses(err.all_errors),
 )
@@ -40,6 +40,27 @@ async def get_currency_code_rate(
         "rate": db.rate,
         "last_updated": db.date_updated.created,
     }
+
+
+@currencies_router.get(
+    "/rates",
+    response_model=resp.CurrenciesRatesResponse,
+    responses=err.get_responses(err.all_errors),
+)
+async def get_currency_codes_rates(
+    currency_in: req.CurrenciesRatesIn = Depends(),
+    currency_db: CurrencyDB = Depends(get_currency_db),
+    # auth_user: UserModel = Depends(get_current_active_user),
+) -> Dict[str, Any]:
+
+    try:
+        result: Dict[str, Any] = await currency_db.get_currency_rates(
+            currency_in.on_date
+        )
+    except ValueError as e:
+        errcode, errtxt = e.args[0]
+        raise HTTPException(status_code=errcode, detail=errtxt)
+    return {"success": True, **result}
 
 
 @currencies_router.get(
@@ -73,7 +94,7 @@ async def convert_currency_rate(
     }
 
 
-@currencies_router.get("/", response_model=resp.CurrenciesResponse)
+@currencies_router.get("", response_model=resp.CurrenciesResponse)
 async def get_all_currencies(
     currency_db: CurrencyDB = Depends(get_currency_db),
     # auth_user: UserModel = Depends(get_current_active_user),

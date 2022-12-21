@@ -29,6 +29,14 @@ async def test_last_update(db: CurrencyDB):
 
 
 @pytest.mark.asyncio
+async def test_all_latest_rates_correct(db: CurrencyDB):
+
+    await db.add_update(sr.base_currency, sr.rates)
+    latest_rates = await db.get_currency_rates()
+    assert latest_rates["rates"] == sr.rates
+
+
+@pytest.mark.asyncio
 async def test_latest_rate_correct(db: CurrencyDB):
 
     curr_code = "AED"
