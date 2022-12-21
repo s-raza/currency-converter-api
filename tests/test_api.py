@@ -22,6 +22,19 @@ async def test_api_currencies_list(db: CurrencyDB, api: AsyncClient):
 
 
 @pytest.mark.asyncio
+async def test_api_currencies_rates(db: CurrencyDB, api: AsyncClient):
+
+    await db.add_update(sr.base_currency2, sr.rates)
+    currencies: Response = await api.get("/rates")
+
+    json: Dict = currencies.json()
+    success = json.get("success")
+
+    assert success is not None and success is True
+    assert json.get("rates") == sr.rates
+
+
+@pytest.mark.asyncio
 async def test_latest_rate_for_currency_success(db: CurrencyDB, api: AsyncClient):
 
     await db.add_update(sr.base_currency, sr.rates)
