@@ -227,6 +227,61 @@ class CurrencyDB:
 
         return [curr.code for curr in result]
 
+    async def get_currency_rates(self, on_date: str = None) -> Dict[str, Any]:
+        """
+        Get last rates updated in DB for all currency codes.
+
+        If a date is not provided, the date from the last update is used.
+
+        :param on_date:
+            Particular date for which to get the rate, in the "%d-%m-%Y" format
+        :type on_date: optional
+
+        :raises ValueError: If the date is not in the "%d-%m-%Y" format.
+
+        :raises ValueError: If an empty result is returned from the query.
+
+        :return:
+            :obj:`Dict[created_date: date, base_currency: currency_code,
+            rates: Dict[currency_code: rate]]`
+            if the query returns a result else raises ValueError
+
+        """
+
+        last_update_date = await self.last_update_date
+
+        if on_date is not None:
+            try:
+                date_obj = datetime.datetime.strptime(on_date, "%d-%m-%Y")
+            except ValueError:
+                raise ValueError((400, "Malformed date format, expected DD-MM-YYYY"))
+        else:
+            date_obj = last_update_date.created
+
+        q = (
+            select([CurrencyUpdates, Currencies, CurrencyUpdateDates])
+            .where(Currencies.id == CurrencyUpdates.currency_id)
+            .where(CurrencyUpdates.date_updated_id == CurrencyUpdateDates.id)
+            .options(selectinload(CurrencyUpdateDates.base_currency))
+            .where(func.DATE(CurrencyUpdateDates.created) == date_obj.date())
+            .order_by(CurrencyUpdateDates.id.desc())
+            .options(selectinload(CurrencyUpdates.date_updated))
+        )
+
+        result = await self.session.execute(q)
+        result = result.scalars()
+        rates = {item.currency.code: item.rate for item in result}
+
+        if rates:
+            return {
+                "created": date_obj,
+                "base_currency": last_update_date.base_currency.code,
+                "rates": rates,
+            }
+        else:
+            date_str = datetime.datetime.strftime(date_obj, "%d-%m-%Y")
+            raise ValueError((404, f"No entry for date {date_str} exists"))
+
     async def get_rate_on_date(
         self, curr_code: str, on_date: str = None
     ) -> CurrencyUpdates:

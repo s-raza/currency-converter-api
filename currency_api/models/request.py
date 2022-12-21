@@ -15,3 +15,8 @@ class ConvertIn:
         self.to_code = to_code
         self.amount = amount
         self.on_date = on_date
+
+
+class CurrenciesRatesIn:
+    def __init__(self, on_date: Optional[str] = None):
+        self.on_date = on_date
