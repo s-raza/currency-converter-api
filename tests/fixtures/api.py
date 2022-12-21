@@ -16,17 +16,15 @@ class PasswordAuth(Auth):
 
 
 @pytest_asyncio.fixture(scope="module")
-# async def api(db):
 async def api():
 
     port = cfg().api.startup.port
-
     base_url = f"http://localhost:{port}"
+    user_settings = cfg().api.user
     auth_client = AsyncClient(base_url=base_url, timeout=None)
 
-    user_settings = cfg().api.user
-
     api_started = False
+
     while not api_started:
         try:
             token: Response = await auth_client.post(
