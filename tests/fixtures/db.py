@@ -7,7 +7,7 @@ from utils import logger
 tests_logger = logger.get_logger("Database")
 
 
-@pytest_asyncio.fixture(scope="session")
+@pytest_asyncio.fixture(scope="module")
 async def db(db_engine):
 
     tests_logger.info("Opening DB connection and starting tests")
