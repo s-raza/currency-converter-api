@@ -28,6 +28,7 @@ class CurrenciesResponse(BaseModel):
 
 
 class CurrenciesRatesResponse(BaseModel):
+    success: bool
     created: datetime
     base_currency: str
     rates: Dict[str, float]

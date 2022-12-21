@@ -60,7 +60,7 @@ async def get_currency_codes_rates(
     except ValueError as e:
         errcode, errtxt = e.args[0]
         raise HTTPException(status_code=errcode, detail=errtxt)
-    return result
+    return {"success": True, **result}
 
 
 @currencies_router.get(
