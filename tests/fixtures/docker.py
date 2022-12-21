@@ -1,18 +1,15 @@
 import os
-import time
 
 import pytest_asyncio
 from python_on_whales import docker
 
-from db.database import create_all, get_engine
-from db.models import Base
 from utils import logger
 
 tests_logger = logger.get_logger("Docker")
 
 
 @pytest_asyncio.fixture(scope="session")
-async def db_engine():
+async def docker_env():
 
     os.chdir("./tests")
     tests_logger.info("Starting Docker Containers")
@@ -29,12 +26,7 @@ async def db_engine():
     env = {k.split("__")[1].lower(): v for k, v in env.items() if "MYSQL__" in k}
     env["port"] = port
 
-    engine = get_engine(env)
-
-    await create_all(engine, Base)
-    time.sleep(5)
-
-    yield engine
+    yield env
 
     tests_logger.info("Removing Containers")
     docker.compose.down(volumes=True)
