@@ -24,10 +24,10 @@ services:
       - mysqldb
     ports:
       - ${API__STARTUP__PORT}:${API__STARTUP__PORT}
-  currency_updater:
+  currency-updater:
     environment:
       - MYSQL__HOST=mysqldb
-    container_name: currency_updater
+    container_name: currency-updater
     restart: always
     build:
       context: .
@@ -36,11 +36,11 @@ services:
     depends_on:
       - mysqldb
 
-  react_frontend:
+  react-frontend:
     environment:
       - PORT=${REACT_APP__PORT}
       - REACT_APP_PROXY_HOST=http://currencyapi:${API__STARTUP__PORT}
-    container_name: react_frontend
+    container_name: react-frontend
     restart: always
     build:
       context: .
