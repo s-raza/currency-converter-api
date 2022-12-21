@@ -20,7 +20,7 @@ services:
       dockerfile: Dockerfile.api
     entrypoint: python api_main.py
     depends_on:
-      - currency_updater
+      - currency-updater
       - mysqldb
     ports:
       - ${API__STARTUP__PORT}:${API__STARTUP__PORT}
