@@ -7,16 +7,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import CompareArrowsSharpIcon from '@mui/icons-material/CompareArrowsSharp';
 import IconButton from '@mui/material/IconButton';
-
-const currencyFormatter = (amount, currCode, format='en-US') => {
-    return (
-        new Intl.NumberFormat(format, {
-            style: 'currency',
-            currency: currCode,
-        }
-        ).format(amount)
-    )
-}
+import currencyFormatter from './utils';
 
 const CurrencyConverter = ({currencies}) => {
     const [converted, setConverted] = useState({})
