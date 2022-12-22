@@ -7,7 +7,7 @@ function App() {
   const [currencies, setCurrencies] = useState([]);
 
   let getCurrencies = useCallback(async () => {
-    await fetch('/currencies/').then(res => res.json()).then(data => {
+    await fetch('/currencies').then(res => res.json()).then(data => {
       setCurrencies(data);
     });
   }, [])
