@@ -56,6 +56,7 @@ const CurrencyConverter = ({currencies}) => {
                 inputProps={{min: 0, style: { textAlign: 'center', fontSize: 25, padding: 1 }}}
                 value={amount}
                 onChange={event => setAmount(event.target.value? event.target.value: 1)}
+                onFocus={event => event.target.select()}
                 />
             </Box>
             <Stack direction="row" spacing={2} display="flex" justifyContent="center" alignItems="center">
