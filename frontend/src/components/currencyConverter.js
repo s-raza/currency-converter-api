@@ -7,7 +7,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import CompareArrowsSharpIcon from '@mui/icons-material/CompareArrowsSharp';
 import IconButton from '@mui/material/IconButton';
-import currencyFormatter from './utils';
+import {currencyFormatter} from './utils';
 
 const CurrencyConverter = ({currencies}) => {
     const [converted, setConverted] = useState({})

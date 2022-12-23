@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import currencyFormatter from './utils';
+import {currencyFormatter} from './utils';
 import Typography from '@mui/material/Typography';
 
 const colHeaders = [
