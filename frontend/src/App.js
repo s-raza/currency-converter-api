@@ -24,7 +24,7 @@ function App() {
       {
         rates && rates.success?
         <Stack spacing={2}>
-        <CurrencyConverter currencies={Object.keys(rates.rates).sort()}/>
+        <CurrencyConverter rates={rates}/>
         <GridCurrencyRates rates={rates}/>
         </Stack> :
         <Box sx={{ display: 'flex' }}>
