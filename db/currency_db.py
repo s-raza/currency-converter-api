@@ -264,7 +264,7 @@ class CurrencyDB:
             .where(CurrencyUpdates.date_updated_id == CurrencyUpdateDates.id)
             .options(selectinload(CurrencyUpdateDates.base_currency))
             .where(func.DATE(CurrencyUpdateDates.created) == date_obj.date())
-            .order_by(CurrencyUpdateDates.id.desc())
+            .order_by(CurrencyUpdateDates.id.asc())
             .options(selectinload(CurrencyUpdates.date_updated))
         )
 
