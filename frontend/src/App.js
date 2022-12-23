@@ -6,26 +6,26 @@ import GridCurrencyRates from './components/currencyDataGrid';
 import Stack from '@mui/material/Stack';
 
 function App() {
-  const [currencies, setCurrencies] = useState([]);
+  const [rates, setRates] = useState({});
 
-  let getCurrencies = useCallback(async () => {
-    await fetch('/currencies').then(res => res.json()).then(data => {
-      setCurrencies(data);
+  let getRates = useCallback(async () => {
+    await fetch('/currencies/rates').then(res => res.json()).then(data => {
+      setRates(data);
     });
   }, [])
 
   useEffect(() => {
-    getCurrencies()
-  }, [getCurrencies]);
+    getRates()
+  }, [getRates]);
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"
     >
       {
-        currencies && currencies.success?
+        rates && rates.success?
         <Stack spacing={2}>
-        <CurrencyConverter currencies={currencies.currencies}/>
-        <GridCurrencyRates />
+        <CurrencyConverter currencies={Object.keys(rates.rates).sort()}/>
+        <GridCurrencyRates rates={rates}/>
         </Stack> :
         <Box sx={{ display: 'flex' }}>
           <CircularProgress />
