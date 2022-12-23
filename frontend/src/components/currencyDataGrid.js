@@ -32,44 +32,44 @@ const GridCurrencyRates = ({rates}) => {
         getRows()
       }, [amountDebounced, baseCurrency, getRows]);
 
-      return (
-        <Box sx={{ height: 400, width: '100%' }}>
-        <Stack direction="row" spacing={2} display="flex" justifyContent="center" alignItems="center">
-            <Autocomplete
-                options={currencyList}
-                disableClearable
-                id="currencies-from"
-                value={baseCurrency}
-                onChange={ (event, newValue) => setBaseCurrency(newValue)}
-                sx={{ width: 100 }}
-                renderInput={(params) => (
-                <TextField {...params} variant="standard" />
-                )}
-            />
-            <TextField
-                required
-                width="100%"
-                id="outlined-number"
-                label="Amount"
-                type="number"
-                inputProps={{min: 0, style: { textAlign: 'center', fontSize: 20, padding: 1}}}
-                value={amount}
-                onChange={event => setAmount(event.target.value? event.target.value: 1)}
-                onFocus={event => event.target.select()}
-                />
-        </Stack>
-        <DataGrid
-            rows={rows}
-            rowHeight={30}
-            headerHeight={35}
-            density='compact'
-            columns={colHeaders}
-            disableSelectionOnClick
-            experimentalFeatures={{ newEditingApi: true }}
-            sortModel={[{field: 'currCode', sort: 'asc'}]}
+    return (
+    <Box sx={{ height: 400, width: '100%' }}>
+    <Stack direction="row" spacing={2} display="flex" justifyContent="center" alignItems="center">
+        <Autocomplete
+            options={currencyList}
+            disableClearable
+            id="currencies-from"
+            value={baseCurrency}
+            onChange={ (event, newValue) => setBaseCurrency(newValue)}
+            sx={{ width: 100 }}
+            renderInput={(params) => (
+            <TextField {...params} variant="standard" />
+            )}
         />
-        </Box>
-      )
+        <TextField
+            required
+            width="100%"
+            id="outlined-number"
+            label="Amount"
+            type="number"
+            inputProps={{min: 0, style: { textAlign: 'center', fontSize: 20, padding: 1}}}
+            value={amount}
+            onChange={event => setAmount(event.target.value? event.target.value: 1)}
+            onFocus={event => event.target.select()}
+            />
+    </Stack>
+    <DataGrid
+        rows={rows}
+        rowHeight={30}
+        headerHeight={35}
+        density='compact'
+        columns={colHeaders}
+        disableSelectionOnClick
+        experimentalFeatures={{ newEditingApi: true }}
+        sortModel={[{field: 'currCode', sort: 'asc'}]}
+    />
+    </Box>
+    )
 }
 
 export default GridCurrencyRates
