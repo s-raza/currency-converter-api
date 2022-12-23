@@ -7,3 +7,7 @@ export function currencyFormatter(amount, currCode, format='en-US') {
         ).format(amount)
     )
 }
+
+export function convertCurrency(from_rate, base_rate, amount=1) {
+    return (parseFloat(from_rate) / parseFloat(base_rate)) * parseFloat(amount)
+}
