@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import {currencyFormatter} from './utils';
-import { convertCurrency } from './utils';
+import {currencyFormatter} from './utils/utils';
+import { convertCurrency } from './utils/utils';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useDebounce } from 'use-debounce';

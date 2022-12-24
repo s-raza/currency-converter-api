@@ -7,19 +7,48 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import CompareArrowsSharpIcon from '@mui/icons-material/CompareArrowsSharp';
 import IconButton from '@mui/material/IconButton';
-import {currencyFormatter, convertCurrency} from './utils';
+import {currencyFormatter, convertCurrency} from './utils/utils';
+import { getFlagEmoji } from './utils/currencyFlags';
+
+const CustomAutoComplete = ({id, optionsList, value, setterFunc}) => {
+    return (
+        <Autocomplete
+            sx={{width: "100%"}}
+            options={optionsList}
+            disableClearable
+            id={id}
+            value={value}
+            onChange={ (event, newValue) => setterFunc(newValue)}
+            isOptionEqualToValue={(option, value) => option.currCode === value.currCode}
+            getOptionLabel={(option) => option.currCode}
+            renderOption={(props, option) => (
+                <Box component="li" {...props}>
+                {option.currFlag} {option.currCode}
+                </Box>
+            )}
+            renderInput={(params) => (
+            <TextField {...params} variant="standard" width="100%" />
+            )}
+        />
+    )
+}
 
 const CurrencyConverter = ({rates}) => {
-    let currencies = Object.keys(rates.rates).sort()
+    let currencyRates = Object.keys(rates.rates).sort().map(
+        item => {
+            return {currFlag: getFlagEmoji(item), currCode: item}
+        }
+    )
+
     const [converted, setConverted] = useState(0)
-    const [fromCode, setFromCode] = useState(currencies[0])
-    const [toCode, setToCode] = useState(currencies[0])
+    const [fromCode, setFromCode] = useState(currencyRates[0])
+    const [toCode, setToCode] = useState(currencyRates[0])
     const [amount, setAmount] = useState(1)
     const [amountDebounced] = useDebounce(amount, 800);
 
     const getConversion = useCallback( () => {
         setConverted(
-            convertCurrency(rates.rates[toCode], rates.rates[fromCode], amountDebounced)
+            convertCurrency(rates.rates[toCode.currCode], rates.rates[fromCode.currCode], amountDebounced)
         )
       }, [rates.rates, fromCode, toCode, amountDebounced]
     )
@@ -34,10 +63,10 @@ const CurrencyConverter = ({rates}) => {
       }, [amountDebounced, fromCode, toCode, getConversion]);
 
     return (
-        <Stack spacing={2}>
+        <Stack spacing={2} display="flex" justifyContent="center" alignItems="center">
             <Box display="flex" justifyContent="center" alignItems="center">
                 <Typography variant="h6" gutterBottom>
-                    {currencyFormatter(amountDebounced, fromCode)} = {currencyFormatter(converted, toCode)}
+                    {currencyFormatter(amountDebounced, fromCode.currCode)} = {currencyFormatter(converted, toCode.currCode)}
                 </Typography>
             </Box>
             <Box component="form" noValidate autoComplete="off" display="flex" justifyContent="center" alignItems="center">
@@ -52,31 +81,21 @@ const CurrencyConverter = ({rates}) => {
                 onFocus={event => event.target.select()}
                 />
             </Box>
-            <Stack direction="row" spacing={2} display="flex" justifyContent="center" alignItems="center">
-                <Autocomplete
-                    options={currencies}
-                    disableClearable
+            <Stack spacing={2} direction="row" display="flex" justifyContent="space-evenly" alignItems="center" width="100%">
+                <CustomAutoComplete
                     id="currencies-from"
+                    optionsList={currencyRates}
                     value={fromCode}
-                    onChange={ (event, newValue) => setFromCode(newValue)}
-                    sx={{ width: 100 }}
-                    renderInput={(params) => (
-                    <TextField {...params} variant="standard" />
-                    )}
+                    setterFunc={setFromCode}
                 />
                 <IconButton onClick={switchToFrom}>
                     <CompareArrowsSharpIcon/>
                 </IconButton>
-                <Autocomplete
-                    options={currencies}
-                    disableClearable
+                <CustomAutoComplete
                     id="currencies-to"
+                    optionsList={currencyRates}
                     value={toCode}
-                    onChange={ (event, newValue) => setToCode(newValue)}
-                    sx={{ width: 100 }}
-                    renderInput={(params) => (
-                    <TextField {...params} variant="standard" />
-                    )}
+                    setterFunc={setToCode}
                 />
             </Stack>
         </Stack>
