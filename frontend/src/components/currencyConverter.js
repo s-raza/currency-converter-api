@@ -69,8 +69,9 @@ const CurrencyConverter = ({rates}) => {
                     {currencyFormatter(amountDebounced, fromCode.currCode)} = {currencyFormatter(converted, toCode.currCode)}
                 </Typography>
             </Box>
-            <Box component="form" noValidate autoComplete="off" display="flex" justifyContent="center" alignItems="center">
+            <Box component="form" noValidate autoComplete="off" display="flex" justifyContent="center" alignItems="center" width="100%">
                 <TextField
+                sx={{width: "100%"}}
                 required
                 id="outlined-number"
                 label="Amount"
