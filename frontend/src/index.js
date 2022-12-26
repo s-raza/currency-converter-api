@@ -5,12 +5,17 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from './App';
+import LoginPage from './components/pages/login';
 import reportWebVitals from './reportWebVitals';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "login",
+    element: <LoginPage />,
   },
 ]);
 
