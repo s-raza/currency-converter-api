@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import CurrencyConverter from './components/currencyConverter';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';

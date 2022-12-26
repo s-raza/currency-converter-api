@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import {currencyFormatter} from './utils/utils';
 import { convertCurrency } from './utils/utils';
