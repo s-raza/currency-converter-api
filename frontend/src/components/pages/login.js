@@ -13,7 +13,7 @@ export const LoginButton = ({loggedIn, onClick, buttonText}) => {
     )
 }
 
-export const RequireLogin = ({children}) => {
+export const TopBarLogoutButton = ({children}) => {
     let navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true')
 
@@ -29,7 +29,7 @@ export const RequireLogin = ({children}) => {
 
     useEffect(() => {
         setStorage()
-        if(!loggedIn) {return navigate("/")}
+        if(!loggedIn) {return navigate("login")}
         }, [loggedIn, navigate, setStorage]
     )
 
@@ -41,7 +41,7 @@ export const RequireLogin = ({children}) => {
     )
 }
 
-const LoginPage = () => {
+export const LoginPage = ({navigateTo}) => {
     let navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true')
     const [buttonText, setButtonText] = useState("Login")
@@ -55,9 +55,9 @@ const LoginPage = () => {
             setButtonText(loggedIn? "Log Out": "Login")
             localStorage.setItem('loggedIn', loggedIn)
             if(loggedIn) {
-                return navigate("app");
+                return navigate(navigateTo);
             }
-    },[loggedIn, navigate])
+    },[loggedIn, navigate, navigateTo])
 
     useEffect(updateButtonText, [loggedIn, updateButtonText])
 
@@ -67,5 +67,3 @@ const LoginPage = () => {
         </Box>
     )
 }
-
-export default LoginPage
