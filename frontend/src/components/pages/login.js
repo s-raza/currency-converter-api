@@ -7,7 +7,7 @@ import {
 
 
 const LoginPage = () => {
-    const [loggedIn, setLoggedIn] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true')
     const [buttonText, setButtonText] = useState("Login")
 
     const handleLogin = (event) => {
@@ -17,6 +17,7 @@ const LoginPage = () => {
     const updateButtonText = useCallback(
         () => {
             setButtonText(loggedIn? "Log Out": "Login")
+            localStorage.setItem('loggedIn', loggedIn)
     },[loggedIn])
 
     useEffect(updateButtonText, [loggedIn, updateButtonText])
