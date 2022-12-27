@@ -5,10 +5,39 @@ import {
 
 } from "@mui/material"
 import { useNavigate } from "react-router-dom";
+import TopBar from '../appBar';
 
 export const LoginButton = ({loggedIn, onClick, buttonText}) => {
     return(
         <Button variant={loggedIn? "contained": "outlined"} onClick={onClick}>{buttonText}</Button>
+    )
+}
+
+export const RequireLogin = ({children}) => {
+    let navigate = useNavigate();
+    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true')
+
+    const handleLogout = () => {
+        setLoggedIn(false)
+    }
+
+    const setStorage = useCallback(
+        () => {
+            localStorage.setItem('loggedIn', loggedIn)
+        }, [loggedIn]
+    )
+
+    useEffect(() => {
+        setStorage()
+        if(!loggedIn) {return navigate("/")}
+        }, [loggedIn, navigate, setStorage]
+    )
+
+    return(
+        <>
+        <TopBar loginButton={<LoginButton loggedIn={loggedIn} onClick={handleLogout} buttonText="Log Out" />}/>
+        {children}
+        </>
     )
 }
 
@@ -26,7 +55,7 @@ const LoginPage = () => {
             setButtonText(loggedIn? "Log Out": "Login")
             localStorage.setItem('loggedIn', loggedIn)
             if(loggedIn) {
-                return navigate("/");
+                return navigate("app");
             }
     },[loggedIn, navigate])
 
