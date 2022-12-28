@@ -6,6 +6,8 @@ import {
 } from "@mui/material"
 import { useNavigate } from "react-router-dom";
 import TopBar from '../appBar';
+import { LoggedInContext, TokenContext } from '../contexts';
+import { useContext } from 'react';
 
 export const LoginButton = ({loggedIn, onClick, buttonText}) => {
     return(
@@ -15,21 +17,23 @@ export const LoginButton = ({loggedIn, onClick, buttonText}) => {
 
 export const TopBarLogoutButton = ({children}) => {
     let navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true')
+    const loggedIn = useContext(LoggedInContext)
+    const token = useContext(TokenContext)
 
     const handleLogout = () => {
-        setLoggedIn(false)
+        loggedIn.setLoggedIn(false)
+        token.setToken(false)
     }
 
     const setStorage = useCallback(
         () => {
-            localStorage.setItem('loggedIn', loggedIn)
+            localStorage.setItem('loggedIn', loggedIn.loggedIn)
         }, [loggedIn]
     )
 
     useEffect(() => {
         setStorage()
-        if(!loggedIn) {return navigate("login")}
+        if(!loggedIn.loggedIn) {return navigate("login")}
         }, [loggedIn, navigate, setStorage]
     )
 
@@ -43,27 +47,29 @@ export const TopBarLogoutButton = ({children}) => {
 
 export const LoginPage = ({navigateTo}) => {
     let navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') === 'true')
+    const loggedIn = useContext(LoggedInContext)
+    const token = useContext(TokenContext)
     const [buttonText, setButtonText] = useState("Login")
 
     const handleLogin = (event) => {
-        setLoggedIn(!loggedIn)
+        loggedIn.setLoggedIn(!loggedIn.loggedIn)
+        token.setToken(!token.token)
     }
 
-    const updateButtonText = useCallback(
+    const updateOnLogin = useCallback(
         () => {
-            setButtonText(loggedIn? "Log Out": "Login")
-            localStorage.setItem('loggedIn', loggedIn)
-            if(loggedIn) {
+            setButtonText(loggedIn.loggedIn? "Log Out": "Login")
+            localStorage.setItem('loggedIn', loggedIn.loggedIn)
+            if(loggedIn.loggedIn) {
                 return navigate(navigateTo);
             }
     },[loggedIn, navigate, navigateTo])
 
-    useEffect(updateButtonText, [loggedIn, updateButtonText])
+    useEffect(updateOnLogin, [loggedIn, updateOnLogin])
 
     return (
         <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-            <LoginButton loggedIn={loggedIn} onClick={handleLogin} buttonText={buttonText}/>
+            <LoginButton loggedIn={loggedIn.loggedIn} onClick={handleLogin} buttonText={buttonText}/>
         </Box>
     )
 }
