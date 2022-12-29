@@ -1,49 +1,50 @@
+import React from 'react';
 import CurrencyApp from './components/currencyApp';
-import { Navigate, useRoutes } from 'react-router-dom';
+import {Navigate, useRoutes} from 'react-router-dom';
 import {LoginPage, TopBarLogoutButton} from './components/pages/login';
-import { LoggedInContext, TokenContext } from './components/contexts';
-import { useState, useEffect } from 'react';
+import {TokenContext} from './components/contexts';
+import {useState, useEffect} from 'react';
 
-const routes = (loggedIn) =>
+
+const routes = (token) =>
   [
     {
-      path: "/",
-      element: loggedIn?
-      <TopBarLogoutButton>
-        <CurrencyApp />
-      </TopBarLogoutButton>:
-      <Navigate to="login" />
+      path: '/',
+      element: token !== '' ?
+        <TopBarLogoutButton>
+          <CurrencyApp />
+        </TopBarLogoutButton> :
+        <Navigate to="login" />,
     },
     {
-      path: "login",
-      element: <LoginPage navigateTo="/" />
-    }
-  ]
+      path: 'login',
+      element: <LoginPage navigateTo="/" />,
+    },
+  ];
 
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
-  const [token, setToken] = useState(false)
-  const routing = useRoutes(routes(loggedIn))
+  const [token, setToken] = useState('');
 
   const readToken = () => {
-    if (localStorage.getItem('loggedIn') === 'true') {
-      setLoggedIn(true)
-      setToken(true)
+    const storetoken = localStorage.getItem('token');
+
+    if (storetoken !== null) {
+      setToken(storetoken);
     }
-  }
+  };
 
   useEffect(() => {
-    readToken()
-  }, [])
+    readToken();
+  }, []);
+
+  const routing = useRoutes(routes(token));
 
   return (
-    <LoggedInContext.Provider value={{ loggedIn, setLoggedIn }}>
-      <TokenContext.Provider value={{ token, setToken }}>
-        {routing}
-      </TokenContext.Provider>
-    </LoggedInContext.Provider>
-  )
+    <TokenContext.Provider value={{token, setToken}}>
+      {routing}
+    </TokenContext.Provider>
+  );
 }
 
 export default App;

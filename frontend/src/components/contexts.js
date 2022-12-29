@@ -1,4 +1,3 @@
-import { createContext } from 'react';
+import {createContext} from 'react';
 
-export const LoggedInContext = createContext()
-export const TokenContext = createContext()
+export const TokenContext = createContext();
