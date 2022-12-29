@@ -60,7 +60,10 @@ function Copyright(props) {
       variant="body2"
       color="text.secondary"
       align="center" {...props}>
-      <Link color="inherit" href="https://github.com/s-raza/currency-converter-api/">
+      <Link
+        color="inherit"
+        href="https://github.com/s-raza/currency-converter-api/"
+        target={'new'}>
         GitHub
       </Link>
     </Typography>
@@ -175,6 +178,11 @@ export const LoginPage = ({navigateTo}) => {
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
+          </Typography>
+          <Typography
+            component="h1"
+            variant="h4">
+            <strong>Currency Converter</strong>
           </Typography>
           <Box
             component="form"
