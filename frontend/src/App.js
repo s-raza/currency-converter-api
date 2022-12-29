@@ -1,37 +1,49 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import CurrencyConverter from './components/currencyConverter';
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
-import GridCurrencyRates from './components/currencyDataGrid';
-import Stack from '@mui/material/Stack';
+import React from 'react';
+import CurrencyApp from './components/currencyApp';
+import {Navigate, useRoutes} from 'react-router-dom';
+import {LoginPage, TopBarLogoutButton} from './components/pages/login';
+import {TokenContext} from './components/contexts';
+import {useState, useEffect} from 'react';
+
+
+const routes = (token) =>
+  [
+    {
+      path: '/',
+      element: token !== '' ?
+        <TopBarLogoutButton>
+          <CurrencyApp />
+        </TopBarLogoutButton> :
+        <Navigate to="login" />,
+    },
+    {
+      path: 'login',
+      element: <LoginPage navigateTo="/" />,
+    },
+  ];
+
 
 function App() {
-  const [rates, setRates] = useState({});
+  const [token, setToken] = useState('');
 
-  let getRates = useCallback(async () => {
-    await fetch('/currencies/rates').then(res => res.json()).then(data => {
-      setRates(data);
-    });
-  }, [])
+  const readToken = () => {
+    const storetoken = localStorage.getItem('token');
+
+    if (storetoken !== null) {
+      setToken(storetoken);
+    }
+  };
 
   useEffect(() => {
-    getRates()
-  }, [getRates]);
+    readToken();
+  }, []);
+
+  const routing = useRoutes(routes(token));
 
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh"
-    >
-      {
-        rates && rates.success?
-        <Stack spacing={2}>
-        <CurrencyConverter rates={rates}/>
-        <GridCurrencyRates rates={rates}/>
-        </Stack> :
-        <Box sx={{ display: 'flex' }}>
-          <CircularProgress />
-        </Box>
-      }
-    </Box>
+    <TokenContext.Provider value={{token, setToken}}>
+      {routing}
+    </TokenContext.Provider>
   );
 }
 
