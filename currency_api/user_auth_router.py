@@ -12,10 +12,10 @@ from db.database import get_db
 from db.models import User
 from settings import settings as cfg
 
-# auth_settings = cfg().api.auth
-# SECRET_KEY = auth_settings.secret_key
-# ALGORITHM = auth_settings.algorithm
-# ACCESS_TOKEN_EXPIRE_MINUTES = auth_settings.token_expire_minutes
+auth_settings = cfg().api.auth
+SECRET_KEY = auth_settings.secret_key
+ALGORITHM = auth_settings.algorithm
+ACCESS_TOKEN_EXPIRE_MINUTES = auth_settings.token_expire_minutes
 
 user_router = APIRouter()
 
@@ -80,8 +80,8 @@ def create_access_token(
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(
         to_encode,
-        cfg().auth_settings.secret_key,
-        algorithm=cfg().auth_settings.algorithm,
+        SECRET_KEY,
+        algorithm=ALGORITHM,
     )
     return encoded_jwt
 
@@ -95,8 +95,8 @@ async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
     try:
         payload = jwt.decode(
             token,
-            cfg().auth_settings.secret_key,
-            algorithms=[cfg().auth_settings.algorithm],
+            SECRET_KEY,
+            algorithms=ALGORITHM,
         )
         username: str = payload.get("sub")
         if username is None:
@@ -122,7 +122,7 @@ async def get_current_active_user(
 async def login_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(),
 ) -> Dict[str, str]:
-
+    print(form_data.username, form_data.password)
     user: User = await authenticate_user(form_data.username, form_data.password)
     if not user:
         raise HTTPException(
@@ -130,13 +130,8 @@ async def login_for_access_token(
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    access_token_expires = timedelta(minutes=cfg().auth_settings.token_expire_minutes)
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
-
-
-# @user_router.get("/users/me/", response_model=UserModel)
-# async def read_users_me(current_user: UserModel = Depends(get_current_active_user)):
-#     return current_user
