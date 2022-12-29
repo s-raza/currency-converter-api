@@ -122,18 +122,21 @@ export const LoginPage = ({navigateTo}) => {
 
     const getToken = async () => {
       await axios
-          .post('http://localhost:8080/token', urlEncoded, {headers: headers})
-          .then((response) => {
+          .post(
+              '/token',
+              urlEncoded,
+              {headers: headers},
+          ).then((response) => {
             token.setToken(response.data.access_token);
           })
           .catch((error) => {
             console.log(error.toJSON());
             let msg = '';
-            if (error.response) {
-              const {status} = error.response;
-
-              if (status === 401) {
-                msg = 'Incorrect Username or Password';
+            if (error) {
+              if (error.response) {
+                if (error.response.status === 401) {
+                  msg = 'Incorrect Username or Password';
+                }
               } else {
                 msg = `${error.code}: ${error.message}`;
               }
