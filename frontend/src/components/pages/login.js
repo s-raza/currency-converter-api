@@ -173,7 +173,7 @@ export const LoginPage = ({navigateTo}) => {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+          <Avatar sx={{bgcolor: 'secondary.main'}}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -181,7 +181,8 @@ export const LoginPage = ({navigateTo}) => {
           </Typography>
           <Typography
             component="h1"
-            variant="h4">
+            variant="h4"
+            sx={{color: 'secondary.main'}}>
             <strong>Currency Converter</strong>
           </Typography>
           <Box
