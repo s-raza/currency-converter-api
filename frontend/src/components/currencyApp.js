@@ -14,14 +14,16 @@ const CurrencyApp = () => {
 
   const getRates = useCallback(async () => {
     const headers = {
-      Authorization: `Bearer ${token.token}`,
+      'Authorization': `Bearer ${token.token}`,
     };
 
-    await axios.get('http://localhost:8080/currencies/rates', {headers}).then((response) => {
+    await axios.get(
+        '/currencies/rates',
+        {headers}).then((response) => {
       setRates(response.data);
     })
         .catch((error) => {
-          alert(error.message);
+          console.log(error.toJSON());
           token.setToken('');
         });
   }, [token]);

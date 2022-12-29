@@ -122,7 +122,6 @@ async def get_current_active_user(
 async def login_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(),
 ) -> Dict[str, str]:
-    print(form_data.username, form_data.password)
     user: User = await authenticate_user(form_data.username, form_data.password)
     if not user:
         raise HTTPException(

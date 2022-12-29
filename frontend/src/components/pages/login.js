@@ -60,7 +60,10 @@ function Copyright(props) {
       variant="body2"
       color="text.secondary"
       align="center" {...props}>
-      <Link color="inherit" href="https://github.com/s-raza/currency-converter-api/">
+      <Link
+        color="inherit"
+        href="https://github.com/s-raza/currency-converter-api/"
+        target={'new'}>
         GitHub
       </Link>
     </Typography>
@@ -119,18 +122,21 @@ export const LoginPage = ({navigateTo}) => {
 
     const getToken = async () => {
       await axios
-          .post('http://localhost:8080/token', urlEncoded, {headers: headers})
-          .then((response) => {
+          .post(
+              '/token',
+              urlEncoded,
+              {headers: headers},
+          ).then((response) => {
             token.setToken(response.data.access_token);
           })
           .catch((error) => {
             console.log(error.toJSON());
             let msg = '';
-            if (error.response) {
-              const {status} = error.response;
-
-              if (status === 401) {
-                msg = 'Incorrect Username or Password';
+            if (error) {
+              if (error.response) {
+                if (error.response.status === 401) {
+                  msg = 'Incorrect Username or Password';
+                }
               } else {
                 msg = `${error.code}: ${error.message}`;
               }
@@ -170,11 +176,17 @@ export const LoginPage = ({navigateTo}) => {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+          <Avatar sx={{bgcolor: 'secondary.main'}}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
+          </Typography>
+          <Typography
+            component="h1"
+            variant="h4"
+            sx={{color: 'secondary.main'}}>
+            <strong>Currency Converter</strong>
           </Typography>
           <Box
             component="form"
