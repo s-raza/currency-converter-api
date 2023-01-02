@@ -7,7 +7,7 @@ services:
       volumes:
         - redis-vol:/data
       ports:
-        - ${REDIS__PORT}:${REDIS__PORT}
+        - ${REDIS__PORT}:6379
   currencyapi:
     environment:
       - MYSQL__HOST=mysqldb
