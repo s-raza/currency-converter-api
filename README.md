@@ -1,6 +1,7 @@
 # Currency Converter App using React+FastAPI
 <img src="./docs/source/_static/06-react-ui.gif"/>
 <br>
+
 A simple React+FastAPI based currency converter using micro services architecture.
 
 FastAPI backend &check;
