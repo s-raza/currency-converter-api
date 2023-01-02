@@ -1,4 +1,4 @@
-from typing import Dict, Union
+from typing import Dict
 
 import pytest
 from httpx import AsyncClient, Response
@@ -9,13 +9,10 @@ from . import sample_rates as sr
 
 
 @pytest.mark.asyncio
-async def test_api_currencies_list(api: Dict[str, Union[CurrencyDB, AsyncClient]]):
-
-    db = api["db"]
-    client = api["client"]
+async def test_api_currencies_list(db: CurrencyDB, api: AsyncClient):
 
     await db.add_update(sr.base_currency, sr.rates)
-    currencies: Response = await client.get("/")
+    currencies: Response = await api.get("")
 
     json: Dict = currencies.json()
     success = json.get("success")
@@ -25,18 +22,26 @@ async def test_api_currencies_list(api: Dict[str, Union[CurrencyDB, AsyncClient]
 
 
 @pytest.mark.asyncio
-async def test_latest_rate_for_currency_success(
-    api: Dict[str, Union[CurrencyDB, AsyncClient]]
-):
+async def test_api_currencies_rates(db: CurrencyDB, api: AsyncClient):
 
-    db = api["db"]
-    client = api["client"]
+    await db.add_update(sr.base_currency2, sr.rates)
+    currencies: Response = await api.get("/rates")
+
+    json: Dict = currencies.json()
+    success = json.get("success")
+
+    assert success is not None and success is True
+    assert json.get("rates") == sr.rates
+
+
+@pytest.mark.asyncio
+async def test_latest_rate_for_currency_success(db: CurrencyDB, api: AsyncClient):
 
     await db.add_update(sr.base_currency, sr.rates)
     await db.add_update(sr.base_currency2, sr.rates2)
 
     curr_code = "AED"
-    rate: Response = await client.get(f"/rate/{curr_code}")
+    rate: Response = await api.get(f"/rates/{curr_code}")
 
     json: Dict = rate.json()
     success = json.get("success")
@@ -48,16 +53,13 @@ async def test_latest_rate_for_currency_success(
 
 
 @pytest.mark.asyncio
-async def test_currency_non_existant(api: Dict[str, Union[CurrencyDB, AsyncClient]]):
-
-    db = api["db"]
-    client = api["client"]
+async def test_currency_non_existant(db: CurrencyDB, api: AsyncClient):
 
     await db.add_update(sr.base_currency, sr.rates)
 
     curr_code = "ABC"
 
-    rate: Response = await client.get(f"/rate/{curr_code}")
+    rate: Response = await api.get(f"/rates/{curr_code}")
 
     json: Dict = rate.json()
     success = json.get("success")

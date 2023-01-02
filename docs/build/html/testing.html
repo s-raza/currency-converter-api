@@ -84,30 +84,72 @@
 <p>A docker container is started upon initiating tests using pytest.</p>
 <p>Pytest waits for the docker container to startup before connecting to it, and executing the tests using the MySQL server running inside it.</p>
 <p>Example run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;pytest -s
-<span class="o">=======</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">=======</span>
-platform win32 -- Python <span class="m">3</span>.9.5, pytest-7.1.2, pluggy-1.0.0
-rootdir: C:<span class="se">\c</span>urrency-converter
-plugins: anyio-3.6.1, asyncio-0.19.0, cov-2.12.1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt; pytest -s -v
+<span class="o">=======================================================</span> <span class="nb">test</span> session <span class="nv">starts</span> <span class="o">========================================================</span>
+platform win32 -- Python <span class="m">3</span>.9.0, pytest-7.1.2, pluggy-1.0.0 -- C:<span class="se">\.</span>python_venvs<span class="se">\p</span>oetry<span class="se">\c</span>ache<span class="se">\v</span>irtualenvs<span class="se">\c</span>urrency-converter-api-CRVacMOl-py3.9<span class="se">\S</span>cripts<span class="se">\p</span>ython.exe
+cachedir: .pytest_cache
+rootdir: D:<span class="se">\D</span>evelopment<span class="se">\c</span>urrency-converter-api
+plugins: anyio-3.6.1, asyncio-0.19.0, cov-2.12.1, typeguard-2.13.3
 asyncio: <span class="nv">mode</span><span class="o">=</span>strict
-collected <span class="m">7</span> items
+collected <span class="m">13</span> items
 
-tests<span class="se">\t</span>est_db.py <span class="m">25</span>-Jul-2022 <span class="m">06</span>:49:44PM <span class="o">[</span>INFO<span class="o">]</span> Tests: Starting MySQL container
-<span class="m">26</span>-Jul-2022 <span class="m">06</span>:49:48PM <span class="o">[</span>INFO<span class="o">]</span> Tests: Container startup initiated
-<span class="m">26</span>-Jul-2022 <span class="m">06</span>:49:49PM <span class="o">[</span>INFO<span class="o">]</span> Engine Connection: Waiting <span class="k">for</span> Database container to finish startup
-<span class="m">26</span>-Jul-2022 <span class="m">06</span>:49:54PM <span class="o">[</span>INFO<span class="o">]</span> Engine Connection: Waiting <span class="k">for</span> Database container to finish startup
-<span class="m">26</span>-Jul-2022 <span class="m">06</span>:49:59PM <span class="o">[</span>INFO<span class="o">]</span> Engine Connection: Waiting <span class="k">for</span> Database container to finish startup
-<span class="m">26</span>-Jul-2022 <span class="m">06</span>:50:04PM <span class="o">[</span>INFO<span class="o">]</span> Engine Connection: Waiting <span class="k">for</span> Database container to finish startup
-<span class="m">26</span>-Jul-2022 <span class="m">06</span>:50:09PM <span class="o">[</span>INFO<span class="o">]</span> Engine Connection: Waiting <span class="k">for</span> Database container to finish startup
-<span class="m">26</span>-Jul-2022 <span class="m">06</span>:50:14PM <span class="o">[</span>INFO<span class="o">]</span> Engine Connection: Waiting <span class="k">for</span> Database container to finish startup
-<span class="m">26</span>-Jul-2022 <span class="m">06</span>:50:19PM <span class="o">[</span>INFO<span class="o">]</span> Engine Connection: Waiting <span class="k">for</span> Database container to finish startup
-<span class="m">26</span>-Jul-2022 <span class="m">06</span>:50:26PM <span class="o">[</span>INFO<span class="o">]</span> Tests: Opening DB connection and starting tests
-.......26-Jul-2022 <span class="m">06</span>:50:30PM <span class="o">[</span>INFO<span class="o">]</span> Tests: Tests completed, DB connection closed
-<span class="m">26</span>-Jul-2022 <span class="m">06</span>:50:30PM <span class="o">[</span>INFO<span class="o">]</span> Tests: Stopping MySQL container
-<span class="m">26</span>-Jul-2022 <span class="m">06</span>:50:34PM <span class="o">[</span>INFO<span class="o">]</span> Tests: <span class="nv">Stopped</span>
+tests/test_api.py::test_api_currencies_list <span class="m">02</span>-Jan-2023 <span class="m">04</span>:37:14PM <span class="o">[</span>INFO<span class="o">]</span> Docker: Starting Docker Containers
+failed to get console mode <span class="k">for</span> stderr: The handle is invalid.
+<span class="o">[</span>+<span class="o">]</span> Building <span class="m">4</span>.1s <span class="o">(</span><span class="m">22</span>/22<span class="o">)</span> <span class="nv">FINISHED</span>
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build definition from Dockerfile.api                                                                        <span class="m">0</span>.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring dockerfile: <span class="m">1</span>.26kB                                                                                          <span class="m">0</span>.0s
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load .dockerignore                                                                                               <span class="m">0</span>.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: 34B                                                                                                <span class="m">0</span>.0s
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load metadata <span class="k">for</span> docker.io/library/python:3.9.16-slim                                                           <span class="m">2</span>.9s
+<span class="o">=</span>&gt; <span class="o">[</span> <span class="m">1</span>/17<span class="o">]</span> FROM docker.io/library/python:3.9.16-slim@sha256:9e0b4391fc41bc35c16caef4740736b6b349f6626fd14eba32793ae3c7b01908   <span class="m">0</span>.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; resolve docker.io/library/python:3.9.16-slim@sha256:9e0b4391fc41bc35c16caef4740736b6b349f6626fd14eba32793ae3c7b01908     <span class="m">0</span>.0s
+<span class="o">=</span>&gt; <span class="o">[</span>internal<span class="o">]</span> load build context                                                                                               <span class="m">0</span>.1s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; transferring context: <span class="m">210</span>.40kB                                                                                           <span class="m">0</span>.1s
+<span class="o">=</span>&gt; CACHED <span class="o">[</span> <span class="m">2</span>/17<span class="o">]</span> RUN apt-get update<span class="p">;</span> apt-get install curl -y                                                                  <span class="m">0</span>.0s
+<span class="o">=</span>&gt; CACHED <span class="o">[</span> <span class="m">3</span>/17<span class="o">]</span> RUN curl -sSL https://install.python-poetry.org <span class="p">|</span> <span class="nv">POETRY_HOME</span><span class="o">=</span>/opt/poetry <span class="nv">POETRY_VERSION</span><span class="o">=</span><span class="m">1</span>.2.0 python <span class="o">&amp;&amp;</span>     <span class="m">0</span>.0s
+<span class="o">=</span>&gt; CACHED <span class="o">[</span> <span class="m">4</span>/17<span class="o">]</span> RUN groupadd -r appgrp                                                                                       <span class="m">0</span>.0s
+<span class="o">=</span>&gt; CACHED <span class="o">[</span> <span class="m">5</span>/17<span class="o">]</span> RUN useradd -r -m appusr                                                                                     <span class="m">0</span>.0s
+<span class="o">=</span>&gt; CACHED <span class="o">[</span> <span class="m">6</span>/17<span class="o">]</span> RUN usermod -a -G appgrp appusr                                                                              <span class="m">0</span>.0s
+<span class="o">=</span>&gt; CACHED <span class="o">[</span> <span class="m">7</span>/17<span class="o">]</span> WORKDIR /app                                                                                                 <span class="m">0</span>.0s
+<span class="o">=</span>&gt; CACHED <span class="o">[</span> <span class="m">8</span>/17<span class="o">]</span> RUN chown appusr:appgrp /app                                                                                 <span class="m">0</span>.0s
+<span class="o">=</span>&gt; CACHED <span class="o">[</span> <span class="m">9</span>/17<span class="o">]</span> COPY --chown<span class="o">=</span>appusr:appgrp ./pyproject.toml ./poetry.lock* ./                                                <span class="m">0</span>.0s
+<span class="o">=</span>&gt; CACHED <span class="o">[</span><span class="m">10</span>/17<span class="o">]</span> RUN poetry install --no-root --no-dev                                                                        <span class="m">0</span>.0s
+<span class="o">=</span>&gt; <span class="o">[</span><span class="m">11</span>/17<span class="o">]</span> COPY --chown<span class="o">=</span>appusr:appgrp ./currency_api ./currency_api                                                            <span class="m">0</span>.1s
+<span class="o">=</span>&gt; <span class="o">[</span><span class="m">12</span>/17<span class="o">]</span> COPY --chown<span class="o">=</span>appusr:appgrp ./db ./db                                                                                <span class="m">0</span>.1s
+<span class="o">=</span>&gt; <span class="o">[</span><span class="m">13</span>/17<span class="o">]</span> COPY --chown<span class="o">=</span>appusr:appgrp ./ext_api ./ext_api                                                                      <span class="m">0</span>.1s
+<span class="o">=</span>&gt; <span class="o">[</span><span class="m">14</span>/17<span class="o">]</span> COPY --chown<span class="o">=</span>appusr:appgrp ./utils ./utils                                                                          <span class="m">0</span>.1s
+<span class="o">=</span>&gt; <span class="o">[</span><span class="m">15</span>/17<span class="o">]</span> COPY --chown<span class="o">=</span>appusr:appgrp ./settings.py ./                                                                         <span class="m">0</span>.1s
+<span class="o">=</span>&gt; <span class="o">[</span><span class="m">16</span>/17<span class="o">]</span> COPY --chown<span class="o">=</span>appusr:appgrp ./api_main.py ./                                                                         <span class="m">0</span>.1s
+<span class="o">=</span>&gt; <span class="o">[</span><span class="m">17</span>/17<span class="o">]</span> COPY --chown<span class="o">=</span>appusr:appgrp ./tests/.env ./                                                                          <span class="m">0</span>.1s
+<span class="o">=</span>&gt; exporting to image                                                                                                          <span class="m">0</span>.3s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; exporting layers                                                                                                         <span class="m">0</span>.2s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; writing image sha256:061c8bd329befc32240d8873262cb9205cfedcd5bc0a4094bf109c2c4164eef5                                    <span class="m">0</span>.0s
+<span class="o">=</span>&gt; <span class="o">=</span>&gt; naming to docker.io/library/tests-test_currency_api                                                                      <span class="m">0</span>.0s
+<span class="m">02</span>-Jan-2023 <span class="m">04</span>:37:24PM <span class="o">[</span>INFO<span class="o">]</span> Docker: Startup initiated <span class="k">in</span> detached mode
+<span class="m">02</span>-Jan-2023 <span class="m">04</span>:37:24PM <span class="o">[</span>INFO<span class="o">]</span> Engine Connection: Waiting <span class="k">for</span> Database: <span class="o">(</span><span class="m">2013</span>, <span class="s1">&#39;Lost connection to MySQL server during query&#39;</span><span class="o">)</span>
+<span class="m">02</span>-Jan-2023 <span class="m">04</span>:37:29PM <span class="o">[</span>INFO<span class="o">]</span> Engine Connection: Waiting <span class="k">for</span> Database: <span class="o">(</span><span class="m">2013</span>, <span class="s1">&#39;Lost connection to MySQL server during query&#39;</span><span class="o">)</span>
+<span class="m">02</span>-Jan-2023 <span class="m">04</span>:37:34PM <span class="o">[</span>INFO<span class="o">]</span> Engine Connection: Waiting <span class="k">for</span> Database: <span class="o">(</span><span class="m">2013</span>, <span class="s1">&#39;Lost connection to MySQL server during query&#39;</span><span class="o">)</span>
+<span class="m">02</span>-Jan-2023 <span class="m">04</span>:37:40PM <span class="o">[</span>INFO<span class="o">]</span> Database: Opening DB connection
+PASSED
+tests/test_api.py::test_api_currencies_rates PASSED
+tests/test_api.py::test_latest_rate_for_currency_success PASSED
+tests/test_api.py::test_currency_non_existant PASSED02-Jan-2023 <span class="m">04</span>:37:51PM <span class="o">[</span>INFO<span class="o">]</span> Database: Test completed, DB connection closed
+
+tests/test_db.py::test_currency_codes <span class="m">02</span>-Jan-2023 <span class="m">04</span>:37:51PM <span class="o">[</span>INFO<span class="o">]</span> Database: Opening DB connection
+PASSED
+tests/test_db.py::test_last_update PASSED
+tests/test_db.py::test_all_latest_rates_correct PASSED
+tests/test_db.py::test_latest_rate_correct PASSED
+tests/test_db.py::test_latest_rate_curr_non_existant PASSED
+tests/test_db.py::test_rate_on_date_correct PASSED
+tests/test_db.py::test_add_update_wrong_date_exception PASSED
+tests/test_db.py::test_get_rate_on_date_wrong_date_exception PASSED
+tests/test_db.py::test_currency_conversion PASSED02-Jan-2023 <span class="m">04</span>:37:57PM <span class="o">[</span>INFO<span class="o">]</span> Database: Test completed, DB connection closed
+<span class="m">02</span>-Jan-2023 <span class="m">04</span>:37:57PM <span class="o">[</span>INFO<span class="o">]</span> Docker: Removing Containers
+<span class="m">02</span>-Jan-2023 <span class="m">04</span>:38:02PM <span class="o">[</span>INFO<span class="o">]</span> Docker: <span class="nv">Removed</span>
 
 
-<span class="o">=======</span> <span class="m">7</span> passed <span class="k">in</span> <span class="m">14</span>.57s <span class="o">=======</span>
+<span class="o">=======================================================</span> <span class="m">13</span> passed <span class="k">in</span> <span class="m">48</span>.04s <span class="o">========================================================</span>
 </pre></div>
 </div>
 </section>
