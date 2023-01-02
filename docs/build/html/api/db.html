@@ -302,6 +302,29 @@ and last updated date of the currency from the external API</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="db.currency_db.CurrencyDB.get_currency_rates">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_currency_rates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">on_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#db.currency_db.CurrencyDB.get_currency_rates" title="Permalink to this definition"></a></dt>
+<dd><p>Get last rates updated in DB for all currency codes.</p>
+<p>If a date is not provided, the date from the last update is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>on_date</strong> (<em>optional</em>) – Particular date for which to get the rate, in the “%d-%m-%Y” format</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the date is not in the “%d-%m-%Y” format.</p></li>
+<li><p><strong>ValueError</strong> – If an empty result is returned from the query.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Dict[created_date:</span> <span class="pre">date,</span> <span class="pre">base_currency:</span> <span class="pre">currency_code,</span>
+<span class="pre">rates:</span> <span class="pre">Dict[currency_code:</span> <span class="pre">rate]]</span></code>
+if the query returns a result else raises ValueError</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="db.currency_db.CurrencyDB.get_or_create">
 <em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_or_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">curr_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#db.models.Currencies" title="db.models.Currencies"><span class="pre">Currencies</span></a></span></span><a class="headerlink" href="#db.currency_db.CurrencyDB.get_or_create" title="Permalink to this definition"></a></dt>
 <dd><p>Get currency object, create it if it does not exist.</p>

@@ -1,8 +1,13 @@
-# Currency Converter API using FastAPI
+# Currency Converter App using React+FastAPI
+<img src="./docs/source/_static/06-react-ui.gif"/>
+<br>
+A simple React+FastAPI based currency converter using micro services architecture.
 
-A simple FastAPI based currency converter API using micro services architecture.
+FastAPI backend &check;
 
-FastAPI &check;
+React front end for a currency converter &check;
+
+Token based authentication with Username and Password &check;
 
 Async &check;
 
@@ -20,13 +25,13 @@ SQLAlchemy/MySQL &check;
 
 ## Component services of the API
 
-The API is implemented using three separate services running in docker containers and orechestrated using docker compose.
+The API is implemented using five separate services running in docker containers and orechestrated using docker compose.
 
 1. Database Updater Service
 
     This service perpetually updates the MySQL server running in the Database container.
 
-2. MySQL Datbase Service
+2. MySQL Database Service
 
     A container running MySQL server acts as the back end from which client requests to the API are fulfilled.
 
@@ -34,13 +39,21 @@ The API is implemented using three separate services running in docker container
 
     This service exposes the API endpoints for the currency converter service.
 
-## Running the Currency Converter API Services
+4. Redis Cache
 
-The services run inside docker containers. A `docker-compose.yml` file is provided to orchesrate the services. Once the containers are up and running the API endpoints are available at `http://localhost:8080`
+   Cache API responses in Redis to avoid the overhead of querying the MySQL database. This is implemented as a middleware in the FastAPI service, that connects to this Redis service for all its caching needs.
+
+5. React frontend service
+
+    Frontend interface that consumes the backend FastAPI service to implement various features like a currency converter, table with latest currency rates, etc.
+
+## Running the Currency Converter Services
+
+The services run inside docker containers. A `docker-compose.yml` file is provided to orchesrate the services. Once the containers are up and running the API endpoints are available at `http://localhost:8080` and the React frontend is accessible from `http://localhost:3002`
 
 Below are the steps for running the Currency converter API.
 
-1. Install [Docker Desktop](https://docs.docker.com/desktop/install/windows-install/) for windows.
+1. Install [Docker](https://docs.docker.com/get-docker/) for windows.
 2. Clone this repository to your local machine
 
     ```
@@ -58,20 +71,31 @@ Below are the steps for running the Currency converter API.
    ```
    docker compose up --build -d
    ```
-6. Once all the containers are up and running, the API endpoints will be available at `http://localhost:8080`
+6. Once all the containers are up and running, the FastAPI endpoints will be available at `http://localhost:8080` and the React frontend is accessible from `http://localhost:3002`
 
+## React Frontend
 
-## Documentation
+### Login Interface
+
+<img src="./docs/source/_static/04-login-page.jpg"/>
+<br>
+
+Sign in with pre-defined credentials user:pass123
+
+<img src="./docs/source/_static/05-currency-converter.jpg"/>
+<br>
+
+The currency converter is accessible after a successfull login.
+
+## FastAPI Backend
 
 ### API Documentation
 
-The API documentation will be available at `http://localhost:8080/docs` once all the docker containers are up.
+The API documentation is available at `http://localhost:8080/docs`
 
-**API Documentation**
+**Swagger UI API Docs**
 <img src="./docs/source/_static/01-api-docs.jpg"/>
 <br>
-
-
 
 ### Code documentation
 
@@ -83,18 +107,18 @@ Alternatively the code documentation can be read directly from the docstrings in
 
 The API requires authentication. A default user with credentials `user:pass123` is added to the database when the Currency API service starts.
 
-**Login Dialog**
+**Swagger UI Login Dialog**
 <img src="./docs/source/_static/02-user-auth-dialog.jpg"/>
 <br>
 
 
-**Successful Login**
+**Swagger UI Successful Login**
 <img src="./docs/source/_static/03-user-authorized-dialog.jpg"/>
 <br>
 
 ### Endpoint Summary
 
-1. `GET`: **/currencies/rate/{curr_code}**
+1. `GET`: **/currencies/rates/{curr_code}**
 
    Get the latest currency rate of the currency code `curr_code`. If a parameter `on_date` is provided the last rate recorded on that particular date is returned.
 
@@ -102,7 +126,15 @@ The API requires authentication. A default user with credentials `user:pass123` 
 
    The accepted date format is "%d-%m-%Y", any other format will result in a `Bad Request` response.
 
-2. `GET`: **/currencies/convert/{from_code}/{to_code}**
+2. `GET`: **/currencies/rates**
+
+   Get the latest rates of all the currencies available. If a parameter `on_date` is provided the last rate recorded on that particular date is returned for each currency
+
+   If `on_date` parameter is not provided, the absolute last rates recorded for all the currency codes is returned.
+
+   The accepted date format is "%d-%m-%Y", any other format will result in a `Bad Request` response.
+
+3. `GET`: **/currencies/convert/{from_code}/{to_code}**
 
    Convert the amount given in the `amount` query parameter from `from_code` currency code to `to_code` currency code.
 
@@ -112,13 +144,13 @@ The API requires authentication. A default user with credentials `user:pass123` 
 
    The accepted date format is "%d-%m-%Y", any other format will result in a `Bad Request` response.
 
-3. `GET`: **/currencies**
+4. `GET`: **/currencies**
 
    Get a list of all the currencies available for conversion from the database.
 
 ## Tests
 
-Tests are implemented using Python’s `pytest` module and a live MySQL server using docker.
+Tests are implemented using Python’s `pytest` and a live MySQL server using docker.
 
 A docker container is started upon initiating tests using pytest.
 
@@ -129,30 +161,18 @@ Before running tests copy the `tests/.env-template` file to `tests/.env`, all th
 
 **Test Run**
 ```
->pytest -s
-    ======= test session starts =======
-    platform win32 -- Python 3.9.5, pytest-7.1.2, pluggy-1.0.0
-    rootdir: C:\currency-converter
-    plugins: anyio-3.6.1, asyncio-0.19.0, cov-2.12.1
-    asyncio: mode=strict
-    collected 7 items
+> pytest
+=========================== test session starts ===========================
+platform win32 -- Python 3.9.0, pytest-7.1.2, pluggy-1.0.0
+rootdir: D:\Development\currency-converter-api
+plugins: anyio-3.6.1, asyncio-0.19.0, cov-2.12.1, typeguard-2.13.3
+asyncio: mode=strict
+collected 13 items
 
-    tests\test_db.py 26-Jul-2022 06:49:44PM [INFO] Tests: Starting MySQL container
-    26-Jul-2022 06:49:48PM [INFO] Tests: Container startup initiated
-    26-Jul-2022 06:49:49PM [INFO] Engine Connection: Waiting for Database container to finish startup
-    26-Jul-2022 06:49:54PM [INFO] Engine Connection: Waiting for Database container to finish startup
-    26-Jul-2022 06:49:59PM [INFO] Engine Connection: Waiting for Database container to finish startup
-    26-Jul-2022 06:50:04PM [INFO] Engine Connection: Waiting for Database container to finish startup
-    26-Jul-2022 06:50:09PM [INFO] Engine Connection: Waiting for Database container to finish startup
-    26-Jul-2022 06:50:14PM [INFO] Engine Connection: Waiting for Database container to finish startup
-    26-Jul-2022 06:50:19PM [INFO] Engine Connection: Waiting for Database container to finish startup
-    26-Jul-2022 06:50:26PM [INFO] Tests: Opening DB connection and starting tests
-    .......26-Jul-2022 06:50:30PM [INFO] Tests: Tests completed, DB connection closed
-    26-Jul-2022 06:50:30PM [INFO] Tests: Stopping MySQL container
-    26-Jul-2022 06:50:34PM [INFO] Tests: Stopped
+tests\test_api.py ....                                                                                                        [ 30%]
+tests\test_db.py .........                                                                                                    [100%]
 
-
-    ======= 7 passed in 14.57s =======
+=========================== 13 passed in 76.00s (0:01:16) ===========================
 ```
 
 ## Redis Cache
@@ -173,11 +193,12 @@ The caching is applied selectively only to the requests that have the api path p
 ## Planned Updates
 
 1. Add a caching middleware layer using Redis running in a separate container. &check;
-2. Increase tests coverage.
-3. Add more endpoints. E.g.
+2. Add more endpoints. E.g.
 
     1. Highest/Lowest rate for a currency on a given day
     2. Highest/Lowest rate for a currency between two dates.
+    3. Latest rates of all currencies with reference to a   base currency. &check;
 
+3. Interactive front end for a currency converter using React. &check;
 4. Interactive front end to visualize trends in currency rates using React.
 5. Closer integration of Pydantic and SQLAlchemy models in FastAPI.
