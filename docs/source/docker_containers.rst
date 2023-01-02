@@ -3,9 +3,11 @@ Docker Containers
 
 The Currency API is architected using docker containers.
 
-Three different containers work in collaboration to implement the over all functionality of the system.
+Five different containers work in collaboration to implement the over all functionality of the system.
 
 .. toctree::
-    update_server
-    database_server
-    currency_api_server
+    containers/react_frontend
+    containers/currency_api
+    containers/redis
+    containers/currency_updater
+    containers/database
