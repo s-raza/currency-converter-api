@@ -24,7 +24,7 @@ const CurrencyApp = () => {
     })
         .catch((error) => {
           console.log(error.toJSON());
-          token.setToken('');
+          token.setToken(false);
         });
   }, [token]);
 
