@@ -12,6 +12,7 @@ RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/opt/poetry POETRY
     poetry config virtualenvs.create false
 
 ARG APP_DIR=/app
+ARG LOCAL_DIR=.
 ARG ENV_FILE=./.env
 
 # Create app user and group
@@ -27,15 +28,15 @@ WORKDIR $APP_DIR
 RUN chown $APP_USR:$APP_GRP $APP_DIR
 
 # Install dependencies
-COPY --chown=$APP_USR:$APP_GRP ./pyproject.toml ./poetry.lock* ./
+COPY --chown=$APP_USR:$APP_GRP ./$LOCAL_DIR/pyproject.toml ./$LOCAL_DIR/poetry.lock* ./
 RUN poetry install --no-root --no-dev
 
 # Install db application into the container
-COPY --chown=$APP_USR:$APP_GRP ./db ./db
-COPY --chown=$APP_USR:$APP_GRP ./ext_api ./ext_api
-COPY --chown=$APP_USR:$APP_GRP ./utils ./utils
-COPY --chown=$APP_USR:$APP_GRP ./settings.py ./
-COPY --chown=$APP_USR:$APP_GRP ./start_updates.py ./
+COPY --chown=$APP_USR:$APP_GRP ./$LOCAL_DIR/db ./db
+COPY --chown=$APP_USR:$APP_GRP ./$LOCAL_DIR/ext_api ./ext_api
+COPY --chown=$APP_USR:$APP_GRP ./$LOCAL_DIR/utils ./utils
+COPY --chown=$APP_USR:$APP_GRP ./$LOCAL_DIR/settings.py ./
+COPY --chown=$APP_USR:$APP_GRP ./$LOCAL_DIR/start_updates.py ./
 COPY --chown=$APP_USR:$APP_GRP $ENV_FILE ./
 
 # Become appusr
