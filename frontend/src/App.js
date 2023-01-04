@@ -10,11 +10,11 @@ const routes = (token) =>
   [
     {
       path: '/',
-      element: token !== '' ?
+      element: ['', false, null, undefined].includes(token) ?
+      <Navigate to="login" />:
         <TopBarLogoutButton>
           <CurrencyApp />
-        </TopBarLogoutButton> :
-        <Navigate to="login" />,
+        </TopBarLogoutButton>,
     },
     {
       path: 'login',
@@ -37,6 +37,10 @@ function App() {
   useEffect(() => {
     readToken();
   }, []);
+
+  if (token === false) {
+    localStorage.removeItem('token');
+  }
 
   const routing = useRoutes(routes(token));
 

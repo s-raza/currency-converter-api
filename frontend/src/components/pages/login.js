@@ -10,6 +10,7 @@ import {
   Container,
   CssBaseline,
   Snackbar,
+  CircularProgress,
 } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
 import {useNavigate} from 'react-router-dom';
@@ -37,8 +38,7 @@ export const TopBarLogoutButton = ({children}) => {
   const token = useContext(TokenContext);
 
   const handleLogout = () => {
-    token.setToken('');
-    localStorage.removeItem('token');
+    token.setToken(false);
   };
 
   return (
@@ -147,7 +147,7 @@ export const LoginPage = ({navigateTo}) => {
                   msgSnackbar: msg,
                 },
             );
-            token.setToken('');
+            token.setToken(false);
           });
     };
 
@@ -156,7 +156,7 @@ export const LoginPage = ({navigateTo}) => {
 
   const updateOnLogin = useCallback(
       () => {
-        if (token.token !== '') {
+        if (!['', false, null, undefined].includes(token.token)) {
           localStorage.setItem('token', token.token);
           return navigate(navigateTo);
         }
@@ -165,6 +165,10 @@ export const LoginPage = ({navigateTo}) => {
   useEffect(updateOnLogin, [token, updateOnLogin]);
 
   return (
+    !['', false, null, undefined].includes(token.token) ?
+    <Box sx={{display: 'flex'}}>
+      <CircularProgress />
+    </Box> :
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
