@@ -48,6 +48,8 @@ services:
     restart: always
     build:
       context: .
+      args:
+        LOCAL_DIR: frontend
       dockerfile: frontend/Dockerfile.frontend
     entrypoint: npm start
     depends_on:
