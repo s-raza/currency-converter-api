@@ -17,7 +17,9 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: Dockerfile.api
+      args:
+        LOCAL_DIR: backend
+      dockerfile: backend/Dockerfile.api
     entrypoint: python api_main.py
     depends_on:
       - currency-updater
@@ -31,7 +33,9 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: Dockerfile.db
+      args:
+        LOCAL_DIR: backend
+      dockerfile: backend/Dockerfile.db
     entrypoint: python start_updates.py
     depends_on:
       - mysqldb
@@ -44,7 +48,9 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: Dockerfile.frontend
+      args:
+        LOCAL_DIR: frontend
+      dockerfile: frontend/Dockerfile.frontend
     entrypoint: npm start
     depends_on:
       - currencyapi
