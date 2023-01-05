@@ -1,7 +1,7 @@
 FROM node:18.12.1-slim as base
 
 ARG APP_DIR=/app
-ARG LOCAL_DIR=frontend
+ARG LOCAL_DIR=.
 ARG CONTAINER_PATH=$APP_DIR/$LOCAL_DIR
 
 # Create user and group
