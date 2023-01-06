@@ -57,7 +57,7 @@ def get_async_session(engine: AsyncEngine) -> T:
 
     """
     async_session = async_scoped_session(
-        sessionmaker(engine, expire_on_commit=False, class_=AsyncSession),
+        sessionmaker(engine, expire_on_commit=False, class_=AsyncSession, future=True),
         scopefunc=current_task,
     )
 

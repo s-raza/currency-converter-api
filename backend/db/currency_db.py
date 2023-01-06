@@ -248,39 +248,39 @@ class CurrencyDB:
 
         """
 
-        last_update_date = await self.last_update_date
+        q = (
+            select(CurrencyUpdateDates)
+            .order_by(CurrencyUpdateDates.id.desc())
+            .limit(1)
+            .options(
+                selectinload(CurrencyUpdateDates.currency_updates).selectinload(
+                    CurrencyUpdates.currency
+                )
+            )
+        )
 
         if on_date is not None:
             try:
                 date_obj = datetime.datetime.strptime(on_date, "%d-%m-%Y")
             except ValueError:
                 raise ValueError((400, "Malformed date format, expected DD-MM-YYYY"))
-        else:
-            date_obj = last_update_date.created
 
-        q = (
-            select([CurrencyUpdates, Currencies, CurrencyUpdateDates])
-            .where(Currencies.id == CurrencyUpdates.currency_id)
-            .where(CurrencyUpdates.date_updated_id == CurrencyUpdateDates.id)
-            .options(selectinload(CurrencyUpdateDates.base_currency))
-            .where(func.DATE(CurrencyUpdateDates.created) == date_obj.date())
-            .order_by(CurrencyUpdateDates.id.asc())
-            .options(selectinload(CurrencyUpdates.date_updated))
-        )
+            q = q.where(func.DATE(CurrencyUpdateDates.created) == date_obj.date())
 
         result = await self.session.execute(q)
-        result = result.scalars()
-        rates = {item.currency.code: item.rate for item in result}
+        currency_update_date = result.scalars().first()
 
-        if rates:
-            return {
-                "created": date_obj,
-                "base_currency": last_update_date.base_currency.code,
-                "rates": rates,
-            }
+        if currency_update_date is None:
+            raise ValueError((404, f"No entry for date {on_date} exists"))
         else:
-            date_str = datetime.datetime.strftime(date_obj, "%d-%m-%Y")
-            raise ValueError((404, f"No entry for date {date_str} exists"))
+            currency_updates = currency_update_date.currency_updates
+            return {
+                "created": currency_update_date.created,
+                "base_currency": currency_update_date.base_currency.code,
+                "rates": {
+                    update.currency.code: update.rate for update in currency_updates
+                },
+            }
 
     async def get_rate_on_date(
         self, curr_code: str, on_date: str = None
@@ -321,14 +321,16 @@ class CurrencyDB:
             date_obj = last_update_date.created
 
         q = (
-            select([CurrencyUpdates, Currencies, CurrencyUpdateDates])
-            .where(Currencies.code == curr_obj.code)
-            .where(Currencies.id == CurrencyUpdates.currency_id)
-            .where(CurrencyUpdates.date_updated_id == CurrencyUpdateDates.id)
-            .options(selectinload(CurrencyUpdateDates.base_currency))
+            select(CurrencyUpdates)
+            .join(CurrencyUpdateDates)
+            .where(CurrencyUpdates.currency == curr_obj)
             .where(func.DATE(CurrencyUpdateDates.created) == date_obj.date())
+            .options(
+                selectinload(CurrencyUpdates.date_updated).selectinload(
+                    CurrencyUpdateDates.base_currency
+                )
+            )
             .order_by(CurrencyUpdateDates.id.desc())
-            .options(selectinload(CurrencyUpdates.date_updated))
             .limit(1)
         )
 
