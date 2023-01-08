@@ -14,6 +14,28 @@ services:
       - redis-vol:/data
     ports:
       - "6380:${REDIS__PORT}"
+
+  test_mysqldb:
+    container_name: test_mysqldb
+    restart: always
+    image: mysql:8.0.29
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL__ROOT_PASSWORD}'
+      MYSQL_USER: '${MYSQL__USER}'
+      MYSQL_PASSWORD: '${MYSQL__PASSWORD}'
+      MYSQL_DATABASE: '${MYSQL__DATABASE}'
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - vol:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
   test_currency_api:
     environment:
       - MYSQL__PORT=3306
@@ -39,26 +61,7 @@ services:
         condition: service_healthy
     ports:
       - "${API__STARTUP__PORT}:${API__STARTUP__PORT}"
-  test_mysqldb:
-    container_name: test_mysqldb
-    restart: always
-    image: mysql:8.0.29
-    env_file: .env
-    environment:
-      MYSQL_ROOT_PASSWORD: '${MYSQL__ROOT_PASSWORD}'
-      MYSQL_USER: '${MYSQL__USER}'
-      MYSQL_PASSWORD: '${MYSQL__PASSWORD}'
-      MYSQL_DATABASE: '${MYSQL__DATABASE}'
-    healthcheck:
-      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
-      start_period: 5s
-      interval: 5s
-      timeout: 5s
-      retries: 10
-    volumes:
-      - vol:/var/lib/mysql
-    ports:
-      - "3307:3306"
+
 volumes:
   vol:
   redis-vol:

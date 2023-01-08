@@ -2,12 +2,6 @@ version: '3.8'
 services:
 
   redis:
-    healthcheck:
-      test: ls -l /proc/*/exe | grep redis
-      start_period: 5s
-      interval: 5s
-      timeout: 5s
-      retries: 10
     container_name: redis
     restart: always
     image: redis:7.0.4
@@ -15,92 +9,99 @@ services:
       - redis-vol:/data
     ports:
       - ${REDIS__PORT}:6379
-
-  currencyapi:
-    environment:
-      - MYSQL__HOST=mysqldb
-      - API__STARTUP__UVICORN_RELOAD=False
-      - REDIS__HOST=redis
     healthcheck:
-      test: ls -l /proc/*/exe | grep python
+      test: ls -l /proc/*/exe | grep redis
       start_period: 5s
       interval: 5s
       timeout: 5s
       retries: 10
-    container_name: currencyapi
-    restart: always
-    build:
-      context: .
-      args:
-        LOCAL_DIR: backend
-      dockerfile: backend/Dockerfile.api
-    entrypoint: python api_main.py
-    depends_on:
-      currency-updater:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    ports:
-      - ${API__STARTUP__PORT}:${API__STARTUP__PORT}
-
-  currency-updater:
-    environment:
-      - MYSQL__HOST=mysqldb
-    healthcheck:
-      test: ls -l /proc/*/exe | grep python
-      start_period: 5s
-      interval: 5s
-      timeout: 5s
-      retries: 10
-    container_name: currency-updater
-    restart: always
-    build:
-      context: .
-      args:
-        LOCAL_DIR: backend
-      dockerfile: backend/Dockerfile.db
-    entrypoint: python start_updates.py
-    depends_on:
-      mysqldb:
-        condition: service_healthy
-
-  react-frontend:
-    environment:
-      - PORT=${REACT_APP__PORT}
-      - REACT_APP_PROXY_HOST=http://currencyapi:${API__STARTUP__PORT}
-    container_name: react-frontend
-    restart: always
-    build:
-      context: .
-      args:
-        LOCAL_DIR: frontend
-      dockerfile: frontend/Dockerfile.frontend
-    entrypoint: npm start
-    depends_on:
-      currencyapi:
-        condition: service_healthy
-    ports:
-      - ${REACT_APP__PORT}:${REACT_APP__PORT}
 
   mysqldb:
+    image: mysql:8.0.29
     container_name: mysqldb
     restart: always
-    image: mysql:8.0.29
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL__ROOT_PASSWORD}
       MYSQL_USER: ${MYSQL__USER}
       MYSQL_PASSWORD: ${MYSQL__PASSWORD}
       MYSQL_DATABASE: ${MYSQL__DATABASE}
+    volumes:
+      - vol:/var/lib/mysql
+    ports:
+      - ${MYSQL__PORT}:3306
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
       start_period: 5s
       interval: 5s
       timeout: 5s
       retries: 10
-    volumes:
-      - vol:/var/lib/mysql
+
+  currency-updater:
+    container_name: currency-updater
+    entrypoint: python start_updates.py
+    restart: always
+    environment:
+      - MYSQL__HOST=mysqldb
+    build:
+      context: .
+      args:
+        LOCAL_DIR: backend
+      dockerfile: backend/Dockerfile.db
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    healthcheck:
+      test: ls -l /proc/*/exe | grep python
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  currencyapi:
+    container_name: currencyapi
+    entrypoint: python api_main.py
+    restart: always
+    environment:
+      - MYSQL__HOST=mysqldb
+      - API__STARTUP__UVICORN_RELOAD=False
+      - REDIS__HOST=redis
+    build:
+      context: .
+      args:
+        LOCAL_DIR: backend
+      dockerfile: backend/Dockerfile.api
     ports:
-      - ${MYSQL__PORT}:3306
+      - ${API__STARTUP__PORT}:${API__STARTUP__PORT}
+    depends_on:
+      currency-updater:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ls -l /proc/*/exe | grep python
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  react-frontend:
+    container_name: react-frontend
+    entrypoint: npm start
+    restart: always
+    environment:
+      - PORT=${REACT_APP__PORT}
+      - REACT_APP_PROXY_HOST=http://currencyapi:${API__STARTUP__PORT}
+    build:
+      context: .
+      args:
+        LOCAL_DIR: frontend
+      dockerfile: frontend/Dockerfile.frontend
+    depends_on:
+      currencyapi:
+        condition: service_healthy
+    ports:
+      - ${REACT_APP__PORT}:${REACT_APP__PORT}
+
 volumes:
   vol:
   redis-vol:
