@@ -1,18 +1,32 @@
 version: '3.8'
 services:
+
   redis:
-      container_name: redis
-      restart: always
-      image: redis:7.0.4
-      volumes:
-        - redis-vol:/data
-      ports:
-        - ${REDIS__PORT}:6379
+    healthcheck:
+      test: ls -l /proc/*/exe | grep redis
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    container_name: redis
+    restart: always
+    image: redis:7.0.4
+    volumes:
+      - redis-vol:/data
+    ports:
+      - ${REDIS__PORT}:6379
+
   currencyapi:
     environment:
       - MYSQL__HOST=mysqldb
       - API__STARTUP__UVICORN_RELOAD=False
       - REDIS__HOST=redis
+    healthcheck:
+      test: ls -l /proc/*/exe | grep python
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 10
     container_name: currencyapi
     restart: always
     build:
@@ -22,13 +36,22 @@ services:
       dockerfile: backend/Dockerfile.api
     entrypoint: python api_main.py
     depends_on:
-      - currency-updater
-      - mysqldb
+      currency-updater:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     ports:
       - ${API__STARTUP__PORT}:${API__STARTUP__PORT}
+
   currency-updater:
     environment:
       - MYSQL__HOST=mysqldb
+    healthcheck:
+      test: ls -l /proc/*/exe | grep python
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 10
     container_name: currency-updater
     restart: always
     build:
@@ -38,7 +61,8 @@ services:
       dockerfile: backend/Dockerfile.db
     entrypoint: python start_updates.py
     depends_on:
-      - mysqldb
+      mysqldb:
+        condition: service_healthy
 
   react-frontend:
     environment:
@@ -53,10 +77,11 @@ services:
       dockerfile: frontend/Dockerfile.frontend
     entrypoint: npm start
     depends_on:
-      - currencyapi
-      - mysqldb
+      currencyapi:
+        condition: service_healthy
     ports:
       - ${REACT_APP__PORT}:${REACT_APP__PORT}
+
   mysqldb:
     container_name: mysqldb
     restart: always
@@ -66,6 +91,12 @@ services:
       MYSQL_USER: ${MYSQL__USER}
       MYSQL_PASSWORD: ${MYSQL__PASSWORD}
       MYSQL_DATABASE: ${MYSQL__DATABASE}
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 10
     volumes:
       - vol:/var/lib/mysql
     ports:
