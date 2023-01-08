@@ -12,6 +12,7 @@ import {
   Snackbar,
   CircularProgress,
 } from '@mui/material';
+import {LoadingButton} from '@mui/lab';
 import MuiAlert from '@mui/material/Alert';
 import {useNavigate} from 'react-router-dom';
 import TopBar from '../appBar';
@@ -82,6 +83,7 @@ export const LoginPage = ({navigateTo}) => {
         horizontal: 'left',
       },
   );
+  const [loadingButton, setLoadingButton] = useState(false);
   const {vertical, horizontal, openSnackbar, msgSnackbar} = snackbar;
   const token = useContext(TokenContext);
 
@@ -103,6 +105,8 @@ export const LoginPage = ({navigateTo}) => {
     if (event) {
       event.preventDefault();
     }
+
+    setLoadingButton(true);
 
     const data = {
       client_id: '',
@@ -152,6 +156,7 @@ export const LoginPage = ({navigateTo}) => {
     };
 
     await getToken();
+    setLoadingButton(false);
   };
 
   const updateOnLogin = useCallback(
@@ -219,14 +224,16 @@ export const LoginPage = ({navigateTo}) => {
               value={password}
               onChange={handlePassword}
             />
-            <Button
+            <LoadingButton
               type="submit"
               fullWidth
+              loading={loadingButton}
+              loadingPosition="start"
               variant="contained"
               sx={{mt: 3, mb: 2}}
             >
               Sign In
-            </Button>
+            </LoadingButton>
           </Box>
         </Box>
         <Copyright sx={{mt: 8, mb: 4}} />
