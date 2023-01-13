@@ -12,8 +12,6 @@ RUN npm run build
 
 FROM nginx:1.23.3-alpine-slim
 
-ARG LOCAL_DIR=.
-
 COPY --from=build-stage /app/build/ /usr/share/nginx/html
-COPY ./$LOCAL_DIR/currency-converter.conf.template /etc/nginx/conf.d/
-COPY ./$LOCAL_DIR/start_nginx.sh /
+COPY ./nginx.conf.template /etc/nginx/conf.d/
+COPY ./start_nginx.sh /

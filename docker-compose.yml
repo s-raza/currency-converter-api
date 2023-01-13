@@ -116,7 +116,7 @@ services:
       context: .
       args:
         LOCAL_DIR: frontend
-      dockerfile: frontend/Dockerfile.nginx
+      dockerfile: Dockerfile.nginx
     depends_on:
       api:
         condition: service_healthy
