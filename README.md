@@ -55,13 +55,13 @@ The services run inside docker containers. A `docker-compose.yml` file is provid
 Below are the steps for running the Currency converter API.
 
 1. Install [Docker](https://docs.docker.com/get-docker/).
-2. Clone this repository to your local machine
+2. Clone this repository to your local machine.
 
     ```
     git clone https://github.com/s-raza/currency-converter-api.git
     ```
 
-3. Change to the `currency-converter-api` directory, which contains the `docker-compose.yml` file
+3. Change to the `currency-converter-api` directory, which contains the `docker-compose.yml` file.
 
    ```
    >cd currency-converter-api
@@ -83,7 +83,7 @@ Below are the steps for running the Currency converter API.
       ```
       docker compose up api --build -d
       ```
-   4. To run only the updater that updates the MySQL database with latest rates
+   4. To run only the updater that updates the MySQL database with latest rates.
 
       ```
       docker compose up updater --build -d
@@ -95,7 +95,6 @@ To stop the containers run the below command from the same directory in which th
 ```
 docker compose down -v
 ```
-To stop the services started
 ## React Frontend
 
 ### Login Interface
@@ -216,12 +215,13 @@ The caching is applied selectively only to the requests that have the api path p
 ## Planned Updates
 
 1. Add a caching middleware layer using Redis running in a separate container. &check;
-2. Add more endpoints. E.g.
+2. Use nginx container for deployment. &check;
+3. Add more endpoints. E.g.
 
     1. Highest/Lowest rate for a currency on a given day
     2. Highest/Lowest rate for a currency between two dates.
     3. Latest rates of all currencies with reference to a   base currency. &check;
 
-3. Interactive front end for a currency converter using React. &check;
-4. Interactive front end to visualize trends in currency rates using React.
-5. Closer integration of Pydantic and SQLAlchemy models in FastAPI.
+4. Interactive front end for a currency converter using React. &check;
+5. Interactive front end to visualize trends in currency rates using React.
+6. Closer integration of Pydantic and SQLAlchemy models in FastAPI.
