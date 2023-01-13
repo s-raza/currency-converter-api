@@ -134,17 +134,21 @@ export const LoginPage = ({navigateTo}) => {
             token.setToken(response.data.access_token);
           })
           .catch((error) => {
+            setLoadingButton(false);
             console.log(error.toJSON());
             let msg = '';
-            if (error) {
-              if (error.response) {
-                if (error.response.status === 401) {
-                  msg = 'Incorrect Username or Password';
-                }
-              } else {
+
+            switch (error.response.status) {
+              case 401:
+                msg = 'Incorrect Username or Password';
+                break;
+              case 404:
+                msg = ` API endpoint: '${error.config.url}' not found`;
+                break;
+              default:
                 msg = `${error.code}: ${error.message}`;
-              }
             }
+
             setSnackbar(
                 {...snackbar,
                   openSnackbar: true,

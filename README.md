@@ -67,13 +67,35 @@ Below are the steps for running the Currency converter API.
    >cd currency-converter-api
    ```
 4. Copy the `.env-template` file to `.env`, all the settings in it can be left as they are for local testing purposes.
-5. Run docker compose with the `--build` switch
+5. Run docker compose
+   1. To build and run the React frontend with Nginx. The React frontend will be accessible from `http://localhost:3002`
 
-   ```
-   docker compose up --build -d
-   ```
-6. Once all the containers are up and running, the FastAPI endpoints will be available at `http://localhost:8080` and the React frontend is accessible from `http://localhost:3002`
+      ```
+      docker compose up prod-server --build -d
+      ```
+   2. To run the frontend using the webpack dev server included with React. The React frontend will be accessible from `http://localhost:3002`
 
+      ```
+      docker compose up dev-server --build -d
+      ```
+   3. To run only the FastAPI backend. The endpoints will be available at `http://localhost:8080`
+
+      ```
+      docker compose up api --build -d
+      ```
+   4. To run only the updater that updates the MySQL database with latest rates
+
+      ```
+      docker compose up updater --build -d
+      ```
+## Stopping the Services
+
+To stop the containers run the below command from the same directory in which the `docker-compose.yml` file is present.
+
+```
+docker compose down -v
+```
+To stop the services started
 ## React Frontend
 
 ### Login Interface

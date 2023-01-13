@@ -18,6 +18,14 @@ def get_conn_string(db_settings: Dict[str, Any]) -> str:
     )
 
 
+class MYSQLContainer(BaseModel):
+    """
+    MYSQL docker container setttings
+    """
+
+    name: str
+
+
 class MYSQL(BaseModel):
     """
     DB connection settings
@@ -29,6 +37,15 @@ class MYSQL(BaseModel):
     dialect: str
     host: str
     port: str
+    container: MYSQLContainer
+
+
+class UpdaterContainer(BaseModel):
+    """
+    Updater docker container setttings
+    """
+
+    name: str
 
 
 class Updater(BaseModel):
@@ -37,6 +54,7 @@ class Updater(BaseModel):
     """
 
     frequency: int
+    container: UpdaterContainer
 
 
 class CurrencyAPIStartup(BaseModel):
@@ -71,6 +89,14 @@ class CurrencyAPIUser(BaseModel):
     password = "pass123"
 
 
+class CurrencyAPIContainer(BaseModel):
+    """
+    Currency API docker container setttings
+    """
+
+    name: str
+
+
 class CurrencyAPI(BaseModel):
     """
     Currency API setttings
@@ -80,6 +106,15 @@ class CurrencyAPI(BaseModel):
     auth: CurrencyAPIAuth
     user: CurrencyAPIUser
     prefix: str
+    container: CurrencyAPIContainer
+
+
+class REDISContainer(BaseModel):
+    """
+    Redis docker container setttings
+    """
+
+    name: str
 
 
 class REDIS(BaseModel):
@@ -90,6 +125,24 @@ class REDIS(BaseModel):
     host: str
     expire_seconds: int
     port: int
+    container: REDISContainer
+
+
+class ReactAppContainer(BaseModel):
+    """
+    Redis docker container setttings
+    """
+
+    name: str
+
+
+class ReactApp(BaseModel):
+    """
+    React App setttings
+    """
+
+    port: int
+    container: ReactAppContainer
 
 
 class Settings(BaseSettings):
