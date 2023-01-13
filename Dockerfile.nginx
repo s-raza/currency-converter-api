@@ -1,0 +1,17 @@
+FROM node:18.12.1-slim as build-stage
+
+ARG LOCAL_DIR=.
+
+WORKDIR /app
+
+COPY $LOCAL_DIR/package*.json /app/
+RUN npm install
+COPY ./$LOCAL_DIR/public/ /app/public
+COPY ./$LOCAL_DIR/src/ /app/src
+RUN npm run build
+
+FROM nginx:1.23.3-alpine-slim
+
+COPY --from=build-stage /app/build/ /usr/share/nginx/html
+COPY ./nginx.conf.template /etc/nginx/conf.d/
+COPY ./start_nginx.sh /
