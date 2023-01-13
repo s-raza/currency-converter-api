@@ -1,0 +1,31 @@
+upstream fastapi_server {
+    server ${NGINX_UPSTREAM};
+  }
+
+server {
+  listen ${NGINX_SERVER_PORT};
+
+  location / {
+    root /usr/share/nginx/html;
+    index index.html index.htm;
+    try_files ${D}uri ${D}uri/ /index.html =404;
+  }
+
+  location /token {
+    proxy_pass http://fastapi_server;
+    proxy_set_header   Host ${D}host;
+    proxy_set_header   X-Real-IP ${D}remote_addr;
+    proxy_set_header   X-Forwarded-For ${D}proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Host ${D}server_name;
+  }
+
+  location /${NGINX_API_PREFIX} {
+    proxy_pass http://fastapi_server;
+    proxy_set_header   Host ${D}host;
+    proxy_set_header   X-Real-IP ${D}remote_addr;
+    proxy_set_header   X-Forwarded-For ${D}proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Host ${D}server_name;
+  }
+
+  include /etc/nginx/extra-conf.d/*.conf;
+}
