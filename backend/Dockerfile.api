@@ -30,7 +30,7 @@ RUN chown $APP_USR:$APP_GRP $CONTAINER_PATH
 
 # Install dependencies
 COPY --chown=$APP_USR:$APP_GRP ./$LOCAL_DIR/pyproject.toml ./$LOCAL_DIR/poetry.lock* ./
-RUN poetry install --no-root --no-dev
+RUN poetry install --no-root --without dev
 
 COPY --chown=$APP_USR:$APP_GRP ./$LOCAL_DIR/currency_api ./currency_api
 COPY --chown=$APP_USR:$APP_GRP ./$LOCAL_DIR/db ./db
