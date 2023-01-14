@@ -14,4 +14,5 @@ FROM nginx:1.23.3-alpine-slim
 
 COPY --from=build-stage /app/build/ /usr/share/nginx/html
 COPY ./nginx.conf.template /etc/nginx/conf.d/
-COPY ./start_nginx.sh /
+COPY ./start_nginx.sh /docker-entrypoint.d/
+RUN chmod +x /docker-entrypoint.d/start_nginx.sh
