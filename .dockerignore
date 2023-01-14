@@ -1,6 +1,7 @@
-.gitignore
-Dockerfile.db
+**/*ignore
+**/Dockerfile*
 .pre-commit-config.yaml
-setup.config
-docker-compose.yaml
+setup.cfg
+docker-compose*.yml
 **/node_modules
+**/.eslintrc.yml

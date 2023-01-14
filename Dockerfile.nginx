@@ -1,17 +1,22 @@
 FROM node:18.12.1-slim as build-stage
 
 ARG LOCAL_DIR=.
+ARG CONTAINER_PATH=/app
 
-WORKDIR /app
+WORKDIR $CONTAINER_PATH
 
-COPY $LOCAL_DIR/package*.json /app/
+# Generate build to copy later to Nginx
+COPY $LOCAL_DIR/package*.json $CONTAINER_PATH
 RUN npm install
-COPY ./$LOCAL_DIR/public/ /app/public
-COPY ./$LOCAL_DIR/src/ /app/src
+COPY ./$LOCAL_DIR/public/ $CONTAINER_PATH/public
+COPY ./$LOCAL_DIR/src/ $CONTAINER_PATH/src
 RUN npm run build
 
 FROM nginx:1.23.3-alpine-slim
 
-COPY --from=build-stage /app/build/ /usr/share/nginx/html
+ARG CONTAINER_PATH=/app
+
+COPY --from=build-stage $CONTAINER_PATH/build/ /usr/share/nginx/html
 COPY ./nginx.conf.template /etc/nginx/conf.d/
-COPY ./start_nginx.sh /
+COPY ./start_nginx.sh /docker-entrypoint.d/
+RUN chmod +x /docker-entrypoint.d/start_nginx.sh
