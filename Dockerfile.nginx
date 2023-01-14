@@ -5,6 +5,7 @@ ARG CONTAINER_PATH=/app
 
 WORKDIR $CONTAINER_PATH
 
+# Generate build to copy later to Nginx
 COPY $LOCAL_DIR/package*.json $CONTAINER_PATH
 RUN npm install
 COPY ./$LOCAL_DIR/public/ $CONTAINER_PATH/public

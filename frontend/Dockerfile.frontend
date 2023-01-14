@@ -22,7 +22,6 @@ RUN usermod -a -G $APP_GRP $APP_USR
 
 # Change to container path
 WORKDIR $CONTAINER_PATH
-# RUN mkdir $APP_DIR
 
 # Change ownership of container path to appusr from root
 RUN chown appusr:appgrp $CONTAINER_PATH
