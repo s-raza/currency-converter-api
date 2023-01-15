@@ -145,6 +145,23 @@ class ReactApp(BaseModel):
     container: ReactAppContainer
 
 
+class NginxContainer(BaseModel):
+    """
+    Redis docker container setttings
+    """
+
+    name: str
+
+
+class Nginx(BaseModel):
+    """
+    Nginx setttings
+    """
+
+    port: int
+    container: NginxContainer
+
+
 class Settings(BaseSettings):
     """
     Retrieve settings from the `.env` file.
@@ -154,6 +171,8 @@ class Settings(BaseSettings):
     updater: Updater
     api: CurrencyAPI
     redis: REDIS
+    react_app: ReactApp
+    nginx: Nginx
 
     class Config:
         env_file = ".env"
