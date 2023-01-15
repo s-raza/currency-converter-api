@@ -8,7 +8,7 @@ from db.currency_db import CurrencyDB
 from db.database import create_all, get_db, get_engine
 from db.models import Base
 from ext_api import CurrencyRatesDownloader, ExchangeRateAPI
-from settings import settings as cfg
+from settings import cfg
 from utils import logger
 
 updates_logger = logger.get_logger("CURRENCY UPDATES")
@@ -52,11 +52,11 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    freq_mins = int(args.minutes) if args.minutes else cfg().updater.frequency
+    freq_mins = int(args.minutes) if args.minutes else cfg.updater.frequency
 
     # Create all database tables on startup
     loop = asyncio.get_event_loop()
-    engine = get_engine(cfg().db_conn_settings)
+    engine = get_engine(cfg.db_conn_settings)
     loop.run_until_complete(create_all(engine, Base))
 
     scheduler = AsyncIOScheduler()

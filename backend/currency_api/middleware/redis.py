@@ -5,7 +5,7 @@ from fastapi import FastAPI, Request, Response
 from starlette.concurrency import iterate_in_threadpool
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from settings import settings as cfg
+from settings import cfg
 from utils import requests
 
 
@@ -58,10 +58,10 @@ class RedisMiddleware(BaseHTTPMiddleware):
         """
         url = requests.request_url(request)
         redis = aioredis.from_url(
-            f"redis://{cfg().redis.host}:{cfg().redis.port}", decode_responses=True
+            f"redis://{cfg.redis.host}:{cfg.redis.port}", decode_responses=True
         )
 
-        if cfg().api.prefix in url:
+        if cfg.api.prefix in url:
             from_redis = await redis.execute_command("GET", url)
 
             if not from_redis:

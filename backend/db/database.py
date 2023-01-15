@@ -9,8 +9,7 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import sessionmaker
 
-from settings import get_conn_string
-from settings import settings as cfg
+from settings import cfg, get_conn_string
 
 from .currency_db import CurrencyDB
 from .utils import wait_for_db
@@ -79,7 +78,7 @@ async def get_db(
     """
 
     if engine is None:
-        engine = get_engine(cfg().db_conn_settings)
+        engine = get_engine(cfg.db_conn_settings)
 
     async_session = get_async_session(engine)  # type: ignore
 
