@@ -1,6 +1,9 @@
 import asyncio
+import os
 
 import pytest
+
+os.environ["ENV_FILE"] = "./tests/.env"
 
 
 @pytest.fixture(scope="session")
