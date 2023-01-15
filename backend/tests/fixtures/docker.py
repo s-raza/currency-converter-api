@@ -3,6 +3,7 @@ import os
 import pytest_asyncio
 from python_on_whales import docker
 
+from settings import cfg
 from utils import logger
 
 tests_logger = logger.get_logger("Docker")
@@ -19,7 +20,7 @@ async def docker_env():
 
     tests_logger.info("Startup initiated in detached mode")
 
-    docker_config = docker.compose.config().services["test_mysqldb"]
+    docker_config = docker.compose.config().services[cfg.mysql.container.name]
     env = docker_config.environment
     port = docker_config.ports[0].published
 
