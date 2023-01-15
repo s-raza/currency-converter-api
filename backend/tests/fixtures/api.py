@@ -1,9 +1,12 @@
 from asyncio import sleep
 
 import pytest_asyncio
-from httpx import AsyncClient, Auth, RemoteProtocolError, Response
+from httpx import AsyncClient, Auth, Response
 
-from settings import settings as cfg
+from settings import cfg
+from utils import logger
+
+fixture_logger = logger.get_logger("API Fixture")
 
 
 class PasswordAuth(Auth):
@@ -18,9 +21,9 @@ class PasswordAuth(Auth):
 @pytest_asyncio.fixture(scope="module")
 async def api():
 
-    port = cfg().api.startup.port
+    port = cfg.api.startup.port
     base_url = f"http://localhost:{port}"
-    user_settings = cfg().api.user
+    user_settings = cfg.api.user
     auth_client = AsyncClient(base_url=base_url, timeout=None)
 
     api_started = False
@@ -36,13 +39,14 @@ async def api():
             )
             await auth_client.aclose()
             api_started = True
-        except RemoteProtocolError:
+        except Exception as e:
+            fixture_logger.info(f"{e.args[0]}: {e.request.url}")
             await sleep(1)
             continue
 
     auth = PasswordAuth(token.json()["access_token"])
     client = AsyncClient(
-        base_url=f"{base_url}/{cfg().api.prefix}",
+        base_url=f"{base_url}/{cfg.api.prefix}",
         auth=auth,
         timeout=None,
         follow_redirects=True,

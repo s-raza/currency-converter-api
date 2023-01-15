@@ -1,22 +1,22 @@
 version: '3.8'
 services:
-  test_redis:
+  test-redis:
     healthcheck:
       test: ls -l /proc/*/exe | grep redis
       start_period: 5s
       interval: 5s
       timeout: 5s
       retries: 10
-    container_name: test_redis
+    container_name: ${REDIS__CONTAINER__NAME}
     restart: always
     image: redis:7.0.4
     volumes:
-      - redis-vol:/data
+      - test-redis-vol:/data
     ports:
-      - "6380:${REDIS__PORT}"
+      - ${REDIS__PORT}:6379
 
-  test_mysqldb:
-    container_name: test_mysqldb
+  test-mysqldb:
+    container_name: ${MYSQL__CONTAINER__NAME}
     restart: always
     image: mysql:8.0.29
     env_file: .env
@@ -32,21 +32,21 @@ services:
       timeout: 5s
       retries: 10
     volumes:
-      - vol:/var/lib/mysql
+      - test-db-vol:/var/lib/mysql
     ports:
-      - "3307:3306"
+      - ${MYSQL__PORT}:3306
 
-  test_currency_api:
+  test-currency-api:
     environment:
-      - MYSQL__PORT=3306
-      - MYSQL__HOST=test_mysqldb
+      - MYSQL__HOST=${MYSQL__CONTAINER__NAME}
+      - REDIS__HOST=${REDIS__CONTAINER__NAME}
     healthcheck:
       test: ls -l /proc/*/exe | grep python
       start_period: 5s
       interval: 5s
       timeout: 5s
       retries: 10
-    container_name: test_currency_api
+    container_name: ${API__CONTAINER__NAME}
     restart: always
     build:
       context: ..
@@ -55,13 +55,13 @@ services:
       dockerfile: Dockerfile.api
     entrypoint: python api_main.py
     depends_on:
-      test_mysqldb:
+      test-mysqldb:
         condition: service_healthy
-      test_redis:
+      test-redis:
         condition: service_healthy
     ports:
-      - "${API__STARTUP__PORT}:${API__STARTUP__PORT}"
+      - ${API__STARTUP__PORT}:${API__STARTUP__PORT}
 
 volumes:
-  vol:
-  redis-vol:
+  test-db-vol:
+  test-redis-vol:

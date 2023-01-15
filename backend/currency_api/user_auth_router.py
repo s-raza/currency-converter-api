@@ -10,9 +10,9 @@ from pydantic import BaseModel
 from db.currency_db import CurrencyDB
 from db.database import get_db
 from db.models import User
-from settings import settings as cfg
+from settings import cfg
 
-auth_settings = cfg().api.auth
+auth_settings = cfg.api.auth
 SECRET_KEY = auth_settings.secret_key
 ALGORITHM = auth_settings.algorithm
 ACCESS_TOKEN_EXPIRE_MINUTES = auth_settings.token_expire_minutes

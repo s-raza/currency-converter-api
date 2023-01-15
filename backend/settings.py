@@ -1,4 +1,5 @@
-from typing import Any, Dict
+import os
+from typing import Any, Dict, List, Union
 
 from pydantic import BaseModel, BaseSettings
 
@@ -175,7 +176,6 @@ class Settings(BaseSettings):
     nginx: Nginx
 
     class Config:
-        env_file = [".env", "../.env", "../../.env"]
         env_nested_delimiter = "__"
 
     @property
@@ -205,8 +205,39 @@ class Settings(BaseSettings):
         return self.api.auth
 
 
-def settings() -> Settings:
+def get_config(env_file: str = "") -> Settings:
     """
-    Get settings object to import in other modules.
+    Get configuration parameters from an `env` file.
+
+    Settings are preferentially loaded from the env variable `ENV_FILE`.
+
+    If env variable `ENV_FILE` is present its value is used to set the env file.
+
+    If it is not present then read the env file passed to get_config().
+
+    If file is not read using any of the above methods, then the env file is
+    loaded from these paths: `./.env` and `../.env`, in the same order. The first
+    file found from this order is loaded.
+
+    :param env_file: Path to `.env` file.
+    :type freq_mins: optional
+
+    :return: :obj:`Settings`
     """
-    return Settings()
+
+    final_env: Union[
+        str, None, os.PathLike[Any], List[Union[str, os.PathLike[Any]]]
+    ] = ["./.env", "../.env"]
+
+    env_file_from_env: Union[str, None] = os.getenv("ENV_FILE")
+
+    if env_file_from_env is not None:
+        final_env = env_file_from_env
+    else:
+        if env_file != "":
+            final_env = env_file
+
+    return Settings(_env_file=final_env)
+
+
+cfg = get_config()
