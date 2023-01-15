@@ -79,7 +79,16 @@ async def redis_cache(request: Request, call_next: Any) -> Response:
     return await call_next(request)
 
 
-origins = ["*"]
+origins = [
+    f"https//{cfg().api.container.name}:{cfg().api.startup.port}",
+    f"http//{cfg().api.container.name}:{cfg().api.startup.port}",
+    f"https//{cfg().nginx.container.name}:{cfg().api.startup.port}",
+    f"http//{cfg().nginx.container.name}:{cfg().api.startup.port}",
+    f"https//localhost:{cfg().api.startup.port}",
+    f"http//localhost:{cfg().api.startup.port}",
+    f"https//127.0.0.1:{cfg().api.startup.port}",
+    f"http//127.0.0.1:{cfg().api.startup.port}",
+]
 
 app.add_middleware(
     CORSMiddleware,
