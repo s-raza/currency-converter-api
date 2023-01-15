@@ -1,4 +1,4 @@
-# Currency Converter App using React+FastAPI
+# Currency Converter App using React+FastAPI+Docker+NGINX
 [![Sphinx Documetation](https://img.shields.io/badge/Sphinx-docs-brightgreen)](https://htmlpreview.github.io/?https://github.com/s-raza/currency-converter-api/blob/master/backend/docs/build/html/index.html)
 <img src="https://img.shields.io/badge/FastAPI-brightgreen"/>
 <img src="https://img.shields.io/badge/React-brightgreen"/>
@@ -9,6 +9,7 @@
 <img src="https://img.shields.io/badge/Docker-brightgreen"/>
 <img src="https://img.shields.io/badge/REST--API-brightgreen"/>
 <img src="https://img.shields.io/badge/SQLALchemy-MySQL-brightgreen"/>
+<img src="https://img.shields.io/badge/NGINX-brightgreen"/>
 <img src="./backend/docs/source/_static/06-react-ui.gif"/>
 <br>
 
