@@ -1,7 +1,7 @@
 import logging
 
 
-def get_logger(name: str) -> logging.Logger:
+def get_logger(name: str, level: int = None) -> logging.Logger:
     """
     Utility function to get a logging instance to write logs to stdout.
 
@@ -15,7 +15,9 @@ def get_logger(name: str) -> logging.Logger:
     logger.setLevel(logging.DEBUG)
 
     console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.INFO)
+
+    if level is not None:
+        console_handler.setLevel(level)
 
     formatter = logging.Formatter(
         "%(asctime)s [%(levelname)-2s] %(name)s: %(message)s",
