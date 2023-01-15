@@ -26,7 +26,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL__PASSWORD}
       MYSQL_DATABASE: ${MYSQL__DATABASE}
     volumes:
-      - vol:/var/lib/mysql
+      - db-vol:/var/lib/mysql
     ports:
       - ${MYSQL__PORT}:3306
     healthcheck:
@@ -123,5 +123,5 @@ services:
       - ${REACT_APP__PORT}:${NGINX__PORT}
 
 volumes:
-  vol:
+  db-vol:
   redis-vol:
