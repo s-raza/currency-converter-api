@@ -8,6 +8,8 @@ Welcome to Currency API (FastAPI)'s documentation!
 
 Implementation of a basic `async` currency conversion API using FastAPI.
 
+.. toctree::
+   api/api.rst
 
 .. toctree::
    external_api
@@ -20,9 +22,6 @@ Implementation of a basic `async` currency conversion API using FastAPI.
 
 .. toctree::
    testing
-
-.. toctree::
-   api/api.rst
 
 
 Indices and tables

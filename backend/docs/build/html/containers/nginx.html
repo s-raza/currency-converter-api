@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MySQL Database Server &mdash; Currency API (FastAPI) 0.1.0 documentation</title>
+  <title>NGINX &mdash; Currency API (FastAPI) 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Settings Configuration" href="../settings_config.html" />
-    <link rel="prev" title="Update Server" href="currency_updater.html" />
+    <link rel="next" title="Currency API Server" href="currency_api.html" />
+    <link rel="prev" title="React Frontend" href="react_frontend.html" />
 </head>
 
 <body class="wy-body-for-nav">
@@ -48,11 +48,11 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../docker_containers.html">Docker Containers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="react_frontend.html">React Frontend</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nginx.html">NGINX</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">NGINX</a></li>
 <li class="toctree-l2"><a class="reference internal" href="currency_api.html">Currency API Server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="redis.html">Redis Server</a></li>
 <li class="toctree-l2"><a class="reference internal" href="currency_updater.html">Update Server</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">MySQL Database Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html">MySQL Database Server</a></li>
 </ul>
 </li>
 </ul>
@@ -78,9 +78,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a></li>
           <li class="breadcrumb-item"><a href="../docker_containers.html">Docker Containers</a></li>
-      <li class="breadcrumb-item active">MySQL Database Server</li>
+      <li class="breadcrumb-item active">NGINX</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/containers/database.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/containers/nginx.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -88,21 +88,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
 
-  <section id="mysql-database-server">
-<h1>MySQL Database Server<a class="headerlink" href="#mysql-database-server" title="Permalink to this heading"></a></h1>
-<p>When the system is deployed using docker-compose this container runs a MySQL
-server that is responsible for receiving and saving the latest updates from
-the <a class="reference internal" href="../external_api.html"><span class="doc">external source API</span></a>.</p>
-<p>These updates are perpetually retrieved at regular intervals by
-the <a class="reference internal" href="currency_updater.html"><span class="doc">Update Server</span></a>.</p>
+  <section id="nginx">
+<h1>NGINX<a class="headerlink" href="#nginx" title="Permalink to this heading"></a></h1>
+<p>This container exposes the Web GUI for the currency converter
+using NGINX. Upon startup the source files from the React Frontend
+are built and placed in the appropriate directory within the NGINX
+container, ready to be served to a browser.</p>
+<p>The default login credentials are user:pass123</p>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="currency_updater.html" class="btn btn-neutral float-left" title="Update Server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../settings_config.html" class="btn btn-neutral float-right" title="Settings Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="react_frontend.html" class="btn btn-neutral float-left" title="React Frontend" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="currency_api.html" class="btn btn-neutral float-right" title="Currency API Server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
