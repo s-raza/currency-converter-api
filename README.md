@@ -193,8 +193,11 @@ Before running tests copy the `tests/.env-template` file to `tests/.env`, all th
 
 
 **Test Run**
+
+To run the tests first change into the `backend` directory.
 ```
-> pytest
+currency-converter-api> cd backend
+currency-converter-api\backend> pytest
 =========================== test session starts ===========================
 platform win32 -- Python 3.9.0, pytest-7.1.2, pluggy-1.0.0
 rootdir: D:\Development\currency-converter-api
