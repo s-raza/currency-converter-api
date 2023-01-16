@@ -26,6 +26,7 @@ if errorlevel 9009 (
 if "%1" == "" goto help
 
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+if "%2" == "github" robocopy build/html ../../docs /E /NFL /NDL /NJH /NJS /nc /ns /np
 goto end
 
 :help

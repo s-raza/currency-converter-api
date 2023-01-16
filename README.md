@@ -1,5 +1,5 @@
 # Currency Converter App using React+FastAPI+Docker+NGINX
-[![Sphinx Documetation](https://img.shields.io/badge/Sphinx-docs-brightgreen)](https://htmlpreview.github.io/?https://github.com/s-raza/currency-converter-api/blob/master/backend/docs/build/html/index.html)
+[![Sphinx Documetation](https://img.shields.io/badge/Sphinx-docs-brightgreen)](https://s-raza.github.io/currency-converter-api/)
 <img src="https://img.shields.io/badge/FastAPI-brightgreen"/>
 <img src="https://img.shields.io/badge/React-brightgreen"/>
 <img src="https://img.shields.io/badge/Pre--commit-brightgreen"/>
@@ -10,7 +10,7 @@
 <img src="https://img.shields.io/badge/REST--API-brightgreen"/>
 <img src="https://img.shields.io/badge/SQLALchemy-MySQL-brightgreen"/>
 <img src="https://img.shields.io/badge/NGINX-brightgreen"/>
-<img src="./backend/docs/source/_static/06-react-ui.gif"/>
+<img src="./gh-static/06-react-ui.gif"/>
 <br>
 
 A simple React+FastAPI based currency converter using micro services architecture.
@@ -110,12 +110,12 @@ docker compose down -v
 
 ### Login Interface
 
-<img src="./backend/docs/source/_static/04-login-page.jpg"/>
+<img src="./gh-static/04-login-page.jpg"/>
 <br>
 
 Sign in with pre-defined credentials user:pass123
 
-<img src="./backend/docs/source/_static/05-currency-converter.jpg"/>
+<img src="./gh-static/05-currency-converter.jpg"/>
 <br>
 
 The currency converter is accessible after a successfull login.
@@ -127,12 +127,12 @@ The currency converter is accessible after a successfull login.
 The API documentation is available at `http://localhost:8080/docs`
 
 **Swagger UI API Docs**
-<img src="./backend/docs/source/_static/01-api-docs.jpg"/>
+<img src="./gh-static/01-api-docs.jpg"/>
 <br>
 
 ### Code documentation
 
-Code documentation can be accessed from the  [docs](https://htmlpreview.github.io/?https://github.com/s-raza/currency-converter-api/blob/master/backend/docs/build/html/index.html) folder of this repository. The code documentation is pre-built using [Sphinx](https://www.sphinx-doc.org/en/master/)
+Code documentation can be accessed from the project's [GitHub Pages](https://s-raza.github.io/currency-converter-api/). The code documentation is pre-built using [Sphinx](https://www.sphinx-doc.org/en/master/)
 
 Alternatively the code documentation can be read directly from the docstrings in the source code.
 
@@ -141,12 +141,12 @@ Alternatively the code documentation can be read directly from the docstrings in
 The API requires authentication. A default user with credentials `user:pass123` is added to the database when the Currency API service starts.
 
 **Swagger UI Login Dialog**
-<img src="./backend/docs/source/_static/02-user-auth-dialog.jpg"/>
+<img src="./gh-static/02-user-auth-dialog.jpg"/>
 <br>
 
 
 **Swagger UI Successful Login**
-<img src="./backend/docs/source/_static/03-user-authorized-dialog.jpg"/>
+<img src="./gh-static/03-user-authorized-dialog.jpg"/>
 <br>
 
 ### Endpoint Summary
