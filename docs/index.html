@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Currency API (FastAPI)’s documentation! &mdash; Currency API (FastAPI) 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api/api.html" />
+</head>
+
+<body class="wy-body-for-nav">
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> Currency API (FastAPI)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="external_api.html">External Source API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docker_containers.html">Docker Containers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="settings_config.html">Settings Configuration</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Currency API (FastAPI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Welcome to Currency API (FastAPI)’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <section id="welcome-to-currency-api-fastapi-s-documentation">
+<h1>Welcome to Currency API (FastAPI)’s documentation!<a class="headerlink" href="#welcome-to-currency-api-fastapi-s-documentation" title="Permalink to this heading"></a></h1>
+<p>Implementation of a basic <cite>async</cite> currency conversion API using FastAPI.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/db.html">MySQL Database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/db.html#sqlalchemy-orm-models"><strong>SQLAlchemy</strong> ORM Models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/db.html#currencies">Currencies</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.models.Currencies"><code class="docutils literal notranslate"><span class="pre">Currencies</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="api/db.html#currencyupdatedates">CurrencyUpdateDates</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.models.CurrencyUpdateDates"><code class="docutils literal notranslate"><span class="pre">CurrencyUpdateDates</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="api/db.html#currencyupdates">CurrencyUpdates</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.models.CurrencyUpdates"><code class="docutils literal notranslate"><span class="pre">CurrencyUpdates</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="api/db.html#user">User</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.models.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/db.html#currency-database-interface-using-sqlalchemy-orm">Currency Database Interface using <strong>SQLAlchemy</strong> ORM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/db.html#db.currency_db.CurrencyDB"><code class="docutils literal notranslate"><span class="pre">CurrencyDB</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.currency_db.CurrencyDB.add_update"><code class="docutils literal notranslate"><span class="pre">CurrencyDB.add_update()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.currency_db.CurrencyDB.add_user"><code class="docutils literal notranslate"><span class="pre">CurrencyDB.add_user()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.currency_db.CurrencyDB.convert_rate"><code class="docutils literal notranslate"><span class="pre">CurrencyDB.convert_rate()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.currency_db.CurrencyDB.get_currency"><code class="docutils literal notranslate"><span class="pre">CurrencyDB.get_currency()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.currency_db.CurrencyDB.get_currency_codes"><code class="docutils literal notranslate"><span class="pre">CurrencyDB.get_currency_codes()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.currency_db.CurrencyDB.get_currency_rates"><code class="docutils literal notranslate"><span class="pre">CurrencyDB.get_currency_rates()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.currency_db.CurrencyDB.get_or_create"><code class="docutils literal notranslate"><span class="pre">CurrencyDB.get_or_create()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.currency_db.CurrencyDB.get_pwd_hash"><code class="docutils literal notranslate"><span class="pre">CurrencyDB.get_pwd_hash()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.currency_db.CurrencyDB.get_rate_on_date"><code class="docutils literal notranslate"><span class="pre">CurrencyDB.get_rate_on_date()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.currency_db.CurrencyDB.get_user"><code class="docutils literal notranslate"><span class="pre">CurrencyDB.get_user()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.currency_db.CurrencyDB.last_update_date"><code class="docutils literal notranslate"><span class="pre">CurrencyDB.last_update_date</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/db.html#database-engine-and-sessions">Database Engine and Sessions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/db.html#get-engine">get_engine</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.database.get_engine"><code class="docutils literal notranslate"><span class="pre">get_engine()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="api/db.html#create-all">create_all</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.database.create_all"><code class="docutils literal notranslate"><span class="pre">create_all()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="api/db.html#get-async-session">get_async_session</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.database.get_async_session"><code class="docutils literal notranslate"><span class="pre">get_async_session()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="api/db.html#get-db">get_db</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.database.get_db"><code class="docutils literal notranslate"><span class="pre">get_db()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/db.html#utils">Utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/db.html#wait-for-db">wait_for_db</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/db.html#db.utils.wait_for_db"><code class="docutils literal notranslate"><span class="pre">wait_for_db()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/db_updates.html">DB Updates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/db_updates.html#start_updates.execute"><code class="docutils literal notranslate"><span class="pre">execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/db_updates.html#start_updates.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/fastapi.html">FastAPI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/fastapi.html#main">main</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/fastapi.html#api_main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/fastapi.html#add-default-user">add_default_user</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/fastapi.html#api_main.add_default_user"><code class="docutils literal notranslate"><span class="pre">add_default_user()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/fastapi.html#module-currency_api.dependencies.db">Dependencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/fastapi.html#currency_api.dependencies.db.get_currency_db"><code class="docutils literal notranslate"><span class="pre">get_currency_db()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/middleware.html">Middleware</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/middleware.html#redismiddleware">RedisMiddleware</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/middleware.html#currency_api.middleware.redis.RedisMiddleware"><code class="docutils literal notranslate"><span class="pre">RedisMiddleware</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/middleware.html#currency_api.middleware.redis.RedisMiddleware.dispatch"><code class="docutils literal notranslate"><span class="pre">RedisMiddleware.dispatch()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/external_api.html">External API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/external_api.html#externalapibase">ExternalAPIBase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/external_api.html#ext_api.ext_api_interface.ExternalAPIBase"><code class="docutils literal notranslate"><span class="pre">ExternalAPIBase</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/external_api.html#ext_api.ext_api_interface.ExternalAPIBase.formatted_rates"><code class="docutils literal notranslate"><span class="pre">ExternalAPIBase.formatted_rates()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/external_api.html#ext_api.ext_api_interface.ExternalAPIBase.params"><code class="docutils literal notranslate"><span class="pre">ExternalAPIBase.params</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/external_api.html#ext_api.ext_api_interface.ExternalAPIBase.url"><code class="docutils literal notranslate"><span class="pre">ExternalAPIBase.url</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/external_api.html#exchangerateapi">ExchangeRateAPI</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/external_api.html#ext_api.exchange_rate.ExchangeRateAPI"><code class="docutils literal notranslate"><span class="pre">ExchangeRateAPI</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/external_api.html#ext_api.exchange_rate.ExchangeRateAPI.formatted_rates"><code class="docutils literal notranslate"><span class="pre">ExchangeRateAPI.formatted_rates()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/external_api.html#ext_api.exchange_rate.ExchangeRateAPI.params"><code class="docutils literal notranslate"><span class="pre">ExchangeRateAPI.params</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/external_api.html#ext_api.exchange_rate.ExchangeRateAPI.url"><code class="docutils literal notranslate"><span class="pre">ExchangeRateAPI.url</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/external_api.html#currencyratesdownloader">CurrencyRatesDownloader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/external_api.html#ext_api.rates_downloader.CurrencyRatesDownloader"><code class="docutils literal notranslate"><span class="pre">CurrencyRatesDownloader</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/external_api.html#ext_api.rates_downloader.CurrencyRatesDownloader.add_headers"><code class="docutils literal notranslate"><span class="pre">CurrencyRatesDownloader.add_headers()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/external_api.html#ext_api.rates_downloader.CurrencyRatesDownloader.get_rates"><code class="docutils literal notranslate"><span class="pre">CurrencyRatesDownloader.get_rates()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/settings.html">Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.CurrencyAPI"><code class="docutils literal notranslate"><span class="pre">CurrencyAPI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.CurrencyAPIAuth"><code class="docutils literal notranslate"><span class="pre">CurrencyAPIAuth</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.CurrencyAPIContainer"><code class="docutils literal notranslate"><span class="pre">CurrencyAPIContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.CurrencyAPIStartup"><code class="docutils literal notranslate"><span class="pre">CurrencyAPIStartup</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.CurrencyAPIUser"><code class="docutils literal notranslate"><span class="pre">CurrencyAPIUser</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.MYSQL"><code class="docutils literal notranslate"><span class="pre">MYSQL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.MYSQLContainer"><code class="docutils literal notranslate"><span class="pre">MYSQLContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.Nginx"><code class="docutils literal notranslate"><span class="pre">Nginx</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.NginxContainer"><code class="docutils literal notranslate"><span class="pre">NginxContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.REDIS"><code class="docutils literal notranslate"><span class="pre">REDIS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.REDISContainer"><code class="docutils literal notranslate"><span class="pre">REDISContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.ReactApp"><code class="docutils literal notranslate"><span class="pre">ReactApp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.ReactAppContainer"><code class="docutils literal notranslate"><span class="pre">ReactAppContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.Settings"><code class="docutils literal notranslate"><span class="pre">Settings</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/settings.html#settings.Settings.auth_settings"><code class="docutils literal notranslate"><span class="pre">Settings.auth_settings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/settings.html#settings.Settings.db_conn_settings"><code class="docutils literal notranslate"><span class="pre">Settings.db_conn_settings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/settings.html#settings.Settings.db_conn_str"><code class="docutils literal notranslate"><span class="pre">Settings.db_conn_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.Updater"><code class="docutils literal notranslate"><span class="pre">Updater</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.UpdaterContainer"><code class="docutils literal notranslate"><span class="pre">UpdaterContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.get_config"><code class="docutils literal notranslate"><span class="pre">get_config()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/settings.html#settings.get_conn_string"><code class="docutils literal notranslate"><span class="pre">get_conn_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api/utils.html">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/utils.html#module-utils.logger">logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/utils.html#utils.logger.get_logger"><code class="docutils literal notranslate"><span class="pre">get_logger()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/utils.html#module-utils.requests">requests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/utils.html#utils.requests.request_url"><code class="docutils literal notranslate"><span class="pre">request_url()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="external_api.html">External Source API</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docker_containers.html">Docker Containers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="containers/react_frontend.html">React Frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="containers/nginx.html">NGINX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="containers/currency_api.html">Currency API Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="containers/redis.html">Redis Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="containers/currency_updater.html">Update Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="containers/database.html">MySQL Database Server</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="settings_config.html">Settings Configuration</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api/api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Salman Raza.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+</body>
+</html>
