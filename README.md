@@ -1,5 +1,5 @@
 # Currency Converter App using React+FastAPI+Docker+NGINX
-[![Sphinx Documetation](https://img.shields.io/badge/Sphinx-docs-brightgreen)](https://htmlpreview.github.io/?https://github.com/s-raza/currency-converter-api/blob/master/backend/docs/build/html/index.html)
+[![Sphinx Documetation](https://img.shields.io/badge/Sphinx-docs-brightgreen)](https://s-raza.github.io/currency-converter-api/)
 <img src="https://img.shields.io/badge/FastAPI-brightgreen"/>
 <img src="https://img.shields.io/badge/React-brightgreen"/>
 <img src="https://img.shields.io/badge/Pre--commit-brightgreen"/>
@@ -132,7 +132,7 @@ The API documentation is available at `http://localhost:8080/docs`
 
 ### Code documentation
 
-Code documentation can be accessed from the  [docs](https://htmlpreview.github.io/?https://github.com/s-raza/currency-converter-api/blob/master/backend/docs/build/html/index.html) folder of this repository. The code documentation is pre-built using [Sphinx](https://www.sphinx-doc.org/en/master/)
+Code documentation can be accessed from the project's [GitHub Pages](https://s-raza.github.io/currency-converter-api/). The code documentation is pre-built using [Sphinx](https://www.sphinx-doc.org/en/master/)
 
 Alternatively the code documentation can be read directly from the docstrings in the source code.
 
