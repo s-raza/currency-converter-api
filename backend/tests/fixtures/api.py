@@ -39,9 +39,10 @@ async def api():
             )
             await auth_client.aclose()
             api_started = True
+            fixture_logger.info("API server started")
         except Exception as e:
-            fixture_logger.info(f"{e.args[0]}: {e.request.url}")
-            await sleep(1)
+            fixture_logger.info(f"Waiting for API Server: {e.request.url}")
+            await sleep(2)
             continue
 
     auth = PasswordAuth(token.json()["access_token"])
