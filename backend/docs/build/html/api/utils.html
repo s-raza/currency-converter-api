@@ -16,9 +16,11 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="External Source API" href="../external_api.html" />
     <link rel="prev" title="Settings" href="settings.html" />
 </head>
 
@@ -37,7 +39,29 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="db.html">MySQL Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_updates.html">DB Updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fastapi.html">FastAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="middleware.html">Middleware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_api.html">External API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-utils.logger">logger</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#utils.logger.get_logger"><code class="docutils literal notranslate"><span class="pre">get_logger()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-utils.requests">requests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#utils.requests.request_url"><code class="docutils literal notranslate"><span class="pre">request_url()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../external_api.html">External Source API</a></li>
 </ul>
 <ul>
@@ -48,20 +72,6 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="db.html">MySQL Database</a></li>
-<li class="toctree-l2"><a class="reference internal" href="db_updates.html">DB Updates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fastapi.html">FastAPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="external_api.html">External API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Utilities</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-utils.logger">logger</a></li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 
         </div>
@@ -77,9 +87,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="api.html">API Reference</a> &raquo;</li>
-      <li>Utilities</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API Reference</a></li>
+      <li class="breadcrumb-item active">Utilities</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api/utils.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -95,7 +105,7 @@
 <span id="logger"></span><h2>logger<a class="headerlink" href="#module-utils.logger" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="utils.logger.get_logger">
-<span class="sig-prename descclassname"><span class="pre">utils.logger.</span></span><span class="sig-name descname"><span class="pre">get_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Logger</span></span></span><a class="headerlink" href="#utils.logger.get_logger" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">utils.logger.</span></span><span class="sig-name descname"><span class="pre">get_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Logger</span></span></span><a class="headerlink" href="#utils.logger.get_logger" title="Permalink to this definition"></a></dt>
 <dd><p>Utility function to get a logging instance to write logs to stdout.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -108,6 +118,23 @@
 </dd></dl>
 
 </section>
+<section id="module-utils.requests">
+<span id="requests"></span><h2>requests<a class="headerlink" href="#module-utils.requests" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="utils.requests.request_url">
+<span class="sig-prename descclassname"><span class="pre">utils.requests.</span></span><span class="sig-name descname"><span class="pre">request_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#utils.requests.request_url" title="Permalink to this definition"></a></dt>
+<dd><p>Utility function to get combination of API path and query</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>required</em>) – <code class="xref py py-obj docutils literal notranslate"><span class="pre">fastapi.Request</span></code> object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 </section>
 
 
@@ -115,6 +142,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="settings.html" class="btn btn-neutral float-left" title="Settings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../external_api.html" class="btn btn-neutral float-right" title="External Source API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

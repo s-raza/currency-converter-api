@@ -1,6 +1,7 @@
-from typing import Any, Dict
+import os
+from typing import Any, Dict, List, Union
 
-from pydantic import BaseModel, BaseSettings, ValidationError
+from pydantic import BaseModel, BaseSettings
 
 
 def get_conn_string(db_settings: Dict[str, Any]) -> str:
@@ -145,6 +146,23 @@ class ReactApp(BaseModel):
     container: ReactAppContainer
 
 
+class NginxContainer(BaseModel):
+    """
+    Redis docker container setttings
+    """
+
+    name: str
+
+
+class Nginx(BaseModel):
+    """
+    Nginx setttings
+    """
+
+    port: int
+    container: NginxContainer
+
+
 class Settings(BaseSettings):
     """
     Retrieve settings from the `.env` file.
@@ -154,9 +172,10 @@ class Settings(BaseSettings):
     updater: Updater
     api: CurrencyAPI
     redis: REDIS
+    react_app: ReactApp
+    nginx: Nginx
 
     class Config:
-        env_file = ".env"
         env_nested_delimiter = "__"
 
     @property
@@ -186,15 +205,39 @@ class Settings(BaseSettings):
         return self.api.auth
 
 
-def settings() -> Settings:
+def get_config(env_file: str = "") -> Settings:
     """
-    Get settings object to import in other modules.
+    Get configuration parameters from an `env` file.
+
+    Settings are preferentially loaded from the env variable `ENV_FILE`.
+
+    If env variable `ENV_FILE` is present its value is used to set the env file.
+
+    If it is not present then read the env file passed to get_config().
+
+    If file is not read using any of the above methods, then the env file is
+    loaded from these paths: `./.env` and `../.env`, in the same order. The first
+    file found from this order is loaded.
+
+    :param env_file: Path to `.env` file.
+    :type freq_mins: optional
+
+    :return: :obj:`Settings`
     """
-    try:
-        return Settings()
-    except ValidationError:
-        # When generating docs with sphinx ``.env`` is not found by pydantic as sphinx
-        # is running from the ``docs`` directory. We then load the ``.env`` from one
-        # directory above.
-        # TODO: Find a better solution.
-        return Settings(_env_file="../.env")
+
+    final_env: Union[
+        str, None, os.PathLike[Any], List[Union[str, os.PathLike[Any]]]
+    ] = ["./.env", "../.env"]
+
+    env_file_from_env: Union[str, None] = os.getenv("ENV_FILE")
+
+    if env_file_from_env is not None:
+        final_env = env_file_from_env
+    else:
+        if env_file != "":
+            final_env = env_file
+
+    return Settings(_env_file=final_env)
+
+
+cfg = get_config()

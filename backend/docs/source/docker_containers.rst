@@ -7,6 +7,7 @@ Five different containers work in collaboration to implement the over all functi
 
 .. toctree::
     /containers/react_frontend
+    /containers/nginx
     /containers/currency_api
     /containers/redis
     /containers/currency_updater

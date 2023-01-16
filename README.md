@@ -1,4 +1,15 @@
-# Currency Converter App using React+FastAPI
+# Currency Converter App using React+FastAPI+Docker+NGINX
+[![Sphinx Documetation](https://img.shields.io/badge/Sphinx-docs-brightgreen)](https://htmlpreview.github.io/?https://github.com/s-raza/currency-converter-api/blob/master/backend/docs/build/html/index.html)
+<img src="https://img.shields.io/badge/FastAPI-brightgreen"/>
+<img src="https://img.shields.io/badge/React-brightgreen"/>
+<img src="https://img.shields.io/badge/Pre--commit-brightgreen"/>
+<img src="https://img.shields.io/badge/Async-brightgreen"/>
+<img src="https://img.shields.io/badge/Redis-brightgreen"/>
+<img src="https://img.shields.io/badge/Microservices-brightgreen"/>
+<img src="https://img.shields.io/badge/Docker-brightgreen"/>
+<img src="https://img.shields.io/badge/REST--API-brightgreen"/>
+<img src="https://img.shields.io/badge/SQLALchemy-MySQL-brightgreen"/>
+<img src="https://img.shields.io/badge/NGINX-brightgreen"/>
 <img src="./backend/docs/source/_static/06-react-ui.gif"/>
 <br>
 
@@ -68,12 +79,12 @@ Below are the steps for running the Currency converter API.
    ```
 4. Copy the `.env-template` file to `.env`, all the settings in it can be left as they are for local testing purposes.
 5. Run docker compose
-   1. To build and run the React frontend with Nginx. The React frontend will be accessible from `http://localhost:3002`
+   1. To build and run the React frontend with Nginx. The React frontend will be accessible from `http://localhost:3002`, API endpoints will be available at `http://localhost:8080`
 
       ```
       docker compose up prod-server --build -d
       ```
-   2. To run the frontend using the webpack dev server included with React. The React frontend will be accessible from `http://localhost:3002`
+   2. To run the frontend using the webpack dev server included with React. The React frontend will be accessible from `http://localhost:3002`, API endpoints will be available at `http://localhost:8080`
 
       ```
       docker compose up dev-server --build -d
@@ -83,7 +94,7 @@ Below are the steps for running the Currency converter API.
       ```
       docker compose up api --build -d
       ```
-   4. To run only the updater that updates the MySQL database with latest rates.
+   4. To run only the updater that updates the MySQL database with the latest rates.
 
       ```
       docker compose up updater --build -d

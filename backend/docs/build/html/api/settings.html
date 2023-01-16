@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -38,7 +39,44 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="db.html">MySQL Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_updates.html">DB Updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fastapi.html">FastAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="middleware.html">Middleware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_api.html">External API</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#settings.CurrencyAPI"><code class="docutils literal notranslate"><span class="pre">CurrencyAPI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.CurrencyAPIAuth"><code class="docutils literal notranslate"><span class="pre">CurrencyAPIAuth</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.CurrencyAPIContainer"><code class="docutils literal notranslate"><span class="pre">CurrencyAPIContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.CurrencyAPIStartup"><code class="docutils literal notranslate"><span class="pre">CurrencyAPIStartup</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.CurrencyAPIUser"><code class="docutils literal notranslate"><span class="pre">CurrencyAPIUser</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.MYSQL"><code class="docutils literal notranslate"><span class="pre">MYSQL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.MYSQLContainer"><code class="docutils literal notranslate"><span class="pre">MYSQLContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.Nginx"><code class="docutils literal notranslate"><span class="pre">Nginx</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.NginxContainer"><code class="docutils literal notranslate"><span class="pre">NginxContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.REDIS"><code class="docutils literal notranslate"><span class="pre">REDIS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.REDISContainer"><code class="docutils literal notranslate"><span class="pre">REDISContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.ReactApp"><code class="docutils literal notranslate"><span class="pre">ReactApp</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.ReactAppContainer"><code class="docutils literal notranslate"><span class="pre">ReactAppContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.Settings"><code class="docutils literal notranslate"><span class="pre">Settings</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#settings.Settings.auth_settings"><code class="docutils literal notranslate"><span class="pre">Settings.auth_settings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#settings.Settings.db_conn_settings"><code class="docutils literal notranslate"><span class="pre">Settings.db_conn_settings</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#settings.Settings.db_conn_str"><code class="docutils literal notranslate"><span class="pre">Settings.db_conn_str</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.Updater"><code class="docutils literal notranslate"><span class="pre">Updater</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.UpdaterContainer"><code class="docutils literal notranslate"><span class="pre">UpdaterContainer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.get_config"><code class="docutils literal notranslate"><span class="pre">get_config()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#settings.get_conn_string"><code class="docutils literal notranslate"><span class="pre">get_conn_string()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities</a></li>
+</ul>
+</li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../external_api.html">External Source API</a></li>
 </ul>
 <ul>
@@ -49,17 +87,6 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="db.html">MySQL Database</a></li>
-<li class="toctree-l2"><a class="reference internal" href="db_updates.html">DB Updates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fastapi.html">FastAPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="external_api.html">External API</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Settings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities</a></li>
-</ul>
-</li>
 </ul>
 
         </div>
@@ -75,9 +102,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="api.html">API Reference</a> &raquo;</li>
-      <li>Settings</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API Reference</a></li>
+      <li class="breadcrumb-item active">Settings</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api/settings.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -92,7 +119,7 @@
 <p>Settings sourced from the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file.</p>
 <span class="target" id="module-settings"></span><dl class="py class">
 <dt class="sig sig-object py" id="settings.CurrencyAPI">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">CurrencyAPI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.CurrencyAPIStartup" title="settings.CurrencyAPIStartup"><span class="pre">CurrencyAPIStartup</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.CurrencyAPIAuth" title="settings.CurrencyAPIAuth"><span class="pre">CurrencyAPIAuth</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.CurrencyAPIUser" title="settings.CurrencyAPIUser"><span class="pre">CurrencyAPIUser</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.CurrencyAPI" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">CurrencyAPI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.CurrencyAPIStartup" title="settings.CurrencyAPIStartup"><span class="pre">CurrencyAPIStartup</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">auth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.CurrencyAPIAuth" title="settings.CurrencyAPIAuth"><span class="pre">CurrencyAPIAuth</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.CurrencyAPIUser" title="settings.CurrencyAPIUser"><span class="pre">CurrencyAPIUser</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.CurrencyAPIContainer" title="settings.CurrencyAPIContainer"><span class="pre">CurrencyAPIContainer</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.CurrencyAPI" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Currency API setttings</p>
 </dd></dl>
@@ -102,6 +129,13 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">CurrencyAPIAuth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secret_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token_expire_minutes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.CurrencyAPIAuth" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Currency API Auth setttings</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="settings.CurrencyAPIContainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">CurrencyAPIContainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.CurrencyAPIContainer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Currency API docker container setttings</p>
 </dd></dl>
 
 <dl class="py class">
@@ -120,21 +154,63 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="settings.MYSQL">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">MYSQL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dialect</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.MYSQL" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">MYSQL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dialect</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.MYSQLContainer" title="settings.MYSQLContainer"><span class="pre">MYSQLContainer</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.MYSQL" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>DB connection settings</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="settings.MYSQLContainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">MYSQLContainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.MYSQLContainer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>MYSQL docker container setttings</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="settings.Nginx">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">Nginx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.NginxContainer" title="settings.NginxContainer"><span class="pre">NginxContainer</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.Nginx" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Nginx setttings</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="settings.NginxContainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">NginxContainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.NginxContainer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Redis docker container setttings</p>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="settings.REDIS">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">REDIS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expire_seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.REDIS" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">REDIS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expire_seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.REDISContainer" title="settings.REDISContainer"><span class="pre">REDISContainer</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.REDIS" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>Redis connection setttings</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="settings.REDISContainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">REDISContainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.REDISContainer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Redis docker container setttings</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="settings.ReactApp">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">ReactApp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.ReactAppContainer" title="settings.ReactAppContainer"><span class="pre">ReactAppContainer</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.ReactApp" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>React App setttings</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="settings.ReactAppContainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">ReactAppContainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.ReactAppContainer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Redis docker container setttings</p>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="settings.Settings">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">Settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_env_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'&lt;object</span> <span class="pre">object&gt;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_env_file_encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_env_nested_delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_secrets_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mysql</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.MYSQL" title="settings.MYSQL"><span class="pre">MYSQL</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">updater</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.Updater" title="settings.Updater"><span class="pre">Updater</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">api</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.CurrencyAPI" title="settings.CurrencyAPI"><span class="pre">CurrencyAPI</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">redis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.REDIS" title="settings.REDIS"><span class="pre">REDIS</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.Settings" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">Settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_env_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'&lt;object</span> <span class="pre">object&gt;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_env_file_encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_env_nested_delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_secrets_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mysql</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.MYSQL" title="settings.MYSQL"><span class="pre">MYSQL</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">updater</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.Updater" title="settings.Updater"><span class="pre">Updater</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">api</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.CurrencyAPI" title="settings.CurrencyAPI"><span class="pre">CurrencyAPI</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">redis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.REDIS" title="settings.REDIS"><span class="pre">REDIS</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">react_app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.ReactApp" title="settings.ReactApp"><span class="pre">ReactApp</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nginx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.Nginx" title="settings.Nginx"><span class="pre">Nginx</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.Settings" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSettings</span></code></p>
 <p>Retrieve settings from the <cite>.env</cite> file.</p>
 <dl class="py property">
@@ -169,9 +245,36 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="settings.Updater">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">Updater</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.Updater" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">Updater</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#settings.UpdaterContainer" title="settings.UpdaterContainer"><span class="pre">UpdaterContainer</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.Updater" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
 <p>DB updater setttings</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="settings.UpdaterContainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">UpdaterContainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#settings.UpdaterContainer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<p>Updater docker container setttings</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="settings.get_config">
+<span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#settings.Settings" title="settings.Settings"><span class="pre">Settings</span></a></span></span><a class="headerlink" href="#settings.get_config" title="Permalink to this definition"></a></dt>
+<dd><p>Get configuration parameters from an <cite>env</cite> file.</p>
+<p>Settings are preferentially loaded from the env variable <cite>ENV_FILE</cite>.</p>
+<p>If env variable <cite>ENV_FILE</cite> is present its value is used to set the env file.</p>
+<p>If it is not present then read the env file passed to get_config().</p>
+<p>If file is not read using any of the above methods, then the env file is
+loaded from these paths: <cite>./.env</cite> and <cite>../.env</cite>, in the same order. The first
+file found from this order is loaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>env_file</strong> – Path to <cite>.env</cite> file.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><a class="reference internal" href="#settings.Settings" title="settings.Settings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Settings</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -186,12 +289,6 @@
 <dd class="field-even"><p><cite>str</cite> Connection string.</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="settings.settings">
-<span class="sig-prename descclassname"><span class="pre">settings.</span></span><span class="sig-name descname"><span class="pre">settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#settings.Settings" title="settings.Settings"><span class="pre">Settings</span></a></span></span><a class="headerlink" href="#settings.settings" title="Permalink to this definition"></a></dt>
-<dd><p>Get settings object to import in other modules.</p>
 </dd></dl>
 
 </section>

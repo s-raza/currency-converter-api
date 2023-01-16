@@ -16,10 +16,11 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="External API" href="external_api.html" />
+    <link rel="next" title="Middleware" href="middleware.html" />
     <link rel="prev" title="DB Updates" href="db_updates.html" />
 </head>
 
@@ -38,7 +39,33 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="db.html">MySQL Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_updates.html">DB Updates</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FastAPI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#main">main</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#api_main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#add-default-user">add_default_user</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#api_main.add_default_user"><code class="docutils literal notranslate"><span class="pre">add_default_user()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-currency_api.dependencies.db">Dependencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#currency_api.dependencies.db.get_currency_db"><code class="docutils literal notranslate"><span class="pre">get_currency_db()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="middleware.html">Middleware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_api.html">External API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities</a></li>
+</ul>
+</li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../external_api.html">External Source API</a></li>
 </ul>
 <ul>
@@ -49,24 +76,6 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="db.html">MySQL Database</a></li>
-<li class="toctree-l2"><a class="reference internal" href="db_updates.html">DB Updates</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">FastAPI</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#main">main</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#add-default-user">add_default_user</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#redis-cache">redis_cache</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-currency_api.dependencies.db">Dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-currency_api.utils">Utils</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="external_api.html">External API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities</a></li>
-</ul>
-</li>
 </ul>
 
         </div>
@@ -82,9 +91,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="api.html">API Reference</a> &raquo;</li>
-      <li>FastAPI</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API Reference</a></li>
+      <li class="breadcrumb-item active">FastAPI</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api/fastapi.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -115,36 +124,6 @@
 </dd></dl>
 
 </section>
-<section id="redis-cache">
-<h2>redis_cache<a class="headerlink" href="#redis-cache" title="Permalink to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="api_main.redis_cache">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">api_main.</span></span><span class="sig-name descname"><span class="pre">redis_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">call_next</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="headerlink" href="#api_main.redis_cache" title="Permalink to this definition"></a></dt>
-<dd><p>Redis middleware implementation for caching responses.</p>
-<p>The value <code class="docutils literal notranslate"><span class="pre">REDIS__EXPIRE_SECONDS</span></code> from the <cite>.env</cite> file is used to set the expiry
-of a cached key, value pair that is cached using Redis.</p>
-<p>Once the number of seconds that are set pass, the entry is deleted from Redis cache,
-forcing a fresh query to the database upon the next request to the same endpoint
-with the same request path and query parameters.</p>
-<p>The caching is applied selectively only to the requests that have the value of
-<code class="docutils literal notranslate"><span class="pre">API__PREFIX</span></code> from <code class="docutils literal notranslate"><span class="pre">.env</span></code> file present in them. This is to avoid caching any
-other requests that are related to authentication and error responses.</p>
-<p><cite>Key</cite>     : Combination of API request path and query parameters</p>
-<p><cite>Value</cite>   : API response after querying the database.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>request</strong> (<em>required</em>) – <code class="xref py py-obj docutils literal notranslate"><span class="pre">fastapi.Request</span></code> object.</p></li>
-<li><p><strong>call_next</strong> (<em>required</em>) – <code class="xref py py-obj docutils literal notranslate"><span class="pre">Callable</span></code> callback for getting response from API endpoint.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fastapi.Response</span></code> object</p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
 <section id="module-currency_api.dependencies.db">
 <span id="dependencies"></span><h2>Dependencies<a class="headerlink" href="#module-currency_api.dependencies.db" title="Permalink to this heading"></a></h2>
 <dl class="py function">
@@ -162,23 +141,6 @@ functionality of <code class="docutils literal notranslate"><span class="pre">fa
 </dd></dl>
 
 </section>
-<section id="module-currency_api.utils">
-<span id="utils"></span><h2>Utils<a class="headerlink" href="#module-currency_api.utils" title="Permalink to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="currency_api.utils.request_url">
-<span class="sig-prename descclassname"><span class="pre">currency_api.utils.</span></span><span class="sig-name descname"><span class="pre">request_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#currency_api.utils.request_url" title="Permalink to this definition"></a></dt>
-<dd><p>Utility function to get combination of API path and query</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>request</strong> (<em>required</em>) – <code class="xref py py-obj docutils literal notranslate"><span class="pre">fastapi.Request</span></code> object.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-</section>
 </section>
 
 
@@ -186,7 +148,7 @@ functionality of <code class="docutils literal notranslate"><span class="pre">fa
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="db_updates.html" class="btn btn-neutral float-left" title="DB Updates" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="external_api.html" class="btn btn-neutral float-right" title="External API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="middleware.html" class="btn btn-neutral float-right" title="Middleware" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -16,11 +16,12 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Settings" href="settings.html" />
-    <link rel="prev" title="FastAPI" href="fastapi.html" />
+    <link rel="prev" title="Middleware" href="middleware.html" />
 </head>
 
 <body class="wy-body-for-nav">
@@ -38,7 +39,33 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="db.html">MySQL Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_updates.html">DB Updates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fastapi.html">FastAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="middleware.html">Middleware</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">External API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#externalapibase">ExternalAPIBase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ext_api.ext_api_interface.ExternalAPIBase"><code class="docutils literal notranslate"><span class="pre">ExternalAPIBase</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#exchangerateapi">ExchangeRateAPI</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ext_api.exchange_rate.ExchangeRateAPI"><code class="docutils literal notranslate"><span class="pre">ExchangeRateAPI</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#currencyratesdownloader">CurrencyRatesDownloader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ext_api.rates_downloader.CurrencyRatesDownloader"><code class="docutils literal notranslate"><span class="pre">CurrencyRatesDownloader</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities</a></li>
+</ul>
+</li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../external_api.html">External Source API</a></li>
 </ul>
 <ul>
@@ -49,22 +76,6 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="db.html">MySQL Database</a></li>
-<li class="toctree-l2"><a class="reference internal" href="db_updates.html">DB Updates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fastapi.html">FastAPI</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">External API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#externalapibase">ExternalAPIBase</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exchangerateapi">ExchangeRateAPI</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#currencyratesdownloader">CurrencyRatesDownloader</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities</a></li>
-</ul>
-</li>
 </ul>
 
         </div>
@@ -80,9 +91,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="api.html">API Reference</a> &raquo;</li>
-      <li>External API</li>
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API Reference</a></li>
+      <li class="breadcrumb-item active">External API</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/api/external_api.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -251,7 +262,7 @@ external source API for currency rates.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="fastapi.html" class="btn btn-neutral float-left" title="FastAPI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="middleware.html" class="btn btn-neutral float-left" title="Middleware" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="settings.html" class="btn btn-neutral float-right" title="Settings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

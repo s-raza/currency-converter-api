@@ -15,6 +15,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
@@ -36,6 +37,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="external_api.html">External Source API</a></li>
 </ul>
 <ul>
@@ -46,9 +50,6 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
 </ul>
 
         </div>
@@ -64,8 +65,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Index</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Index</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -86,6 +87,7 @@
  | <a href="#G"><strong>G</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
@@ -127,18 +129,13 @@
         <li><a href="api/fastapi.html#module-currency_api.dependencies.db">module</a>
 </li>
       </ul></li>
-      <li>
-    currency_api.utils
-
-      <ul>
-        <li><a href="api/fastapi.html#module-currency_api.utils">module</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/settings.html#settings.CurrencyAPI">CurrencyAPI (class in settings)</a>
 </li>
       <li><a href="api/settings.html#settings.CurrencyAPIAuth">CurrencyAPIAuth (class in settings)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/settings.html#settings.CurrencyAPIContainer">CurrencyAPIContainer (class in settings)</a>
 </li>
       <li><a href="api/settings.html#settings.CurrencyAPIStartup">CurrencyAPIStartup (class in settings)</a>
 </li>
@@ -163,6 +160,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/settings.html#settings.Settings.db_conn_str">db_conn_str (settings.Settings property)</a>
+</li>
+      <li><a href="api/middleware.html#currency_api.middleware.redis.RedisMiddleware.dispatch">dispatch() (currency_api.middleware.redis.RedisMiddleware method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -198,6 +197,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/db.html#db.database.get_async_session">get_async_session() (in module db.database)</a>
 </li>
+      <li><a href="api/settings.html#settings.get_config">get_config() (in module settings)</a>
+</li>
       <li><a href="api/settings.html#settings.get_conn_string">get_conn_string() (in module settings)</a>
 </li>
       <li><a href="api/db.html#db.currency_db.CurrencyDB.get_currency">get_currency() (db.currency_db.CurrencyDB method)</a>
@@ -208,10 +209,10 @@
 </li>
       <li><a href="api/db.html#db.currency_db.CurrencyDB.get_currency_rates">get_currency_rates() (db.currency_db.CurrencyDB method)</a>
 </li>
-      <li><a href="api/db.html#db.database.get_db">get_db() (in module db.database)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/db.html#db.database.get_db">get_db() (in module db.database)</a>
+</li>
       <li><a href="api/db.html#db.database.get_engine">get_engine() (in module db.database)</a>
 </li>
       <li><a href="api/utils.html#utils.logger.get_logger">get_logger() (in module utils.logger)</a>
@@ -252,18 +253,32 @@
       <ul>
         <li><a href="api/fastapi.html#module-currency_api.dependencies.db">currency_api.dependencies.db</a>
 </li>
-        <li><a href="api/fastapi.html#module-currency_api.utils">currency_api.utils</a>
-</li>
         <li><a href="api/settings.html#module-settings">settings</a>
 </li>
         <li><a href="api/db_updates.html#module-start_updates">start_updates</a>
 </li>
         <li><a href="api/utils.html#module-utils.logger">utils.logger</a>
 </li>
+        <li><a href="api/utils.html#module-utils.requests">utils.requests</a>
+</li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/settings.html#settings.MYSQL">MYSQL (class in settings)</a>
+</li>
+      <li><a href="api/settings.html#settings.MYSQLContainer">MYSQLContainer (class in settings)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/settings.html#settings.Nginx">Nginx (class in settings)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/settings.html#settings.NginxContainer">NginxContainer (class in settings)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -283,13 +298,19 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/settings.html#settings.ReactApp">ReactApp (class in settings)</a>
+</li>
+      <li><a href="api/settings.html#settings.ReactAppContainer">ReactAppContainer (class in settings)</a>
+</li>
       <li><a href="api/settings.html#settings.REDIS">REDIS (class in settings)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/fastapi.html#api_main.redis_cache">redis_cache() (in module api_main)</a>
+      <li><a href="api/settings.html#settings.REDISContainer">REDISContainer (class in settings)</a>
 </li>
-      <li><a href="api/fastapi.html#currency_api.utils.request_url">request_url() (in module currency_api.utils)</a>
+      <li><a href="api/middleware.html#currency_api.middleware.redis.RedisMiddleware">RedisMiddleware (class in currency_api.middleware.redis)</a>
+</li>
+      <li><a href="api/utils.html#utils.requests.request_url">request_url() (in module utils.requests)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -304,11 +325,9 @@
         <li><a href="api/settings.html#module-settings">module</a>
 </li>
       </ul></li>
-      <li><a href="api/settings.html#settings.Settings">Settings (class in settings)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/settings.html#settings.settings">settings() (in module settings)</a>
+      <li><a href="api/settings.html#settings.Settings">Settings (class in settings)</a>
 </li>
       <li>
     start_updates
@@ -325,6 +344,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/settings.html#settings.Updater">Updater (class in settings)</a>
 </li>
+      <li><a href="api/settings.html#settings.UpdaterContainer">UpdaterContainer (class in settings)</a>
+</li>
       <li><a href="api/external_api.html#ext_api.exchange_rate.ExchangeRateAPI.url">url (ext_api.exchange_rate.ExchangeRateAPI property)</a>
 
       <ul>
@@ -340,6 +361,13 @@
 
       <ul>
         <li><a href="api/utils.html#module-utils.logger">module</a>
+</li>
+      </ul></li>
+      <li>
+    utils.requests
+
+      <ul>
+        <li><a href="api/utils.html#module-utils.requests">module</a>
 </li>
       </ul></li>
   </ul></td>
