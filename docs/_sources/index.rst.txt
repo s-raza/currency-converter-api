@@ -6,7 +6,7 @@ Implementation of a basic `async` currency conversion API using FastAPI.
 .. toctree::
    :maxdepth: 1
 
-   api/api.rst
+   api/api
    external_api
    docker_containers
    settings_config

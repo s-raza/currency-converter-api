@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Docker Containers" href="docker_containers.html" />
+    <link rel="next" title="External API" href="external_api/external_api.html" />
     <link rel="prev" title="Utilities" href="api/utils.html" />
 </head>
 
@@ -41,7 +41,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">External Source API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">External Source API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="external_api/external_api.html">External API</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="docker_containers.html">Docker Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="settings_config.html">Settings Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
@@ -76,6 +79,16 @@
 <p>The latest rates are retrieved from <a class="reference external" href="http://api.exchangerate.host/latest/">Exchange Rate</a></p>
 <p>The <a class="reference internal" href="containers/currency_updater.html"><span class="doc">Update Server</span></a> prepetually retieves latest currency rates from
 <a class="reference external" href="http://api.exchangerate.host/latest/">Exchange Rate</a> and updates the database in the <a class="reference internal" href="containers/database.html"><span class="doc">MySQL Server</span></a></p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="external_api/external_api.html">External API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="external_api/external_api.html#externalapibase">ExternalAPIBase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_api/external_api.html#exchangerateapi">ExchangeRateAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_api/external_api.html#currencyratesdownloader">CurrencyRatesDownloader</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 
 
@@ -83,7 +96,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="api/utils.html" class="btn btn-neutral float-left" title="Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="docker_containers.html" class="btn btn-neutral float-right" title="Docker Containers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="external_api/external_api.html" class="btn btn-neutral float-right" title="External API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

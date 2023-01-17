@@ -3,12 +3,11 @@ API Reference
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    ./db.rst
    ./db_updates.rst
    ./fastapi.rst
    ./middleware.rst
-   ./external_api.rst
    ./settings.rst
    ./utils.rst
