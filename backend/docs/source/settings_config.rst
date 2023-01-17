@@ -1,26 +1,49 @@
 Settings Configuration
 ======================
 
-Application settings are defined using Python's ``pydantic`` module, which are read from an ``.env`` file in the root directory.
+Application settings are defined using Python's ``pydantic`` module,
+which are read from an ``.env`` file in the root directory.
 
-An example settings file is provided as ``.env-template``. This should be copied to ``.env`` and updated as required in a production environment.
+An example settings file is provided as ``.env-template``.
+This should be copied to ``.env`` and updated as required in a production
+environment.
 
-There are 3 groups of settings available in the ``.env`` file, with their respective prefixes :-
+The settings for each service are identified by their respective prefixes:-
 
 #. MySQL - ``MYSQL__*``
-    Settings for MySQL server, like database name, port, user name, password etc.
-
 #. Database updater - ``UPDATER__*``
-    Settings for the database updater service. There is only one setting available: ``UPDATER__FREQUENCY``
-
 #. Currency API - ``API__*``
-    Settings related to the Currrency API.
-
     #. Startup - ``API__STARTUP__*``
-        Settings related to the startup of the Currency API service.
-
     #. Authentication - ``API__AUTH__*``
-        Settings related to cryptography for implementing authentication.
-
     #. User - ``API__USER__*``
-        Details for the default user that is created when the Currency API server is started for the first time.
+#. Redis cache - ``REDIS__*``
+#. React application settings - ``REACT_APP__*``
+#. NGINX ``NGINX__*``
+#. Container settings - ``*__CONTAINER__*``
+    Settings used within the `docker-compose.yml` file for various settings
+    related to each service's container.
+
+The settings can be accessed from within the code by importing the ``cfg``
+variable from the ``settings`` module in other modules.
+
+To use the settings in modules, for each directive replace the double underscore: ``__``
+with a period ``.``
+
+For example to use the ``API__USER__*`` setting to access the user settings:
+
+.. code-block:: python
+
+    from settings import cfg
+
+    user_details = cfg.api.user
+
+    print(user_details.username)
+    print(user_details.email)
+    print(user_details.full_name)
+
+``API__STARTUP__UVICORN_ENTRY``
+
+.. code-block:: python
+
+    from settings import cfg
+    print(cfg.api.startup.uvicorn_entry)
