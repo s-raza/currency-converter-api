@@ -21,7 +21,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Testing" href="testing.html" />
-    <link rel="prev" title="MySQL Database Server" href="containers/database.html" />
+    <link rel="prev" title="NGINX" href="containers/nginx.html" />
 </head>
 
 <body class="wy-body-for-nav">
@@ -39,19 +39,11 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
-</ul>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="external_api.html">External Source API</a></li>
-</ul>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="docker_containers.html">Docker Containers</a></li>
-</ul>
-<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Settings Configuration</a></li>
-</ul>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
 </ul>
 
@@ -81,50 +73,60 @@
 
   <section id="settings-configuration">
 <h1>Settings Configuration<a class="headerlink" href="#settings-configuration" title="Permalink to this heading"></a></h1>
-<p>Application settings are defined using Python’s <code class="docutils literal notranslate"><span class="pre">pydantic</span></code> module, which are read from an <code class="docutils literal notranslate"><span class="pre">.env</span></code> file in the root directory.</p>
-<p>An example settings file is provided as <code class="docutils literal notranslate"><span class="pre">.env-template</span></code>. This should be copied to <code class="docutils literal notranslate"><span class="pre">.env</span></code> and updated as required in a production environment.</p>
-<p>There are 3 groups of settings available in the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file, with their respective prefixes :-</p>
+<p>Application settings are defined using Python’s <code class="docutils literal notranslate"><span class="pre">pydantic</span></code> module,
+which are read from an <code class="docutils literal notranslate"><span class="pre">.env</span></code> file in the root directory.</p>
+<p>An example settings file is provided as <code class="docutils literal notranslate"><span class="pre">.env-template</span></code>.
+This should be copied to <code class="docutils literal notranslate"><span class="pre">.env</span></code> and updated as required in a production
+environment.</p>
+<p>The settings for each service are identified by their respective prefixes:-</p>
 <ol class="arabic simple">
+<li><p>MySQL - <code class="docutils literal notranslate"><span class="pre">MYSQL__*</span></code></p></li>
+<li><p>Database updater - <code class="docutils literal notranslate"><span class="pre">UPDATER__*</span></code></p></li>
 <li><dl class="simple">
-<dt>MySQL - <code class="docutils literal notranslate"><span class="pre">MYSQL__*</span></code></dt><dd><p>Settings for MySQL server, like database name, port, user name, password etc.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Database updater - <code class="docutils literal notranslate"><span class="pre">UPDATER__*</span></code></dt><dd><p>Settings for the database updater service. There is only one setting available: <code class="docutils literal notranslate"><span class="pre">UPDATER__FREQUENCY</span></code></p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Currency API - <code class="docutils literal notranslate"><span class="pre">API__*</span></code></dt><dd><p>Settings related to the Currrency API.</p>
-<ol class="arabic simple">
-<li><dl class="simple">
-<dt>Startup - <code class="docutils literal notranslate"><span class="pre">API__STARTUP__*</span></code></dt><dd><p>Settings related to the startup of the Currency API service.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>Authentication - <code class="docutils literal notranslate"><span class="pre">API__AUTH__*</span></code></dt><dd><p>Settings related to cryptography for implementing authentication.</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>User - <code class="docutils literal notranslate"><span class="pre">API__USER__*</span></code></dt><dd><p>Details for the default user that is created when the Currency API server is started for the first time.</p>
-</dd>
-</dl>
-</li>
+<dt>Currency API - <code class="docutils literal notranslate"><span class="pre">API__*</span></code></dt><dd><ol class="arabic simple">
+<li><p>Startup - <code class="docutils literal notranslate"><span class="pre">API__STARTUP__*</span></code></p></li>
+<li><p>Authentication - <code class="docutils literal notranslate"><span class="pre">API__AUTH__*</span></code></p></li>
+<li><p>User - <code class="docutils literal notranslate"><span class="pre">API__USER__*</span></code></p></li>
 </ol>
 </dd>
 </dl>
 </li>
+<li><p>Redis cache - <code class="docutils literal notranslate"><span class="pre">REDIS__*</span></code></p></li>
+<li><p>React application settings - <code class="docutils literal notranslate"><span class="pre">REACT_APP__*</span></code></p></li>
+<li><p>NGINX <code class="docutils literal notranslate"><span class="pre">NGINX__*</span></code></p></li>
+<li><dl class="simple">
+<dt>Container settings - <code class="docutils literal notranslate"><span class="pre">*__CONTAINER__*</span></code></dt><dd><p>Settings used within the <cite>docker-compose.yml</cite> file for various settings
+related to each service’s container.</p>
+</dd>
+</dl>
+</li>
 </ol>
+<p>The settings can be accessed from within the code by importing the <code class="docutils literal notranslate"><span class="pre">cfg</span></code>
+variable from the <code class="docutils literal notranslate"><span class="pre">settings</span></code> module in other modules.</p>
+<p>To use the settings in modules, for each directive replace the double underscore: <code class="docutils literal notranslate"><span class="pre">__</span></code>
+with a period <code class="docutils literal notranslate"><span class="pre">.</span></code></p>
+<p>For example to use the <code class="docutils literal notranslate"><span class="pre">API__USER__*</span></code> setting to access the user settings:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">cfg</span>
+
+<span class="n">user_details</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">user</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">user_details</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">user_details</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">user_details</span><span class="o">.</span><span class="n">full_name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">API__STARTUP__UVICORN_ENTRY</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">cfg</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">startup</span><span class="o">.</span><span class="n">uvicorn_entry</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="containers/database.html" class="btn btn-neutral float-left" title="MySQL Database Server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="containers/nginx.html" class="btn btn-neutral float-left" title="NGINX" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="testing.html" class="btn btn-neutral float-right" title="Testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
