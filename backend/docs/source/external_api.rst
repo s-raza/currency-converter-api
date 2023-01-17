@@ -7,6 +7,6 @@ The :doc:`Update Server </containers/currency_updater>` prepetually retieves lat
 `Exchange Rate <http://api.exchangerate.host/latest/>`_ and updates the database in the :doc:`MySQL Server </containers/database>`
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   api/external_api
+   external_api/external_api
