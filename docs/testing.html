@@ -38,19 +38,11 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
-</ul>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="external_api.html">External Source API</a></li>
-</ul>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="docker_containers.html">Docker Containers</a></li>
-</ul>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="settings_config.html">Settings Configuration</a></li>
-</ul>
-<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Testing</a></li>
 </ul>
 
@@ -80,76 +72,74 @@
 
   <section id="testing">
 <h1>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h1>
-<p>Tests are implemented using Python’s pytest module and a live MySQL server using docker.</p>
-<p>A docker container is started upon initiating tests using pytest.</p>
-<p>Pytest waits for the docker container to startup before connecting to it, and executing the tests using the MySQL server running inside it.</p>
+<p>Tests are implemented using Python’s pytest module and live MySQL
+and API servers using docker.</p>
+<p>The docker containers are started upon initiating tests using pytest and
+all the tests are run against the live MySQL and API servers.</p>
 <p>Example run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>pytest<span class="w"> </span>-s<span class="w"> </span>-v
-<span class="o">=======================================================</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span>session<span class="w"> </span><span class="nv">starts</span><span class="w"> </span><span class="o">========================================================</span>
-platform<span class="w"> </span>win32<span class="w"> </span>--<span class="w"> </span>Python<span class="w"> </span><span class="m">3</span>.9.0,<span class="w"> </span>pytest-7.1.2,<span class="w"> </span>pluggy-1.0.0<span class="w"> </span>--<span class="w"> </span>C:<span class="se">\.</span>python_venvs<span class="se">\p</span>oetry<span class="se">\c</span>ache<span class="se">\v</span>irtualenvs<span class="se">\c</span>urrency-converter-api-CRVacMOl-py3.9<span class="se">\S</span>cripts<span class="se">\p</span>ython.exe
-cachedir:<span class="w"> </span>.pytest_cache
-rootdir:<span class="w"> </span>D:<span class="se">\D</span>evelopment<span class="se">\c</span>urrency-converter-api
-plugins:<span class="w"> </span>anyio-3.6.1,<span class="w"> </span>asyncio-0.19.0,<span class="w"> </span>cov-2.12.1,<span class="w"> </span>typeguard-2.13.3
-asyncio:<span class="w"> </span><span class="nv">mode</span><span class="o">=</span>strict
-collected<span class="w"> </span><span class="m">13</span><span class="w"> </span>items
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt; cd backend
+currency-converter-api\backend&gt; pytest -s -v
 
-tests/test_api.py::test_api_currencies_list<span class="w"> </span><span class="m">02</span>-Jan-2023<span class="w"> </span><span class="m">04</span>:37:14PM<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Docker:<span class="w"> </span>Starting<span class="w"> </span>Docker<span class="w"> </span>Containers
-failed<span class="w"> </span>to<span class="w"> </span>get<span class="w"> </span>console<span class="w"> </span>mode<span class="w"> </span><span class="k">for</span><span class="w"> </span>stderr:<span class="w"> </span>The<span class="w"> </span>handle<span class="w"> </span>is<span class="w"> </span>invalid.
-<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Building<span class="w"> </span><span class="m">4</span>.1s<span class="w"> </span><span class="o">(</span><span class="m">22</span>/22<span class="o">)</span><span class="w"> </span><span class="nv">FINISHED</span>
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>internal<span class="o">]</span><span class="w"> </span>load<span class="w"> </span>build<span class="w"> </span>definition<span class="w"> </span>from<span class="w"> </span>Dockerfile.api<span class="w">                                                                        </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>transferring<span class="w"> </span>dockerfile:<span class="w"> </span><span class="m">1</span>.26kB<span class="w">                                                                                          </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>internal<span class="o">]</span><span class="w"> </span>load<span class="w"> </span>.dockerignore<span class="w">                                                                                               </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>transferring<span class="w"> </span>context:<span class="w"> </span>34B<span class="w">                                                                                                </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>internal<span class="o">]</span><span class="w"> </span>load<span class="w"> </span>metadata<span class="w"> </span><span class="k">for</span><span class="w"> </span>docker.io/library/python:3.9.16-slim<span class="w">                                                           </span><span class="m">2</span>.9s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">1</span>/17<span class="o">]</span><span class="w"> </span>FROM<span class="w"> </span>docker.io/library/python:3.9.16-slim@sha256:9e0b4391fc41bc35c16caef4740736b6b349f6626fd14eba32793ae3c7b01908<span class="w">   </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>resolve<span class="w"> </span>docker.io/library/python:3.9.16-slim@sha256:9e0b4391fc41bc35c16caef4740736b6b349f6626fd14eba32793ae3c7b01908<span class="w">     </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>internal<span class="o">]</span><span class="w"> </span>load<span class="w"> </span>build<span class="w"> </span>context<span class="w">                                                                                               </span><span class="m">0</span>.1s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>transferring<span class="w"> </span>context:<span class="w"> </span><span class="m">210</span>.40kB<span class="w">                                                                                           </span><span class="m">0</span>.1s
-<span class="o">=</span>&gt;<span class="w"> </span>CACHED<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">2</span>/17<span class="o">]</span><span class="w"> </span>RUN<span class="w"> </span>apt-get<span class="w"> </span>update<span class="p">;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>curl<span class="w"> </span>-y<span class="w">                                                                  </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span>CACHED<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">3</span>/17<span class="o">]</span><span class="w"> </span>RUN<span class="w"> </span>curl<span class="w"> </span>-sSL<span class="w"> </span>https://install.python-poetry.org<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nv">POETRY_HOME</span><span class="o">=</span>/opt/poetry<span class="w"> </span><span class="nv">POETRY_VERSION</span><span class="o">=</span><span class="m">1</span>.2.0<span class="w"> </span>python<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w">     </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span>CACHED<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">4</span>/17<span class="o">]</span><span class="w"> </span>RUN<span class="w"> </span>groupadd<span class="w"> </span>-r<span class="w"> </span>appgrp<span class="w">                                                                                       </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span>CACHED<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">5</span>/17<span class="o">]</span><span class="w"> </span>RUN<span class="w"> </span>useradd<span class="w"> </span>-r<span class="w"> </span>-m<span class="w"> </span>appusr<span class="w">                                                                                     </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span>CACHED<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">6</span>/17<span class="o">]</span><span class="w"> </span>RUN<span class="w"> </span>usermod<span class="w"> </span>-a<span class="w"> </span>-G<span class="w"> </span>appgrp<span class="w"> </span>appusr<span class="w">                                                                              </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span>CACHED<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">7</span>/17<span class="o">]</span><span class="w"> </span>WORKDIR<span class="w"> </span>/app<span class="w">                                                                                                 </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span>CACHED<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">8</span>/17<span class="o">]</span><span class="w"> </span>RUN<span class="w"> </span>chown<span class="w"> </span>appusr:appgrp<span class="w"> </span>/app<span class="w">                                                                                 </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span>CACHED<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">9</span>/17<span class="o">]</span><span class="w"> </span>COPY<span class="w"> </span>--chown<span class="o">=</span>appusr:appgrp<span class="w"> </span>./pyproject.toml<span class="w"> </span>./poetry.lock*<span class="w"> </span>./<span class="w">                                                </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span>CACHED<span class="w"> </span><span class="o">[</span><span class="m">10</span>/17<span class="o">]</span><span class="w"> </span>RUN<span class="w"> </span>poetry<span class="w"> </span>install<span class="w"> </span>--no-root<span class="w"> </span>--no-dev<span class="w">                                                                        </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">11</span>/17<span class="o">]</span><span class="w"> </span>COPY<span class="w"> </span>--chown<span class="o">=</span>appusr:appgrp<span class="w"> </span>./currency_api<span class="w"> </span>./currency_api<span class="w">                                                            </span><span class="m">0</span>.1s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">12</span>/17<span class="o">]</span><span class="w"> </span>COPY<span class="w"> </span>--chown<span class="o">=</span>appusr:appgrp<span class="w"> </span>./db<span class="w"> </span>./db<span class="w">                                                                                </span><span class="m">0</span>.1s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">13</span>/17<span class="o">]</span><span class="w"> </span>COPY<span class="w"> </span>--chown<span class="o">=</span>appusr:appgrp<span class="w"> </span>./ext_api<span class="w"> </span>./ext_api<span class="w">                                                                      </span><span class="m">0</span>.1s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">14</span>/17<span class="o">]</span><span class="w"> </span>COPY<span class="w"> </span>--chown<span class="o">=</span>appusr:appgrp<span class="w"> </span>./utils<span class="w"> </span>./utils<span class="w">                                                                          </span><span class="m">0</span>.1s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">15</span>/17<span class="o">]</span><span class="w"> </span>COPY<span class="w"> </span>--chown<span class="o">=</span>appusr:appgrp<span class="w"> </span>./settings.py<span class="w"> </span>./<span class="w">                                                                         </span><span class="m">0</span>.1s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">16</span>/17<span class="o">]</span><span class="w"> </span>COPY<span class="w"> </span>--chown<span class="o">=</span>appusr:appgrp<span class="w"> </span>./api_main.py<span class="w"> </span>./<span class="w">                                                                         </span><span class="m">0</span>.1s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">17</span>/17<span class="o">]</span><span class="w"> </span>COPY<span class="w"> </span>--chown<span class="o">=</span>appusr:appgrp<span class="w"> </span>./tests/.env<span class="w"> </span>./<span class="w">                                                                          </span><span class="m">0</span>.1s
-<span class="o">=</span>&gt;<span class="w"> </span>exporting<span class="w"> </span>to<span class="w"> </span>image<span class="w">                                                                                                          </span><span class="m">0</span>.3s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>exporting<span class="w"> </span>layers<span class="w">                                                                                                         </span><span class="m">0</span>.2s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>writing<span class="w"> </span>image<span class="w"> </span>sha256:061c8bd329befc32240d8873262cb9205cfedcd5bc0a4094bf109c2c4164eef5<span class="w">                                    </span><span class="m">0</span>.0s
-<span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>naming<span class="w"> </span>to<span class="w"> </span>docker.io/library/tests-test_currency_api<span class="w">                                                                      </span><span class="m">0</span>.0s
-<span class="m">02</span>-Jan-2023<span class="w"> </span><span class="m">04</span>:37:24PM<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Docker:<span class="w"> </span>Startup<span class="w"> </span>initiated<span class="w"> </span><span class="k">in</span><span class="w"> </span>detached<span class="w"> </span>mode
-<span class="m">02</span>-Jan-2023<span class="w"> </span><span class="m">04</span>:37:24PM<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Engine<span class="w"> </span>Connection:<span class="w"> </span>Waiting<span class="w"> </span><span class="k">for</span><span class="w"> </span>Database:<span class="w"> </span><span class="o">(</span><span class="m">2013</span>,<span class="w"> </span><span class="s1">&#39;Lost connection to MySQL server during query&#39;</span><span class="o">)</span>
-<span class="m">02</span>-Jan-2023<span class="w"> </span><span class="m">04</span>:37:29PM<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Engine<span class="w"> </span>Connection:<span class="w"> </span>Waiting<span class="w"> </span><span class="k">for</span><span class="w"> </span>Database:<span class="w"> </span><span class="o">(</span><span class="m">2013</span>,<span class="w"> </span><span class="s1">&#39;Lost connection to MySQL server during query&#39;</span><span class="o">)</span>
-<span class="m">02</span>-Jan-2023<span class="w"> </span><span class="m">04</span>:37:34PM<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Engine<span class="w"> </span>Connection:<span class="w"> </span>Waiting<span class="w"> </span><span class="k">for</span><span class="w"> </span>Database:<span class="w"> </span><span class="o">(</span><span class="m">2013</span>,<span class="w"> </span><span class="s1">&#39;Lost connection to MySQL server during query&#39;</span><span class="o">)</span>
-<span class="m">02</span>-Jan-2023<span class="w"> </span><span class="m">04</span>:37:40PM<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Database:<span class="w"> </span>Opening<span class="w"> </span>DB<span class="w"> </span>connection
+platform win32 -- Python 3.9.0, pytest-7.2.0, pluggy-1.0.0 -- C:\.python_venvs\poetry\cache\virtualenvs\currency-converter-api-5abJ2n6c-py3.9\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Development\currency-converter-api\backend
+plugins: anyio-3.6.2, asyncio-0.19.0, cov-2.12.1, typeguard-2.13.3
+asyncio: mode=strict
+collected 13 items
+
+tests/test_api.py::test_api_currencies_list 17-Jan-2023 12:53:47PM [INFO] Docker: Starting Docker Containers
+failed to get console mode for stderr: The handle is invalid.
+[+] Building 3.8s (21/21) FINISHED
+=&gt; [internal] load build definition from Dockerfile.api                                                                        0.1s
+=&gt; =&gt; transferring dockerfile: 36B                                                                                             0.0s
+=&gt; [internal] load .dockerignore                                                                                               0.0s
+=&gt; =&gt; transferring context: 2B                                                                                                 0.0s
+=&gt; [internal] load metadata for docker.io/library/python:3.9.16-slim                                                           2.6s
+=&gt; [ 1/16] FROM docker.io/library/python:3.9.16-slim@sha256:0b19e7429c822572b27627a887470a9337e9477d4099bc9f79fb2cd5a5764278   0.0s
+=&gt; [internal] load build context                                                                                               0.1s
+=&gt; =&gt; transferring context: 215.91kB                                                                                           0.0s
+=&gt; CACHED [ 2/16] RUN apt-get update; apt-get install curl -y                                                                  0.0s
+=&gt; CACHED [ 3/16] RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/opt/poetry POETRY_VERSION=1.2.0 python &amp;&amp;     0.0s
+=&gt; CACHED [ 4/16] RUN groupadd -r appgrp                                                                                       0.0s
+=&gt; CACHED [ 5/16] RUN useradd -r -m appusr                                                                                     0.0s
+=&gt; CACHED [ 6/16] RUN usermod -a -G appgrp appusr                                                                              0.0s
+=&gt; CACHED [ 7/16] WORKDIR /app/.                                                                                               0.0s
+=&gt; CACHED [ 8/16] RUN chown appusr:appgrp /app/.                                                                               0.0s
+=&gt; CACHED [ 9/16] COPY --chown=appusr:appgrp ././pyproject.toml ././poetry.lock* ./                                            0.0s
+=&gt; CACHED [10/16] RUN poetry install --no-root --without dev                                                                   0.0s
+=&gt; [11/16] COPY --chown=appusr:appgrp ././currency_api ./currency_api                                                          0.1s
+=&gt; [12/16] COPY --chown=appusr:appgrp ././db ./db                                                                              0.1s
+=&gt; [13/16] COPY --chown=appusr:appgrp ././utils ./utils                                                                        0.1s
+=&gt; [14/16] COPY --chown=appusr:appgrp ././settings.py ./                                                                       0.1s
+=&gt; [15/16] COPY --chown=appusr:appgrp ././api_main.py ./                                                                       0.1s
+=&gt; [16/16] COPY --chown=appusr:appgrp ./tests/.env ./                                                                          0.1s
+=&gt; exporting to image                                                                                                          0.3s
+=&gt; =&gt; exporting layers                                                                                                         0.2s
+=&gt; =&gt; writing image sha256:dde26c9d46ebbe0cd680e283aeb03da77ab7ec7cb5d667218cf730464bcf2951                                    0.0s
+=&gt; =&gt; naming to docker.io/library/tests-test-currency-api                                                                      0.0s
+17-Jan-2023 12:54:16PM [INFO] Docker: Startup initiated in detached mode
+17-Jan-2023 12:54:18PM [INFO] Database: Opening DB connection
+17-Jan-2023 12:54:18PM [INFO] API Fixture: Waiting for API Server: http://localhost:8080/token
+17-Jan-2023 12:54:20PM [INFO] API Fixture: Waiting for API Server: http://localhost:8080/token
+17-Jan-2023 12:54:22PM [INFO] API Fixture: Waiting for API Server: http://localhost:8080/token
+17-Jan-2023 12:54:24PM [INFO] API Fixture: API server started
 PASSED
-tests/test_api.py::test_api_currencies_rates<span class="w"> </span>PASSED
-tests/test_api.py::test_latest_rate_for_currency_success<span class="w"> </span>PASSED
-tests/test_api.py::test_currency_non_existant<span class="w"> </span>PASSED02-Jan-2023<span class="w"> </span><span class="m">04</span>:37:51PM<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Database:<span class="w"> </span>Test<span class="w"> </span>completed,<span class="w"> </span>DB<span class="w"> </span>connection<span class="w"> </span>closed
+tests/test_api.py::test_api_currencies_rates PASSED
+tests/test_api.py::test_latest_rate_for_currency_success PASSED
+tests/test_api.py::test_currency_non_existant PASSED17-Jan-2023 12:54:30PM [INFO] Database: Test completed, DB connection closed
 
-tests/test_db.py::test_currency_codes<span class="w"> </span><span class="m">02</span>-Jan-2023<span class="w"> </span><span class="m">04</span>:37:51PM<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Database:<span class="w"> </span>Opening<span class="w"> </span>DB<span class="w"> </span>connection
+tests/test_db.py::test_currency_codes 17-Jan-2023 12:54:30PM [INFO] Database: Opening DB connection
 PASSED
-tests/test_db.py::test_last_update<span class="w"> </span>PASSED
-tests/test_db.py::test_all_latest_rates_correct<span class="w"> </span>PASSED
-tests/test_db.py::test_latest_rate_correct<span class="w"> </span>PASSED
-tests/test_db.py::test_latest_rate_curr_non_existant<span class="w"> </span>PASSED
-tests/test_db.py::test_rate_on_date_correct<span class="w"> </span>PASSED
-tests/test_db.py::test_add_update_wrong_date_exception<span class="w"> </span>PASSED
-tests/test_db.py::test_get_rate_on_date_wrong_date_exception<span class="w"> </span>PASSED
-tests/test_db.py::test_currency_conversion<span class="w"> </span>PASSED02-Jan-2023<span class="w"> </span><span class="m">04</span>:37:57PM<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Database:<span class="w"> </span>Test<span class="w"> </span>completed,<span class="w"> </span>DB<span class="w"> </span>connection<span class="w"> </span>closed
-<span class="m">02</span>-Jan-2023<span class="w"> </span><span class="m">04</span>:37:57PM<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Docker:<span class="w"> </span>Removing<span class="w"> </span>Containers
-<span class="m">02</span>-Jan-2023<span class="w"> </span><span class="m">04</span>:38:02PM<span class="w"> </span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span>Docker:<span class="w"> </span><span class="nv">Removed</span>
-
-
-<span class="o">=======================================================</span><span class="w"> </span><span class="m">13</span><span class="w"> </span>passed<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">48</span>.04s<span class="w"> </span><span class="o">========================================================</span>
+tests/test_db.py::test_last_update PASSED
+tests/test_db.py::test_all_latest_rates_correct PASSED
+tests/test_db.py::test_latest_rate_correct PASSED
+tests/test_db.py::test_latest_rate_curr_non_existant PASSED
+tests/test_db.py::test_rate_on_date_correct PASSED
+tests/test_db.py::test_add_update_wrong_date_exception PASSED
+tests/test_db.py::test_get_rate_on_date_wrong_date_exception PASSED
+tests/test_db.py::test_currency_conversion PASSED17-Jan-2023 12:54:36PM [INFO] Database: Test completed, DB connection closed
+17-Jan-2023 12:54:36PM [INFO] Docker: Removing Containers
+17-Jan-2023 12:54:41PM [INFO] Docker: Removed
 </pre></div>
 </div>
 </section>
