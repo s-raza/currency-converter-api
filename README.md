@@ -1,15 +1,15 @@
 # Currency Converter App using React+FastAPI+Docker+NGINX
-[![Sphinx Documetation](https://img.shields.io/badge/Sphinx-docs-brightgreen)](https://s-raza.github.io/currency-converter-api/)
-<img src="https://img.shields.io/badge/FastAPI-brightgreen"/>
-<img src="https://img.shields.io/badge/React-brightgreen"/>
-<img src="https://img.shields.io/badge/Pre--commit-brightgreen"/>
-<img src="https://img.shields.io/badge/Async-brightgreen"/>
-<img src="https://img.shields.io/badge/Redis-brightgreen"/>
-<img src="https://img.shields.io/badge/Microservices-brightgreen"/>
-<img src="https://img.shields.io/badge/Docker-brightgreen"/>
-<img src="https://img.shields.io/badge/REST--API-brightgreen"/>
-<img src="https://img.shields.io/badge/SQLALchemy-MySQL-brightgreen"/>
-<img src="https://img.shields.io/badge/NGINX-brightgreen"/>
+[![Sphinx Documetation](https://img.shields.io/badge/Docs-Sphinx-005571?style=flat-square)](https://s-raza.github.io/currency-converter-api/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-005571?style=flat-square&logo=react)](https://reactjs.org/)
+[![Pre-commit](https://img.shields.io/badge/pre--commit-005571?style=flat-square&logo=pre-commit)](https://pre-commit.com/)
+[![Async](https://img.shields.io/badge/Async-005571?style=flat-square&logo=python)](https://docs.python.org/3/library/asyncio.html)
+[![Redis](https://img.shields.io/badge/Redis-005571?style=flat-square&logo=redis)](https://redis.io/)
+[![Docker](https://img.shields.io/badge/Docker-005571?style=flat-square&logo=docker)](https://www.docker.com/)
+[![SQLAlchemy-MySQL](https://img.shields.io/badge/MySQL-SQLAlchemy-005571?style=flat-square&logo=mysql)](https://www.sqlalchemy.org)
+[![NGINX](https://img.shields.io/badge/NGINX-005571?style=flat-square&logo=nginx)](https://www.nginx.com/)
+<img src="https://img.shields.io/badge/REST--API-005571?style=flat-square"/>
+<img src="https://img.shields.io/badge/Microservices-005571?style=flat-square"/>
 <img src="./gh-static/06-react-ui.gif"/>
 <br>
 
