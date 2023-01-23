@@ -19,7 +19,7 @@ spec:
       containers:
         - name: fastapi-server
           command: ["python", "api_main.py"]
-          image: currency-converter-api-api
+          image: currency-converter-api
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080

@@ -19,7 +19,7 @@ spec:
       containers:
         - name: updater-server
           command: ["python", "start_updates.py"]
-          image: currency-converter-api-updater
+          image: currency-converter-updater
           imagePullPolicy: IfNotPresent
           env:
           - name: MYSQL__HOST

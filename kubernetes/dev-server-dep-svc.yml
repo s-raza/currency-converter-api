@@ -19,7 +19,7 @@ spec:
       containers:
         - name: react-dev-server
           command: ["npm", "start"]
-          image: currency-converter-api-dev-server
+          image: currency-converter-dev-server
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3002

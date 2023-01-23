@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: nginx-prod-server
-          image: currency-converter-api-prod-server
+          image: currency-converter-prod-server
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
