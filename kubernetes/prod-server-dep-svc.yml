@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-prod-server
+  labels:
+    name: nginx-prod-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: frontend
+      app: nginx-app
+  template:
+    metadata:
+      labels:
+        type: frontend
+        app: nginx-app
+    spec:
+      containers:
+        - name: nginx-prod-server
+          image: currency-converter-api-prod-server
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+          - name: NGINX_UPSTREAM
+            value: api-server-service:8080
+          - name: NGINX_SERVER_PORT
+            value: '80'
+          - name: NGINX_API_PREFIX
+            value: 'currencies'
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-prod-server-svc
+  labels:
+    service: nginx-prod-server-svc
+spec:
+  type: ClusterIP
+  ports:
+    - name: tcp-port
+      port: 3003
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: nginx-app
