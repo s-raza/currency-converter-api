@@ -39,7 +39,6 @@ services:
 
   updater:
     container_name: ${UPDATER__CONTAINER__NAME}
-    entrypoint: python start_updates.py
     restart: always
     environment:
       - MYSQL__HOST=${MYSQL__CONTAINER__NAME}
@@ -62,7 +61,6 @@ services:
 
   api:
     container_name: ${API__CONTAINER__NAME}
-    entrypoint: python api_main.py
     restart: always
     environment:
       - MYSQL__HOST=${MYSQL__CONTAINER__NAME}
@@ -89,7 +87,6 @@ services:
 
   dev-server:
     container_name: ${REACT_APP__CONTAINER__NAME}
-    entrypoint: npm start
     restart: always
     environment:
       - PORT=${REACT_APP__PORT}
