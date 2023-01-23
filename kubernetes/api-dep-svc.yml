@@ -30,16 +30,6 @@ spec:
             value: 'false'
           - name: REDIS__HOST
             value: redis-server-svc
-          # readinessProbe:
-          #   httpGet:
-          #     path: /token
-          #     port: 8080
-          #   initialDelaySeconds: 5
-          #   periodSeconds: 1
-          # livenessProbe:
-          #   httpGet:
-          #     path: /token
-          #     port: 8080
 
 ---
 
