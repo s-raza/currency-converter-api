@@ -37,9 +37,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: db-server-service
+  name: db-server-svc
   labels:
-    service: db-server-service
+    service: db-server-svc
 spec:
   type: ClusterIP
   ports:

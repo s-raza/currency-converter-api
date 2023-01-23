@@ -24,7 +24,7 @@ spec:
             - containerPort: 80
           env:
           - name: NGINX_UPSTREAM
-            value: api-server-service:8080
+            value: api-server-svc:8080
           - name: NGINX_SERVER_PORT
             value: '80'
           - name: NGINX_API_PREFIX

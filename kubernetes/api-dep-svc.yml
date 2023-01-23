@@ -17,7 +17,7 @@ spec:
         app: fastapi-app
     spec:
       containers:
-        - name: currencyapi
+        - name: fastapi-server
           command: ["python", "api_main.py"]
           image: currency-converter-api-api
           imagePullPolicy: IfNotPresent
@@ -25,11 +25,11 @@ spec:
             - containerPort: 8080
           env:
           - name: MYSQL__HOST
-            value: db-server-service
+            value: db-server-svc
           - name: API__STARTUP__UVICORN_RELOAD
             value: 'false'
           - name: REDIS__HOST
-            value: redis-server-service
+            value: redis-server-svc
           # readinessProbe:
           #   httpGet:
           #     path: /token
@@ -46,9 +46,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: api-server-service
+  name: api-server-svc
   labels:
-    service: api-server-service
+    service: api-server-svc
 spec:
   type: ClusterIP
   ports:

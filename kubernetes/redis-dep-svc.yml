@@ -28,9 +28,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis-server-service
+  name: redis-server-svc
   labels:
-    service: redis-server-service
+    service: redis-server-svc
 spec:
   type: ClusterIP
   ports:

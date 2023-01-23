@@ -17,30 +17,10 @@ spec:
         app: updater-app
     spec:
       containers:
-        - name: currencyapi
+        - name: updater-server
           command: ["python", "start_updates.py"]
           image: currency-converter-api-updater
           imagePullPolicy: IfNotPresent
-          # ports:
-          #   - containerPort: 8080
           env:
           - name: MYSQL__HOST
-            value: db-server-service
-
-# ---
-
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: updater-server-service
-#   labels:
-#     service: updater-server-service
-# spec:
-#   type: ClusterIP
-#   ports:
-#     - name: tcp-port
-#       port: 8080
-#       targetPort: 8080
-#       protocol: TCP
-#   selector:
-#     app: fastapi-app
+            value: db-server-svc

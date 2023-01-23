@@ -27,7 +27,7 @@ spec:
           - name: PORT
             value: '3002'
           - name: REACT_APP_PROXY_HOST
-            value: 'http://api-server-service:8080'
+            value: 'http://api-server-svc:8080'
 
 ---
 
