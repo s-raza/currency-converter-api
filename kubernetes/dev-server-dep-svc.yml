@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-server
+  name: react-dev-server
   labels:
-    name: frontend-server
+    name: react-dev-server
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
         app: react-app
     spec:
       containers:
-        - name: react-frontend
+        - name: react-dev-server
           command: ["npm", "start"]
           image: currency-converter-api-dev-server
           imagePullPolicy: IfNotPresent
@@ -34,9 +34,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-server-service
+  name: react-dev-server-svc
   labels:
-    service: frontend-server-service
+    service: react-dev-server-svc
 spec:
   type: ClusterIP
   ports:
