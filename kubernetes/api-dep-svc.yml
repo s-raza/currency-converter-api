@@ -30,6 +30,12 @@ spec:
             value: 'false'
           - name: REDIS__HOST
             value: redis-server-svc
+          readinessProbe:
+            httpGet:
+              path: /diagnostics/status
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 3
 
 ---
 
