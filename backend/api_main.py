@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from currency_api.currencies_router import currencies_router
+from currency_api.diagnostics_router import diagnostics_router
 from currency_api.middleware import RedisMiddleware
 from currency_api.user_auth_router import user_router
 from db.currency_db import CurrencyDB
@@ -34,6 +35,7 @@ app.add_middleware(
 )
 
 app.include_router(currencies_router, prefix=f"/{cfg.api.prefix}")
+app.include_router(diagnostics_router, prefix="/diagnostics")
 app.include_router(user_router)
 
 
