@@ -28,7 +28,10 @@ spec:
           - name: NGINX_SERVER_PORT
             value: '80'
           - name: NGINX_API_PREFIX
-            value: 'currencies'
+            valueFrom:
+              secretKeyRef:
+                name: currency-app-config
+                key: API__PREFIX
           readinessProbe:
             httpGet:
               path: /

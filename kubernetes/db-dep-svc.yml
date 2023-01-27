@@ -24,13 +24,25 @@ spec:
             - containerPort: 3306
           env:
           - name: MYSQL_ROOT_PASSWORD
-            value: "rootpass"
+            valueFrom:
+              secretKeyRef:
+                name: currency-app-config
+                key: MYSQL__ROOT_PASSWORD
           - name: MYSQL_USER
-            value: "currencyuser"
+            valueFrom:
+              secretKeyRef:
+                name: currency-app-config
+                key: MYSQL__USER
           - name: MYSQL_PASSWORD
-            value: "currencypass"
+            valueFrom:
+              secretKeyRef:
+                name: currency-app-config
+                key: MYSQL__PASSWORD
           - name: MYSQL_DATABASE
-            value: "currencydb"
+            valueFrom:
+              secretKeyRef:
+                name: currency-app-config
+                key: MYSQL__DATABASE
 
 ---
 
