@@ -34,8 +34,9 @@ spec:
             httpGet:
               path: /diagnostics/status
               port: 8080
-            initialDelaySeconds: 3
-            periodSeconds: 3
+            initialDelaySeconds: 45
+            periodSeconds: 60
+            failureThreshold: 3
 
 ---
 
