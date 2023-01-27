@@ -9,6 +9,8 @@ $SERVICE = "nginx-prod-server-svc"
 $API_APP = "fastapi-app"
 $PROD_APP = "nginx-app"
 $DEV_APP = "react-app"
+$SECRET_CFG = "currency-app-config"
+$ENV_FILE = "./.env"
 
  $symbols = [PSCustomObject] @{
 
@@ -81,17 +83,33 @@ $delete_deployments = {
         Wait-Pod-Status $DEV_APP "false"
         Write-ClrOP green "$($symbols.SUCCESS) Pods terminated!`n"
     }
+}
 
-    Exit
+$delete_secrets = {
+
+    Write-ClrOP red "$($symbols.PROCESSING) Deleting configuration..."
+    Invoke-Expression "kubectl delete secret $SECRET_CFG" -ErrorVariable ErrOutput 2>&1 >$null
+
+    if($ErrOutput -ne ""){
+        Write-ClrOP red "$($symbols.FAIL) No confguration to delete!`n"
+    }
+    else{
+        Write-ClrOP green "$($symbols.SUCCESS) Configuration deleted!`n"
+    }
 }
 
 if($delete){
     Invoke-Command -ScriptBlock $delete_deployments
+    Invoke-Command -ScriptBlock $delete_secrets
+    Exit
 }
 
 if($build){
     Invoke-Command -ScriptBlock $build_docker_images
 }
+
+Write-ClrOP green "$($symbols.PROCESSING) Setting up configuration..."
+kubectl create secret generic $SECRET_CFG --from-env-file=$ENV_FILE | Out-Null
 
 Write-ClrOP green "$($symbols.PROCESSING) Starting up Kubernetes cluster in minikube...`n"
 kubectl apply -f ./$K8S_CONF_FOLDER | Out-Null
