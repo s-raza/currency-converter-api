@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-server
+  labels:
+    name: api-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: backend
+      app: fastapi-app
+  template:
+    metadata:
+      labels:
+        type: backend
+        app: fastapi-app
+    spec:
+      containers:
+        - name: fastapi-server
+          command: ["python", "api_main.py"]
+          image: currency-converter-api
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+          - name: MYSQL__HOST
+            value: db-server-svc
+          - name: API__STARTUP__UVICORN_RELOAD
+            value: 'false'
+          - name: REDIS__HOST
+            value: redis-server-svc
+          readinessProbe:
+            httpGet:
+              path: /diagnostics/status
+              port: 8080
+            initialDelaySeconds: 45
+            periodSeconds: 60
+            failureThreshold: 3
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-server-svc
+  labels:
+    service: api-server-svc
+spec:
+  type: ClusterIP
+  ports:
+    - name: tcp-port
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: fastapi-app

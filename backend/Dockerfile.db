@@ -42,3 +42,5 @@ COPY --chown=$APP_USR:$APP_GRP $ENV_FILE ./
 
 # Become appusr
 USER $APP_USR
+
+ENTRYPOINT ["python", "start_updates.py"]

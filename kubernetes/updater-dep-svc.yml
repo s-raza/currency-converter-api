@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: updater-server
+  labels:
+    name: updater-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: backend
+      app: updater-app
+  template:
+    metadata:
+      labels:
+        type: backend
+        app: updater-app
+    spec:
+      containers:
+        - name: updater-server
+          command: ["python", "start_updates.py"]
+          image: currency-converter-updater
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: MYSQL__HOST
+            value: db-server-svc

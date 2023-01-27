@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-server
+  labels:
+    name: db-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: backend
+      app: db-mysql
+  template:
+    metadata:
+      labels:
+        type: backend
+        app: db-mysql
+    spec:
+      containers:
+        - name: mysqldb
+          image: mysql:8.0.29
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3306
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: currency-app-config
+                key: MYSQL__ROOT_PASSWORD
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: currency-app-config
+                key: MYSQL__USER
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: currency-app-config
+                key: MYSQL__PASSWORD
+          - name: MYSQL_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: currency-app-config
+                key: MYSQL__DATABASE
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-server-svc
+  labels:
+    service: db-server-svc
+spec:
+  type: ClusterIP
+  ports:
+    - name: tcp-port
+      port: 3306
+      targetPort: 3306
+      protocol: TCP
+  selector:
+    app: db-mysql
