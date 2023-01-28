@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Endpoints Summary &mdash; Currency API (FastAPI) 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api/api.html" />
+    <link rel="prev" title="Kubernetes Powershell Script" href="usage/k8s/ps1_script.html" />
+</head>
+
+<body class="wy-body-for-nav">
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Currency API (FastAPI)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Endpoints Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="external_api.html">External Source API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker_containers.html">Docker Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings_config.html">Settings Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Currency API (FastAPI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">API Endpoints Summary</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api_endpoints.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <section id="api-endpoints-summary">
+<h1>API Endpoints Summary<a class="headerlink" href="#api-endpoints-summary" title="Permalink to this heading"></a></h1>
+<ol class="arabic">
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span></code>: <strong>/currencies/rates/{curr_code}</strong></p>
+<p>Get the latest currency rate of the currency code <code class="docutils literal notranslate"><span class="pre">curr_code</span></code>. If a parameter
+<code class="docutils literal notranslate"><span class="pre">on_date</span></code> is provided the last rate recorded on that particular date is returned.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">on_date</span></code> parameter is not provided, the absolute last rate recorded for the
+given currency code is returned for <code class="docutils literal notranslate"><span class="pre">curr_code</span></code></p>
+<p>The accepted date format is “%d-%m-%Y”, any other format will result in a
+<code class="docutils literal notranslate"><span class="pre">Bad</span> <span class="pre">Request</span></code> response.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span></code>: <strong>/currencies/rates</strong></p>
+<p>Get the latest rates of all the currencies available. If a parameter <code class="docutils literal notranslate"><span class="pre">on_date</span></code>
+is provided the last rate recorded on that particular date is returned for each
+currency</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">on_date</span></code> parameter is not provided, the absolute last rates recorded for all
+the currency codes is returned.</p>
+<p>The accepted date format is “%d-%m-%Y”, any other format will result in a
+<code class="docutils literal notranslate"><span class="pre">Bad</span> <span class="pre">Request</span></code> response.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span></code>: <strong>/currencies/convert/{from_code}/{to_code}</strong></p>
+<p>Convert the amount given in the <code class="docutils literal notranslate"><span class="pre">amount</span></code> query parameter from <code class="docutils literal notranslate"><span class="pre">from_code</span></code> currency
+code to <code class="docutils literal notranslate"><span class="pre">to_code</span></code> currency code.</p>
+<p>If a parameter <code class="docutils literal notranslate"><span class="pre">on_date</span></code> is provided the last rates recorded for the <code class="docutils literal notranslate"><span class="pre">from_code</span></code>
+currency code and <code class="docutils literal notranslate"><span class="pre">to_code</span></code> on that particular date are used in the conversion calculation.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">on_date</span></code> parameter is not provided, the absolute last rates recorded for the
+<code class="docutils literal notranslate"><span class="pre">from_code</span></code> currency code and <code class="docutils literal notranslate"><span class="pre">to_code</span></code> are used in the conversion calculation.</p>
+<p>The accepted date format is “%d-%m-%Y”, any other format will result in a
+<code class="docutils literal notranslate"><span class="pre">Bad</span> <span class="pre">Request</span></code> response.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span></code>: <strong>/currencies</strong></p>
+<p>Get a list of all the currencies available for conversion from the database.</p>
+</li>
+</ol>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage/k8s/ps1_script.html" class="btn btn-neutral float-left" title="Kubernetes Powershell Script" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Salman Raza.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+</body>
+</html>

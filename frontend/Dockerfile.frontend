@@ -34,3 +34,5 @@ COPY --chown=appusr:appgrp ./$LOCAL_DIR ./
 
 # Become appusr to run the app
 USER $APP_USR
+
+ENTRYPOINT ["npm", "start"]

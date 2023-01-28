@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kubernetes Powershell Script &mdash; Currency API (FastAPI) 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="API Endpoints Summary" href="../../api_endpoints.html" />
+    <link rel="prev" title="Kubernetes General Commands" href="general_cmds.html" />
+</head>
+
+<body class="wy-body-for-nav">
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Currency API (FastAPI)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../usage.html">Usage</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../docker/index.html">Run Services using Docker</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Run Services using Kubernetes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="general_cmds.html">Kubernetes General Commands</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Kubernetes Powershell Script</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#minikube-installation">Minikube Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-kubectl">Install kubectl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nginx-production-build-server">NGINX Production Build Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#react-development-server">React Development Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-the-kubernetes-cluster">Delete the Kubernetes Cluster</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_endpoints.html">API Endpoints Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../external_api.html">External Source API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docker_containers.html">Docker Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../settings_config.html">Settings Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Currency API (FastAPI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../usage.html">Usage</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Run Services using Kubernetes</a></li>
+      <li class="breadcrumb-item active">Kubernetes Powershell Script</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/usage/k8s/ps1_script.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <section id="kubernetes-powershell-script">
+<h1>Kubernetes Powershell Script<a class="headerlink" href="#kubernetes-powershell-script" title="Permalink to this heading"></a></h1>
+<p>A Windows Powershell script <code class="docutils literal notranslate"><span class="pre">k8s.ps1</span></code> is provided that automates most of the steps in the
+<a class="reference internal" href="general_cmds.html"><span class="doc">Kubernetes General Commands</span></a> section.</p>
+<p>This script automates the below steps from the
+<a class="reference internal" href="general_cmds.html"><span class="doc">Kubernetes General Commands</span></a> section.</p>
+<ul class="simple">
+<li><p>Sets up the environment for <cite>kubectl</cite> if not already set.</p></li>
+<li><p>Automatically sets up the configuration using the <cite>.env</cite> file if not already set.</p></li>
+<li><p>Option to build the Docker images and run Pods in one go.</p></li>
+<li><p>Option to expose the React UI and forward the port for either the production build
+using NGINX server or the React development server.</p></li>
+<li><p>Wait for the API backend to startup before exposing the React UI.</p></li>
+<li><p>Delete the Kubernetes cluster and wait for all the pods to terminate before showing
+confirmation for the delete operation.</p></li>
+</ul>
+<section id="minikube-installation">
+<h2>Minikube Installation<a class="headerlink" href="#minikube-installation" title="Permalink to this heading"></a></h2>
+<p>Follow the installation and starting instructions <a class="reference internal" href="general_cmds.html#general-minikube-installation"><span class="std std-ref">here</span></a>
+for Minikube.</p>
+</section>
+<section id="install-kubectl">
+<h2>Install kubectl<a class="headerlink" href="#install-kubectl" title="Permalink to this heading"></a></h2>
+<p>Follow the installation instructions <a class="reference internal" href="general_cmds.html#general-install-kubectl"><span class="std std-ref">here</span></a> for kubectl.</p>
+</section>
+<section id="nginx-production-build-server">
+<h2>NGINX Production Build Server<a class="headerlink" href="#nginx-production-build-server" title="Permalink to this heading"></a></h2>
+<section id="with-building-images">
+<h3>With Building Images<a class="headerlink" href="#with-building-images" title="Permalink to this heading"></a></h3>
+<p>This part should be done with the <code class="docutils literal notranslate"><span class="pre">-build</span></code> switch if running for the first time.
+All subsequent runs will not require building images unless there is any change in
+the source code. It will take sometime to build the images for the first time.</p>
+<p>This exposes the production build using NGINX server by default if the <code class="docutils literal notranslate"><span class="pre">-dev</span></code> switch
+is not provided.</p>
+<p>To build the images and run in one go, run the below command.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt; .\k8s.ps1 -build
+▶ Building Docker images...
+
+[+] Building 4.3s (62/62) FINISHED
+=&gt; [currency-converter-prod-server internal] load build definition from Dockerfile.nginx                                       0.0s
+=&gt; =&gt; transferring dockerfile: 649B                                                                                            0.0s
+=&gt; [currency-converter-updater internal] load build definition from Dockerfile.db                                              0.0s
+=&gt; =&gt; transferring dockerfile: 1.40kB                                                                                          0.0s
+=&gt; [currency-converter-dev-server internal] load build definition from Dockerfile.frontend                                     0.1s
+=&gt; =&gt; transferring dockerfile: 907B                                                                                            0.0s
+=&gt; [currency-converter-api internal] load build definition from Dockerfile.api                                                 0.1s
+=&gt; =&gt; transferring dockerfile: 1.40kB                                                                                          0.0s
+=&gt; [currency-converter-prod-server internal] load .dockerignore                                                                0.1s
+=&gt; =&gt; transferring context: 34B                                                                                                0.0s
+=&gt; [currency-converter-updater internal] load .dockerignore                                                                    0.1s
+=&gt; =&gt; transferring context: 34B                                                                                                0.0s
+=&gt; [currency-converter-dev-server internal] load .dockerignore                                                                 0.1s
+=&gt; =&gt; transferring context: 34B                                                                                                0.0s
+=&gt; [currency-converter-api internal] load .dockerignore                                                                        0.1s
+=&gt; =&gt; transferring context: 34B                                                                                                0.0s
+=&gt; [currency-converter-prod-server internal] load metadata for docker.io/library/nginx:1.23.3-alpine-slim                      2.8s
+=&gt; [currency-converter-dev-server internal] load metadata for docker.io/library/node:18.12.1-slim                              2.8s
+=&gt; [currency-converter-updater internal] load metadata for docker.io/library/python:3.9.16-slim                                2.4s
+=&gt; [currency-converter-updater internal] load build context                                                                    0.2s
+=&gt; =&gt; transferring context: 1.83kB                                                                                             0.2s
+=&gt; [currency-converter-updater  1/16] FROM docker.io/library/python:3.9.16-slim@sha256:50c261237b02d3597d9ad74e72f6d67daadb14  0.0s
+=&gt; [currency-converter-api internal] load build context                                                                        0.2s
+=&gt; =&gt; transferring context: 226.77kB                                                                                           0.2s
+=&gt; CACHED [currency-converter-api  2/16] RUN apt-get update; apt-get install curl -y                                           0.0s
+=&gt; CACHED [currency-converter-api  3/16] RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/opt/poetry POETRY_VER  0.0s
+=&gt; CACHED [currency-converter-api  4/16] RUN groupadd -r appgrp                                                                0.0s
+=&gt; CACHED [currency-converter-api  5/16] RUN useradd -r -m appusr                                                              0.0s
+=&gt; CACHED [currency-converter-api  6/16] RUN usermod -a -G appgrp appusr                                                       0.0s
+=&gt; CACHED [currency-converter-api  7/16] WORKDIR /app/backend                                                                  0.0s
+=&gt; CACHED [currency-converter-api  8/16] RUN chown appusr:appgrp /app/backend                                                  0.0s
+=&gt; CACHED [currency-converter-updater  9/16] COPY --chown=appusr:appgrp ./backend/pyproject.toml ./backend/poetry.lock* ./     0.0s
+=&gt; CACHED [currency-converter-updater 10/16] RUN poetry install --no-root --without dev                                        0.0s
+=&gt; CACHED [currency-converter-updater 11/16] COPY --chown=appusr:appgrp ./backend/db ./db                                      0.0s
+=&gt; CACHED [currency-converter-updater 12/16] COPY --chown=appusr:appgrp ./backend/ext_api ./ext_api                            0.0s
+=&gt; CACHED [currency-converter-updater 13/16] COPY --chown=appusr:appgrp ./backend/utils ./utils                                0.0s
+=&gt; CACHED [currency-converter-updater 14/16] COPY --chown=appusr:appgrp ./backend/settings.py ./                               0.0s
+=&gt; CACHED [currency-converter-updater 15/16] COPY --chown=appusr:appgrp ./backend/start_updates.py ./                          0.0s
+=&gt; CACHED [currency-converter-updater 16/16] COPY --chown=appusr:appgrp ./.env ./                                              0.0s
+=&gt; [currency-converter-prod-server] exporting to image                                                                         0.7s
+=&gt; =&gt; exporting layers                                                                                                         0.0s
+=&gt; =&gt; writing image sha256:36d117726c9c61621412badb93275919d4a80bf4da97a73ab0bfd302c2238b75                                    0.0s
+=&gt; =&gt; naming to docker.io/library/currency-converter-updater                                                                   0.0s
+=&gt; =&gt; writing image sha256:4e17c3f783f02954c62264725e5f8dbb78d68c9ff2db04a0096b50ab09aaa5cd                                    0.0s
+=&gt; =&gt; naming to docker.io/library/currency-converter-api                                                                       0.0s
+=&gt; =&gt; writing image sha256:1b67c6d562e79bb330ce9dd3b33dbffcf106860707dc18ee8c128ecb903230fc                                    0.0s
+=&gt; =&gt; naming to docker.io/library/currency-converter-dev-server                                                                0.0s
+=&gt; =&gt; writing image sha256:a2c366ae193cbaa1677bffbc84ca0c0360adfa4c8d69c0707610bca8d4dd22b9                                    0.0s
+=&gt; =&gt; naming to docker.io/library/currency-converter-prod-server                                                               0.0s
+=&gt; CACHED [currency-converter-api  9/16] COPY --chown=appusr:appgrp ./backend/pyproject.toml ./backend/poetry.lock* ./         0.0s
+=&gt; CACHED [currency-converter-api 10/16] RUN poetry install --no-root --without dev                                            0.0s
+=&gt; CACHED [currency-converter-api 11/16] COPY --chown=appusr:appgrp ./backend/currency_api ./currency_api                      0.0s
+=&gt; CACHED [currency-converter-api 12/16] COPY --chown=appusr:appgrp ./backend/db ./db                                          0.0s
+=&gt; CACHED [currency-converter-api 13/16] COPY --chown=appusr:appgrp ./backend/utils ./utils                                    0.0s
+=&gt; CACHED [currency-converter-api 14/16] COPY --chown=appusr:appgrp ./backend/settings.py ./                                   0.0s
+=&gt; CACHED [currency-converter-api 15/16] COPY --chown=appusr:appgrp ./backend/api_main.py ./                                   0.0s
+=&gt; CACHED [currency-converter-api 16/16] COPY --chown=appusr:appgrp ./.env ./                                                  0.0s
+=&gt; [currency-converter-prod-server base 1/1] FROM docker.io/library/node:18.12.1-slim@sha256:70bf84739156657c85440e6a55a3d77a  0.0s
+=&gt; [currency-converter-dev-server internal] load build context                                                                 0.3s
+=&gt; =&gt; transferring context: 841.71kB                                                                                           0.2s
+=&gt; [currency-converter-prod-server internal] load build context                                                                0.4s
+=&gt; =&gt; transferring context: 842.90kB                                                                                           0.4s
+=&gt; [currency-converter-prod-server stage-1 1/5] FROM docker.io/library/nginx:1.23.3-alpine-slim@sha256:49b61e3ddce9e2e4b639dc  0.0s
+=&gt; CACHED [currency-converter-dev-server runtime 1/8] RUN apt-get update; apt-get install curl -y                              0.0s
+=&gt; CACHED [currency-converter-dev-server runtime 2/8] RUN groupadd -r appgrp                                                   0.0s
+=&gt; CACHED [currency-converter-dev-server runtime 3/8] RUN useradd -r -m appusr                                                 0.0s
+=&gt; CACHED [currency-converter-dev-server runtime 4/8] RUN usermod -a -G appgrp appusr                                          0.0s
+=&gt; CACHED [currency-converter-dev-server runtime 5/8] WORKDIR /app/frontend                                                    0.0s
+=&gt; CACHED [currency-converter-dev-server runtime 6/8] RUN chown appusr:appgrp /app/frontend                                    0.0s
+=&gt; CACHED [currency-converter-dev-server node-deps 1/2] COPY frontend/package.json .                                           0.0s
+=&gt; CACHED [currency-converter-dev-server node-deps 2/2] RUN npm install                                                        0.0s
+=&gt; CACHED [currency-converter-dev-server runtime 7/8] COPY --chown=appusr:appgrp --from=node-deps /node_modules ./node_module  0.0s
+=&gt; CACHED [currency-converter-dev-server runtime 8/8] COPY --chown=appusr:appgrp ./frontend ./                                 0.0s
+=&gt; CACHED [currency-converter-prod-server build-stage 2/7] WORKDIR /app                                                        0.0s
+=&gt; CACHED [currency-converter-prod-server build-stage 3/7] COPY frontend/package*.json /app                                    0.0s
+=&gt; CACHED [currency-converter-prod-server build-stage 4/7] RUN npm install                                                     0.0s
+=&gt; CACHED [currency-converter-prod-server build-stage 5/7] COPY ./frontend/public/ /app/public                                 0.0s
+=&gt; CACHED [currency-converter-prod-server build-stage 6/7] COPY ./frontend/src/ /app/src                                       0.0s
+=&gt; CACHED [currency-converter-prod-server build-stage 7/7] RUN npm run build                                                   0.0s
+=&gt; CACHED [currency-converter-prod-server stage-1 2/5] COPY --from=build-stage /app/build/ /usr/share/nginx/html               0.0s
+=&gt; CACHED [currency-converter-prod-server stage-1 3/5] COPY ./nginx.conf.template /etc/nginx/conf.d/                           0.0s
+=&gt; CACHED [currency-converter-prod-server stage-1 4/5] COPY ./start_nginx.sh /docker-entrypoint.d/                             0.0s
+=&gt; CACHED [currency-converter-prod-server stage-1 5/5] RUN chmod +x /docker-entrypoint.d/start_nginx.sh                        0.0s
+
+Use &#39;docker scan&#39; to run Snyk tests against images to find vulnerabilities and learn how to fix them
+▶ Setting up configuration...
+▶ Starting up Kubernetes cluster in minikube...
+
+▶ Setting up services...
+✅ Setup complete!
+
+▶ Exposing nginx-prod-server-svc service for deployment...
+✅ Access the nginx-prod-server-svc on http://localhost:3003
+
+Forwarding from 0.0.0.0:3003 -&gt; 80
+</pre></div>
+</div>
+</section>
+<section id="without-building-images">
+<h3>Without Building Images<a class="headerlink" href="#without-building-images" title="Permalink to this heading"></a></h3>
+<p>If the images are already built, the <code class="docutils literal notranslate"><span class="pre">k8s.ps1</span></code> script can be run directly
+without the <code class="docutils literal notranslate"><span class="pre">-build</span></code> switch.</p>
+<p>If the shell environment was already set before, the script will not attempt to set
+it up again in subsequent runs in the same shell session.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt; .\k8s.ps1
+▶ Setting up configuration...
+▶ Starting up Kubernetes cluster in minikube...
+
+▶ Setting up services...
+✅ Setup complete!
+
+▶ Exposing nginx-prod-server-svc service for deployment...
+✅ Access the nginx-prod-server-svc on http://localhost:3003
+
+Forwarding from 0.0.0.0:3003 -&gt; 80
+</pre></div>
+</div>
+<p>Use Ctrl+c to stop the forwarding.</p>
+</section>
+</section>
+<section id="react-development-server">
+<h2>React Development Server<a class="headerlink" href="#react-development-server" title="Permalink to this heading"></a></h2>
+<p>To use React’s built in development server to expose its UI use the <code class="docutils literal notranslate"><span class="pre">-dev</span></code> switch.
+This can be used in combination with the <code class="docutils literal notranslate"><span class="pre">-build</span></code> switch to build the images before
+exposing the service.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt; .\k8s.ps1 -dev
+▶ Setting up configuration...
+▶ Starting up Kubernetes cluster in minikube...
+
+▶ Setting up services...
+✅ Setup complete!
+
+▶ Exposing react-dev-server-svc service for deployment...
+✅ Access the react-dev-server-svc on http://localhost:3002
+
+Forwarding from 0.0.0.0:3002 -&gt; 3002
+</pre></div>
+</div>
+<p>Use Ctrl+c to stop the forwarding.</p>
+</section>
+<section id="delete-the-kubernetes-cluster">
+<h2>Delete the Kubernetes Cluster<a class="headerlink" href="#delete-the-kubernetes-cluster" title="Permalink to this heading"></a></h2>
+<p>The previous steps only shut down the forwarding of traffic to <cite>localhost</cite>.</p>
+<p>To shutdown and delete the Kubernetes cluster use the following.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt; .\k8s.ps1 -delete
+▶ Deleting deployments...
+▶ Waiting for pods to terminate...
+✅ Pods terminated!
+
+▶ Deleting configuration...
+✅ Configuration deleted!
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="general_cmds.html" class="btn btn-neutral float-left" title="Kubernetes General Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../api_endpoints.html" class="btn btn-neutral float-right" title="API Endpoints Summary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Salman Raza.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+</body>
+</html>

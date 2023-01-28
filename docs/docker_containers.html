@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="React Frontend" href="containers/react_frontend.html" />
+    <link rel="next" title="Settings Configuration" href="settings_config.html" />
     <link rel="prev" title="External API" href="external_api/external_api.html" />
 </head>
 
@@ -40,15 +40,17 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_endpoints.html">API Endpoints Summary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="external_api.html">External Source API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Docker Containers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="containers/react_frontend.html">React Frontend</a></li>
-<li class="toctree-l2"><a class="reference internal" href="containers/currency_api.html">Currency API Server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="containers/currency_updater.html">Update Server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="containers/database.html">MySQL Database Server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="containers/redis.html">Redis Server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="containers/nginx.html">NGINX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database-updater-service">Database Updater Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mysql-database-service">MySQL Database Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fastapi-service">FastAPI Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#redis-caching-service">Redis Caching Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#react-frontend-service">React Frontend Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nginx-service">NGINX Service</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="settings_config.html">Settings Configuration</a></li>
@@ -81,18 +83,63 @@
 
   <section id="docker-containers">
 <h1>Docker Containers<a class="headerlink" href="#docker-containers" title="Permalink to this heading"></a></h1>
-<p>The Currency API is architected using docker containers.</p>
-<p>Different containers work in collaboration to implement the over all functionality of the system.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="containers/react_frontend.html">React Frontend</a></li>
-<li class="toctree-l1"><a class="reference internal" href="containers/currency_api.html">Currency API Server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="containers/currency_updater.html">Update Server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="containers/database.html">MySQL Database Server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="containers/redis.html">Redis Server</a></li>
-<li class="toctree-l1"><a class="reference internal" href="containers/nginx.html">NGINX</a></li>
-</ul>
-</div>
+<p>The currency converter is implemented using different services running in docker
+containers and orchestrated using <a class="reference internal" href="usage/docker/index.html"><span class="doc">Docker Compose</span></a> or
+<a class="reference internal" href="usage/k8s/index.html"><span class="doc">Kubernetes</span></a>.</p>
+<p>These containers co-ordinate to implement the over all functionality of the system.</p>
+<section id="database-updater-service">
+<span id="containers-updater"></span><h2>Database Updater Service<a class="headerlink" href="#database-updater-service" title="Permalink to this heading"></a></h2>
+<p>When the system is deployed using <a class="reference internal" href="usage/docker/index.html"><span class="doc">Docker</span></a> or
+<a class="reference internal" href="usage/k8s/index.html"><span class="doc">Kubernetes</span></a> this container is responsible
+for perpetually retrieving the latest currency rates from the
+<a class="reference internal" href="external_api.html"><span class="doc">External API Server</span></a> and updating them in
+<a class="reference internal" href="#mysql-database-service">MySQL Database Service</a> that is running in a
+different container.</p>
+<p>The frequency of the updates is configurable using the <code class="docutils literal notranslate"><span class="pre">UPDATER__FREQUENCY</span></code>
+setting in the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file.</p>
+<p>Any API calls received by the <a class="reference internal" href="#fastapi-service">FastAPI Service</a> uses the latest or historical data
+from the MySQL container.</p>
+</section>
+<section id="mysql-database-service">
+<span id="containers-database"></span><h2>MySQL Database Service<a class="headerlink" href="#mysql-database-service" title="Permalink to this heading"></a></h2>
+<p>A container running MySQL server acts as the back end from which client
+requests to the API are fulfilled.</p>
+<p>This container runs a MySQL server that is responsible for receiving and
+saving the latest updates from the <a class="reference internal" href="external_api.html"><span class="doc">external source API</span></a>.</p>
+<p>These updates are perpetually retrieved at regular intervals by the
+<a class="reference internal" href="#database-updater-service">Database Updater Service</a> and saved to the MySQL database running inside
+this container.</p>
+</section>
+<section id="fastapi-service">
+<span id="containers-fastapi"></span><h2>FastAPI Service<a class="headerlink" href="#fastapi-service" title="Permalink to this heading"></a></h2>
+<p>This service exposes the <a class="reference internal" href="api_endpoints.html"><span class="doc">API end-points</span></a> for the currency converter.</p>
+</section>
+<section id="redis-caching-service">
+<span id="containers-redis"></span><h2>Redis Caching Service<a class="headerlink" href="#redis-caching-service" title="Permalink to this heading"></a></h2>
+<p>This service caches the API responses in Redis to avoid the overhead of querying
+the MySQL database. This is implemented as a middleware in the <a class="reference internal" href="#fastapi-service">FastAPI Service</a>,
+that connects to this Redis service for all its caching needs.</p>
+</section>
+<section id="react-frontend-service">
+<span id="containers-react"></span><h2>React Frontend Service<a class="headerlink" href="#react-frontend-service" title="Permalink to this heading"></a></h2>
+<p>Frontend interface that consumes the <a class="reference internal" href="api_endpoints.html"><span class="doc">API end-points</span></a> from the backend
+<a class="reference internal" href="#fastapi-service">FastAPI Service</a>.</p>
+<p>This container exposes the Web GUI for the currency converter using
+React’s built-in Webpack development server. This service consumes the backend
+<a class="reference internal" href="#fastapi-service">FastAPI Service</a> to implement various features like a currency converter, table
+with latest currency rates, etc.</p>
+<p>The default login credentials are user:pass123</p>
+</section>
+<section id="nginx-service">
+<span id="containers-nginx"></span><h2>NGINX Service<a class="headerlink" href="#nginx-service" title="Permalink to this heading"></a></h2>
+<p>Frontend interface same as the <a class="reference internal" href="#react-frontend-service">React Frontend Service</a>
+but exposed using a production build of the React application using NGINX.</p>
+<p>This service exposes the Web GUI for the currency converter using NGINX.
+Upon building its image the source files from the <a class="reference internal" href="#react-frontend-service">React Frontend Service</a>
+are built and placed in the appropriate directory within the NGINX
+container, ready to be served to a browser.</p>
+<p>The default login credentials are user:pass123</p>
+</section>
 </section>
 
 
@@ -100,7 +147,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="external_api/external_api.html" class="btn btn-neutral float-left" title="External API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="containers/react_frontend.html" class="btn btn-neutral float-right" title="React Frontend" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="settings_config.html" class="btn btn-neutral float-right" title="Settings Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

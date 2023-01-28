@@ -39,11 +39,16 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_endpoints.html">API Endpoints Summary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="external_api.html">External Source API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docker_containers.html">Docker Containers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="settings_config.html">Settings Configuration</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Testing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example-test-run">Example Test Run</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -72,76 +77,30 @@
 
   <section id="testing">
 <h1>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h1>
-<p>Tests are implemented using Python’s pytest module and live MySQL
-and API servers using docker.</p>
-<p>The docker containers are started upon initiating tests using pytest and
-all the tests are run against the live MySQL and API servers.</p>
-<p>Example run:</p>
+<p>Tests are implemented using Python’s <cite>pytest</cite> and a live MySQL server using docker.</p>
+<p>Docker containers are started upon initiating tests using pytest.</p>
+<p>Pytest waits for the docker containers to startup before connecting to them, and
+executing the tests using the MySQL and FastAPI servers running inside them.</p>
+<p>Before running tests copy the <cite>tests/.env-template</cite> file to <cite>tests/.env</cite>, all
+the settings in it can be left as they are for local testing purposes.</p>
+<section id="example-test-run">
+<h2>Example Test Run<a class="headerlink" href="#example-test-run" title="Permalink to this heading"></a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt; cd backend
-currency-converter-api\backend&gt; pytest -s -v
-
-platform win32 -- Python 3.9.0, pytest-7.2.0, pluggy-1.0.0 -- C:\.python_venvs\poetry\cache\virtualenvs\currency-converter-api-5abJ2n6c-py3.9\Scripts\python.exe
-cachedir: .pytest_cache
-rootdir: D:\Development\currency-converter-api\backend
-plugins: anyio-3.6.2, asyncio-0.19.0, cov-2.12.1, typeguard-2.13.3
+currency-converter-api\backend&gt; pytest
+=========================== test session starts ===========================
+platform win32 -- Python 3.9.0, pytest-7.1.2, pluggy-1.0.0
+rootdir: D:\Development\currency-converter-api
+plugins: anyio-3.6.1, asyncio-0.19.0, cov-2.12.1, typeguard-2.13.3
 asyncio: mode=strict
 collected 13 items
 
-tests/test_api.py::test_api_currencies_list 17-Jan-2023 12:53:47PM [INFO] Docker: Starting Docker Containers
-failed to get console mode for stderr: The handle is invalid.
-[+] Building 3.8s (21/21) FINISHED
-=&gt; [internal] load build definition from Dockerfile.api                                                                        0.1s
-=&gt; =&gt; transferring dockerfile: 36B                                                                                             0.0s
-=&gt; [internal] load .dockerignore                                                                                               0.0s
-=&gt; =&gt; transferring context: 2B                                                                                                 0.0s
-=&gt; [internal] load metadata for docker.io/library/python:3.9.16-slim                                                           2.6s
-=&gt; [ 1/16] FROM docker.io/library/python:3.9.16-slim@sha256:0b19e7429c822572b27627a887470a9337e9477d4099bc9f79fb2cd5a5764278   0.0s
-=&gt; [internal] load build context                                                                                               0.1s
-=&gt; =&gt; transferring context: 215.91kB                                                                                           0.0s
-=&gt; CACHED [ 2/16] RUN apt-get update; apt-get install curl -y                                                                  0.0s
-=&gt; CACHED [ 3/16] RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/opt/poetry POETRY_VERSION=1.2.0 python &amp;&amp;     0.0s
-=&gt; CACHED [ 4/16] RUN groupadd -r appgrp                                                                                       0.0s
-=&gt; CACHED [ 5/16] RUN useradd -r -m appusr                                                                                     0.0s
-=&gt; CACHED [ 6/16] RUN usermod -a -G appgrp appusr                                                                              0.0s
-=&gt; CACHED [ 7/16] WORKDIR /app/.                                                                                               0.0s
-=&gt; CACHED [ 8/16] RUN chown appusr:appgrp /app/.                                                                               0.0s
-=&gt; CACHED [ 9/16] COPY --chown=appusr:appgrp ././pyproject.toml ././poetry.lock* ./                                            0.0s
-=&gt; CACHED [10/16] RUN poetry install --no-root --without dev                                                                   0.0s
-=&gt; [11/16] COPY --chown=appusr:appgrp ././currency_api ./currency_api                                                          0.1s
-=&gt; [12/16] COPY --chown=appusr:appgrp ././db ./db                                                                              0.1s
-=&gt; [13/16] COPY --chown=appusr:appgrp ././utils ./utils                                                                        0.1s
-=&gt; [14/16] COPY --chown=appusr:appgrp ././settings.py ./                                                                       0.1s
-=&gt; [15/16] COPY --chown=appusr:appgrp ././api_main.py ./                                                                       0.1s
-=&gt; [16/16] COPY --chown=appusr:appgrp ./tests/.env ./                                                                          0.1s
-=&gt; exporting to image                                                                                                          0.3s
-=&gt; =&gt; exporting layers                                                                                                         0.2s
-=&gt; =&gt; writing image sha256:dde26c9d46ebbe0cd680e283aeb03da77ab7ec7cb5d667218cf730464bcf2951                                    0.0s
-=&gt; =&gt; naming to docker.io/library/tests-test-currency-api                                                                      0.0s
-17-Jan-2023 12:54:16PM [INFO] Docker: Startup initiated in detached mode
-17-Jan-2023 12:54:18PM [INFO] Database: Opening DB connection
-17-Jan-2023 12:54:18PM [INFO] API Fixture: Waiting for API Server: http://localhost:8080/token
-17-Jan-2023 12:54:20PM [INFO] API Fixture: Waiting for API Server: http://localhost:8080/token
-17-Jan-2023 12:54:22PM [INFO] API Fixture: Waiting for API Server: http://localhost:8080/token
-17-Jan-2023 12:54:24PM [INFO] API Fixture: API server started
-PASSED
-tests/test_api.py::test_api_currencies_rates PASSED
-tests/test_api.py::test_latest_rate_for_currency_success PASSED
-tests/test_api.py::test_currency_non_existant PASSED17-Jan-2023 12:54:30PM [INFO] Database: Test completed, DB connection closed
+tests\test_api.py ....                                                                                                        [ 30%]
+tests\test_db.py .........                                                                                                    [100%]
 
-tests/test_db.py::test_currency_codes 17-Jan-2023 12:54:30PM [INFO] Database: Opening DB connection
-PASSED
-tests/test_db.py::test_last_update PASSED
-tests/test_db.py::test_all_latest_rates_correct PASSED
-tests/test_db.py::test_latest_rate_correct PASSED
-tests/test_db.py::test_latest_rate_curr_non_existant PASSED
-tests/test_db.py::test_rate_on_date_correct PASSED
-tests/test_db.py::test_add_update_wrong_date_exception PASSED
-tests/test_db.py::test_get_rate_on_date_wrong_date_exception PASSED
-tests/test_db.py::test_currency_conversion PASSED17-Jan-2023 12:54:36PM [INFO] Database: Test completed, DB connection closed
-17-Jan-2023 12:54:36PM [INFO] Docker: Removing Containers
-17-Jan-2023 12:54:41PM [INFO] Docker: Removed
+=========================== 13 passed in 76.00s (0:01:16) ===========================
 </pre></div>
 </div>
+</section>
 </section>
 
 

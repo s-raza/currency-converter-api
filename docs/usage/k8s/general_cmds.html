@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kubernetes General Commands &mdash; Currency API (FastAPI) 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Kubernetes Powershell Script" href="ps1_script.html" />
+    <link rel="prev" title="Run Services using Kubernetes" href="index.html" />
+</head>
+
+<body class="wy-body-for-nav">
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Currency API (FastAPI)
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../usage.html">Usage</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../docker/index.html">Run Services using Docker</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Run Services using Kubernetes</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Kubernetes General Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#minikube-installation">Minikube Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#starting-minikube">Starting Minikube</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-kubectl">Install kubectl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup-environment-for-kubectl-commands">Setup environment for kubectl commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-docker-images">Build Docker Images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup-configuration">Setup Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#start-kubernetes-cluster">Start Kubernetes Cluster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#forward-ports">Forward Ports</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-the-kubernetes-cluster">Delete the Kubernetes Cluster</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ps1_script.html">Kubernetes Powershell Script</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_endpoints.html">API Endpoints Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../external_api.html">External Source API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docker_containers.html">Docker Containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../settings_config.html">Settings Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing.html">Testing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Currency API (FastAPI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../usage.html">Usage</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Run Services using Kubernetes</a></li>
+      <li class="breadcrumb-item active">Kubernetes General Commands</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/usage/k8s/general_cmds.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <section id="kubernetes-general-commands">
+<h1>Kubernetes General Commands<a class="headerlink" href="#kubernetes-general-commands" title="Permalink to this heading"></a></h1>
+<p>This guide is generic and can be followed for most OS’s to setup the various tools needed
+to run a Kubernetes cluster locally for testing purposes.</p>
+<section id="minikube-installation">
+<span id="general-minikube-installation"></span><h2>Minikube Installation<a class="headerlink" href="#minikube-installation" title="Permalink to this heading"></a></h2>
+<p>Install Minikube by following the official Minikube
+<a class="reference external" href="https://minikube.sigs.k8s.io/docs/start/">Getting Started</a> guide for your OS.</p>
+</section>
+<section id="starting-minikube">
+<h2>Starting Minikube<a class="headerlink" href="#starting-minikube" title="Permalink to this heading"></a></h2>
+<p>Ensure that Docker is running on your OS before starting Minikube using the below command</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&gt; minikube start
+😄  minikube v1.28.0 on Microsoft Windows 10 Pro 10.0.19044 Build 19044
+    ▪ MINIKUBE_ACTIVE_DOCKERD=minikube
+✨  Automatically selected the docker driver. Other choices: virtualbox, ssh
+📌  Using Docker Desktop driver with root privileges
+👍  Starting control plane node minikube in cluster minikube
+🚜  Pulling base image ...
+🔥  Creating docker container (CPUs=2, Memory=4000MB) ...
+🐳  Preparing Kubernetes v1.25.3 on Docker 20.10.20 ...
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+🔎  Verifying Kubernetes components...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🌟  Enabled addons: storage-provisioner, default-storageclass
+🏄  Done! kubectl is now configured to use &quot;minikube&quot; cluster and &quot;default&quot; namespace by default
+</pre></div>
+</div>
+</section>
+<section id="install-kubectl">
+<span id="general-install-kubectl"></span><h2>Install kubectl<a class="headerlink" href="#install-kubectl" title="Permalink to this heading"></a></h2>
+<p>Install <cite>kubectl</cite> by following the official documentation for your OS
+<a class="reference external" href="https://kubernetes.io/docs/tasks/tools/">here</a></p>
+<p>Before proceeding to execute any of the following <cite>kubectl</cite> commands ensure that
+they are executed from the root directory of the project.</p>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>currency-converter-api
+</pre></div>
+</div>
+</section>
+<section id="setup-environment-for-kubectl-commands">
+<h2>Setup environment for kubectl commands<a class="headerlink" href="#setup-environment-for-kubectl-commands" title="Permalink to this heading"></a></h2>
+<p>Before we can interact with the Kubernetes cluster running inside minikube we need
+to point the shell to Minikube’s Docker daemon.</p>
+<p>The command to do this is the same for all OS’s, except for the name of the shell,
+which is shell specific.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt;<span class="w"> </span>minikube<span class="w"> </span>docker-env<span class="w"> </span>--shell<span class="w"> </span>&lt;name<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>shell&gt;
+</pre></div>
+</div>
+<p>The available options for the shell names are <code class="docutils literal notranslate"><span class="pre">fish,</span> <span class="pre">cmd,</span> <span class="pre">powershell,</span> <span class="pre">tcsh,</span> <span class="pre">bash,</span> <span class="pre">zsh</span></code>.
+By default the shell name is auto-detected by the <code class="docutils literal notranslate"><span class="pre">minikube</span> <span class="pre">docker-env</span></code> command.</p>
+<p>For Example if we run the below command in Powershell, it provides us with the
+instructions for how to setup it up to interact with the Kubernetes cluster running
+in Minikube via the <a class="reference external" href="https://kubernetes.io/docs/tasks/tools/">kubectl</a> command for
+Powershell.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt;<span class="w"> </span>minikube<span class="w"> </span>docker-env
+<span class="nv">$Env</span>:DOCKER_TLS_VERIFY<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
+<span class="nv">$Env</span>:DOCKER_HOST<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;tcp://127.0.0.1:5949&quot;</span>
+<span class="nv">$Env</span>:DOCKER_CERT_PATH<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;C:\Users\User\.minikube\certs&quot;</span>
+<span class="nv">$Env</span>:MINIKUBE_ACTIVE_DOCKERD<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;minikube&quot;</span>
+<span class="c1"># To point your shell to minikube&#39;s docker-daemon, run:</span>
+<span class="c1"># &amp; minikube -p minikube docker-env --shell powershell | Invoke-Expression</span>
+</pre></div>
+</div>
+<p>Finally we can run the command given to us by the <cite>minikube docker-env</cite> command to setup
+our shell to make it ready to execute the <cite>kubectl</cite> command directly on the Kubernetes
+cluster running inside Minikube.</p>
+</section>
+<section id="build-docker-images">
+<h2>Build Docker Images<a class="headerlink" href="#build-docker-images" title="Permalink to this heading"></a></h2>
+<p>We need to build the docker images before we can use them in a Kubernetes cluster.</p>
+<p>The below command builds the images on the minikube node that is running within the
+Docker environment in the OS. This is possible because our shell is pointed to the
+Minikube’s <cite>docker-daemon</cite> as a result of the previous step.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt;<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>build
+</pre></div>
+</div>
+</section>
+<section id="setup-configuration">
+<h2>Setup Configuration<a class="headerlink" href="#setup-configuration" title="Permalink to this heading"></a></h2>
+<p>This is to read configuration parameters from the <cite>.env</cite> file in root directory of
+the project and define them as a Kubernetes secret named as <cite>currency-app-config</cite>.
+This is then referred in the Kubernetes manifest files to define environment
+variables in the Pods.</p>
+<p>Before running this ensure to copy the file <cite>.env-template</cite> to <cite>.env</cite> in the same directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt;<span class="w"> </span>kubectl<span class="w"> </span>create<span class="w"> </span>secret<span class="w"> </span>generic<span class="w"> </span>currency-app-config<span class="w"> </span>--from-env-file<span class="o">=</span>./.env
+secret/currency-app-config<span class="w"> </span>created
+</pre></div>
+</div>
+</section>
+<section id="start-kubernetes-cluster">
+<h2>Start Kubernetes Cluster<a class="headerlink" href="#start-kubernetes-cluster" title="Permalink to this heading"></a></h2>
+<p>Create the containers and pods in the Kubernetes cluster</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt; kubectl apply -f .\kubernetes
+deployment.apps/api-server created
+service/api-server-svc created
+deployment.apps/db-server created
+service/db-server-svc created
+deployment.apps/react-dev-server created
+service/react-dev-server-svc created
+deployment.apps/nginx-prod-server created
+service/nginx-prod-server-svc created
+deployment.apps/redis-server created
+service/redis-server-svc created
+deployment.apps/updater-server created
+</pre></div>
+</div>
+<p>Verify that the pods were created</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt;<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pods
+NAME<span class="w">                                 </span>READY<span class="w">   </span>STATUS<span class="w">    </span>RESTARTS<span class="w">   </span>AGE
+api-server-6f4c477dbd-2dhgw<span class="w">          </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>64s
+db-server-64845b6ddf-5hrfz<span class="w">           </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>64s
+nginx-prod-server-55b988b76c-4kzt8<span class="w">   </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>64s
+react-dev-server-8bb66566-kpn5s<span class="w">      </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>64s
+redis-server-6bb5466dcf-zr7rm<span class="w">        </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>64s
+updater-server-c5dc7c5fc-sbcrb<span class="w">       </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>63s
+</pre></div>
+</div>
+</section>
+<section id="forward-ports">
+<h2>Forward Ports<a class="headerlink" href="#forward-ports" title="Permalink to this heading"></a></h2>
+<p>After starting the Kubernetes cluster we need to expose its entry point along with
+forwarding the port on which the React UI is running.</p>
+<p>It may take a while before the API backend starts up, as it waits for the MySQL database
+container to become functional before serving its end points.</p>
+<p>The React UI can then be accessed on either <code class="docutils literal notranslate"><span class="pre">http://localhost:3003</span></code> or <code class="docutils literal notranslate"><span class="pre">http://localhost:3002</span></code>
+for NGINX and React development server respectively.</p>
+<section id="nginx-server">
+<h3>NGINX Server<a class="headerlink" href="#nginx-server" title="Permalink to this heading"></a></h3>
+<p>Expose the NGINX server that serves a production build of the React UI.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt;<span class="w"> </span>kubectl<span class="w"> </span>port-forward<span class="w"> </span>service/nginx-prod-server-svc<span class="w"> </span><span class="m">3003</span>:3003<span class="w"> </span>--address<span class="w"> </span><span class="m">0</span>.0.0.0
+Forwarding<span class="w"> </span>from<span class="w"> </span><span class="m">0</span>.0.0.0:3003<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">80</span>
+</pre></div>
+</div>
+</section>
+<section id="react-development-server">
+<h3>React Development Server<a class="headerlink" href="#react-development-server" title="Permalink to this heading"></a></h3>
+<p>Expose React’s built-in Webpack development server.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>kubectl<span class="w"> </span>port-forward<span class="w"> </span>service/react-dev-server-svc<span class="w"> </span><span class="m">3002</span>:3002<span class="w"> </span>--address<span class="w"> </span><span class="m">0</span>.0.0.0
+Forwarding<span class="w"> </span>from<span class="w"> </span><span class="m">0</span>.0.0.0:3002<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">3002</span>
+</pre></div>
+</div>
+<p>Use Ctrl+c to stop the forwarding.</p>
+</section>
+</section>
+<section id="delete-the-kubernetes-cluster">
+<h2>Delete the Kubernetes Cluster<a class="headerlink" href="#delete-the-kubernetes-cluster" title="Permalink to this heading"></a></h2>
+<p>The previous step only shuts down the forwarding of traffic to <cite>localhost</cite>.</p>
+<p>Use the following command to shutdown and delete the Kubernetes cluster.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt; kubectl delete -f .\kubernetes
+deployment.apps &quot;api-server&quot; deleted
+service &quot;api-server-svc&quot; deleted
+deployment.apps &quot;db-server&quot; deleted
+service &quot;db-server-svc&quot; deleted
+deployment.apps &quot;react-dev-server&quot; deleted
+service &quot;react-dev-server-svc&quot; deleted
+deployment.apps &quot;nginx-prod-server&quot; deleted
+service &quot;nginx-prod-server-svc&quot; deleted
+deployment.apps &quot;redis-server&quot; deleted
+service &quot;redis-server-svc&quot; deleted
+deployment.apps &quot;updater-server&quot; deleted
+</pre></div>
+</div>
+<p>Verify that all the Pods were removed.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>currency-converter-api&gt; kubectl get pods
+No resources found in default namespace.
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Run Services using Kubernetes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ps1_script.html" class="btn btn-neutral float-right" title="Kubernetes Powershell Script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Salman Raza.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+</body>
+</html>
