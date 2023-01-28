@@ -85,6 +85,16 @@ $delete_deployments = {
     }
 }
 
+$setup_secrets = {
+
+    Write-ClrOP green "$($symbols.PROCESSING) Setting up configuration..."
+    Invoke-Expression "kubectl create secret generic $SECRET_CFG --from-env-file=$ENV_FILE" -ErrorVariable ErrOutput 2>&1 >$null
+
+    if($ErrOutput -ne ""){
+        Write-ClrOP green "$($symbols.SUCCESS) Configuration already exists`n"
+    }
+}
+
 $delete_secrets = {
 
     Write-ClrOP red "$($symbols.PROCESSING) Deleting configuration..."
@@ -108,8 +118,10 @@ if($build){
     Invoke-Command -ScriptBlock $build_docker_images
 }
 
-Write-ClrOP green "$($symbols.PROCESSING) Setting up configuration..."
-kubectl create secret generic $SECRET_CFG --from-env-file=$ENV_FILE | Out-Null
+# Write-ClrOP green "$($symbols.PROCESSING) Setting up configuration..."
+# kubectl create secret generic $SECRET_CFG --from-env-file=$ENV_FILE | Out-Null
+
+Invoke-Command -ScriptBlock $setup_secrets
 
 Write-ClrOP green "$($symbols.PROCESSING) Starting up Kubernetes cluster in minikube...`n"
 kubectl apply -f ./$K8S_CONF_FOLDER | Out-Null
