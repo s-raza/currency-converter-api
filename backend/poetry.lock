@@ -807,17 +807,6 @@ pycrypto = ["pyasn1", "pycrypto (>=2.6.0,<2.7.0)"]
 pycryptodome = ["pyasn1", "pycryptodome (>=3.3.1,<4.0.0)"]
 
 [[package]]
-name = "python-multipart"
-version = "0.0.5"
-description = "A streaming multipart parser for Python"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-six = ">=1.4.0"
-
-[[package]]
 name = "python-on-whales"
 version = "0.49.0"
 description = "A Docker client for Python, designed to be fun and intuitive!"
@@ -1281,7 +1270,7 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "7568ba85d69266869f71a8eb74be3b0703625e6b8aaeec24eb45bb79500d5c21"
+content-hash = "2a6fd6e382c71193dc4816eafeaab3a8be9694eebf8ab38577cc93f1757c3790"
 
 [metadata.files]
 aiomysql = [
@@ -1930,9 +1919,6 @@ python-dotenv = [
 python-jose = [
     {file = "python-jose-3.3.0.tar.gz", hash = "sha256:55779b5e6ad599c6336191246e95eb2293a9ddebd555f796a65f838f07e5d78a"},
     {file = "python_jose-3.3.0-py2.py3-none-any.whl", hash = "sha256:9b1376b023f8b298536eedd47ae1089bcdb848f1535ab30555cd92002d78923a"},
-]
-python-multipart = [
-    {file = "python-multipart-0.0.5.tar.gz", hash = "sha256:f7bb5f611fc600d15fa47b3974c8aa16e93724513b49b5f95c81e6624c83fa43"},
 ]
 python-on-whales = [
     {file = "python-on-whales-0.49.0.tar.gz", hash = "sha256:cb6675bff9e34b83b79ed18596e36cbdccf5dbef1fb42f558d5bea7e53c063b3"},
