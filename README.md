@@ -1,4 +1,4 @@
-# Currency Converter App using React+FastAPI+Docker+NGINX
+# Currency Converter App using React+FastAPI+Docker+NGINX+Kubernetes
 [![Sphinx Documetation](https://img.shields.io/badge/Docs-Sphinx-005571?style=flat-square)](https://s-raza.github.io/currency-converter-api/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React-005571?style=flat-square&logo=react)](https://reactjs.org/)
@@ -13,22 +13,22 @@
 <img src="./gh-static/06-react-ui.gif"/>
 <br>
 
-A simple React+FastAPI based currency converter using micro services architecture.
+**React+FastAPI+NGINX based currency converter app with micro services architecture implemented using Docker and Kubernetes.**
 
 &check; FastAPI backend | &check; React front end for a currency converter | &check; Token based authentication with Username and Password | &check; Async | &check; Micro Services | &check; Tests Automation | &check; CI/CD Ready | &check; REST API | &check; Redis Cache | &check; SQLAlchemy/MySQL
 
 
-### Documentation
+# Documentation
 
 Code documentation and instructions on how to run the application can be viewed
-from the project's [GitHub Pages](https://s-raza.github.io/currency-converter-api/).
+on the project's [GitHub Pages](https://s-raza.github.io/currency-converter-api/).
 The code documentation is pre-built using [Sphinx](https://www.sphinx-doc.org/en/master/)
 
 Alternatively the code documentation can be read directly from the docstrings in the source code.
 
-## React Frontend
+# React Frontend
 
-### Login Interface
+## Login Interface
 
 <img src="./gh-static/04-login-page.jpg"/>
 <br>
@@ -40,9 +40,9 @@ Sign in with pre-defined credentials user:pass123
 
 The currency converter is accessible after a successful login.
 
-## FastAPI Backend
+# FastAPI Backend
 
-### API Documentation
+## API Documentation
 
 The API documentation is available at `http://localhost:8080/docs`
 
@@ -50,7 +50,7 @@ The API documentation is available at `http://localhost:8080/docs`
 <img src="./gh-static/01-api-docs.jpg"/>
 <br>
 
-## API Endpoints
+## Authentication for Swagger UI
 
 The API requires authentication. A default user with credentials `user:pass123` is added to the
 database when the Currency API service starts.
