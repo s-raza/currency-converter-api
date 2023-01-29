@@ -118,9 +118,6 @@ if($build){
     Invoke-Command -ScriptBlock $build_docker_images
 }
 
-# Write-ClrOP green "$($symbols.PROCESSING) Setting up configuration..."
-# kubectl create secret generic $SECRET_CFG --from-env-file=$ENV_FILE | Out-Null
-
 Invoke-Command -ScriptBlock $setup_secrets
 
 Write-ClrOP green "$($symbols.PROCESSING) Starting up Kubernetes cluster in minikube...`n"
