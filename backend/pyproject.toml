@@ -11,17 +11,20 @@ SQLAlchemy = "^1.4.39"
 pydantic = {extras = ["dotenv"], version = "^1.7.2"}
 requests = "^2.25.0"
 PyMySQL = "^1.0.2"
-cryptography = "^37.0.4"
 aiomysql = "^0.1.1"
-APScheduler = "^3.9.1"
+passlib = "^1.7.4"
+cryptography = "^37.0.4"
+bcrypt = "^3.2.2"
+
+[tool.poetry.group.api.dependencies]
 uvicorn = "^0.18.2"
 fastapi = "^0.79.0"
 python-jose = "^3.3.0"
-passlib = "^1.7.4"
-python-multipart = "^0.0.5"
-bcrypt = "^3.2.2"
 aioredis = {extras = ["hiredis"], version = "^2.0.1"}
+python-multipart = "^0.0.5"
 
+[tool.poetry.group.updater.dependencies]
+APScheduler = "^3.9.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
@@ -41,7 +44,7 @@ sphinx-rtd-theme = "^1.0.0"
 httpx = "^0.23.0"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=1.2.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
